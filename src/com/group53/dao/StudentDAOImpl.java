@@ -15,10 +15,24 @@ public class StudentDAOImpl implements StudentDAO {
         this.template = template;
     }
 
-    @Override
+    public void insertStudent(Student student) {
+
+    }
+
+    public void updateStudentById(long student_id) {
+
+    }
+
+    public void selectStudentById(long student_id) {
+
+    }
+
+    public Student getStudent() {
+        return null;
+    }
+
     public List<Student> getAllStudents() {
         return template.query("select * from STUDENTS", new RowMapper<Student>() {
-            @Override
             public Student mapRow(ResultSet resultSet, int i) throws SQLException {
                 /*
                 Student student = new Student();
@@ -30,24 +44,6 @@ public class StudentDAOImpl implements StudentDAO {
             }
         });
     }
-
-    @Override
-    public void insertStudent(Student student) {
-
-    }
-
-    @Override
-    public void updateStudentById(long student_id) {
-
-    }
-
-    @Override
-    public void selectStudentById(long student_id) {
-
-    }
-
-    @Override
-    public Student getStudent() {
-        return null;
-    }
 }
+
+

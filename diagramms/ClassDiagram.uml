@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.group53.beans.Group</OriginalElement>
+  <nodes>
+    <node x="821.4166666666667" y="0.0">com.group53.beans.University</node>
+    <node x="68.66068840579698" y="180.0">com.group53.dao.TutorDAO</node>
+    <node x="581.5548913043478" y="430.0">com.group53.controllers.GroupController</node>
+    <node x="235.07735507246366" y="350.0">com.group53.dao.SubjectDAO</node>
+    <node x="878.035688405797" y="90.0">com.group53.dao.UniversityDAO</node>
+    <node x="336.8333333333333" y="270.0">com.group53.beans.Subject</node>
+    <node x="953.3273550724637" y="430.0">org.springframework.stereotype.Controller</node>
+    <node x="152.0" y="550.0">com.group53.controllers.MarkController</node>
+    <node x="312.82735507246366" y="550.0">com.group53.controllers.LoginController</node>
+    <node x="737.5548913043478" y="430.0">com.group53.dao.StudentDAOImpl</node>
+    <node x="809.7440217391304" y="270.0">com.group53.beans.Student</node>
+    <node x="938.785688405797" y="270.0">com.group53.controllers.UniversityController</node>
+    <node x="0.0" y="550.0">com.group53.controllers.TutorController</node>
+    <node x="88.66068840579698" y="430.0">com.group53.dao.TutorDAOImpl</node>
+    <node x="870.8273550724638" y="550.0">com.group53.controllers.StudentController</node>
+    <node x="525.0548913043478" y="270.0">com.group53.dao.GroupDAO</node>
+    <node x="645.6773550724637" y="180.0">com.group53.beans.Group</node>
+    <node x="545.3048913043478" y="350.0">com.group53.dao.GroupDAOImpl</node>
+    <node x="165.41666666666663" y="90.0">com.group53.beans.Tutor</node>
+    <node x="257.57735507246366" y="430.0">com.group53.dao.SubjectDAOImpl</node>
+    <node x="905.535688405797" y="180.0">com.group53.dao.UniversityDAOIml</node>
+    <node x="465.82735507246366" y="550.0">com.group53.controllers.SubjectController</node>
+    <node x="783.8048913043478" y="350.0">com.group53.dao.StudentDAO</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.group53.controllers.StudentController" target="com.group53.beans.Student">
+      <point x="-1.1368683772161603E-13" y="-15.0" />
+      <point x="942.8273550724637" y="325.0" />
+      <point x="885.5773550724637" y="325.0" />
+      <point x="30.33333333333337" y="15.0" />
+    </edge>
+    <edge source="com.group53.beans.Student" target="com.group53.beans.Group">
+      <point x="0.0" y="-15.0" />
+      <point x="855.2440217391304" y="240.0" />
+      <point x="720.3773550724637" y="240.0" />
+      <point x="33.200000000000045" y="15.0" />
+    </edge>
+    <edge source="com.group53.dao.TutorDAO" target="com.group53.beans.Tutor">
+      <point x="0.0" y="-15.0" />
+      <point x="120.66068840579698" y="150.0" />
+      <point x="189.11666666666667" y="150.0" />
+      <point x="-15.799999999999955" y="15.0" />
+    </edge>
+    <edge source="com.group53.dao.UniversityDAOIml" target="com.group53.dao.UniversityDAO">
+      <point x="-36.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.group53.dao.StudentDAOImpl" target="com.group53.beans.Student">
+      <point x="-35.0" y="-15.0" />
+      <point x="773.3048913043478" y="325.0" />
+      <point x="824.9106884057969" y="325.0" />
+      <point x="-30.33333333333337" y="15.0" />
+    </edge>
+    <edge source="com.group53.dao.UniversityDAO" target="com.group53.beans.University">
+      <point x="0.0" y="-15.0" />
+      <point x="941.535688405797" y="70.0" />
+      <point x="880.9166666666667" y="70.0" />
+      <point x="8.5" y="15.0" />
+    </edge>
+    <edge source="com.group53.dao.GroupDAO" target="com.group53.beans.Group">
+      <point x="0.0" y="-15.0" />
+      <point x="579.0548913043478" y="240.0" />
+      <point x="653.9773550724636" y="240.0" />
+      <point x="-33.200000000000045" y="15.0" />
+    </edge>
+    <edge source="com.group53.dao.StudentDAO" target="com.group53.beans.Student">
+      <point x="0.0" y="-15.0" />
+      <point x="841.8048913043478" y="325.0" />
+      <point x="855.2440217391304" y="325.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.group53.controllers.LoginController" target="com.group53.dao.StudentDAOImpl">
+      <point x="44.33333333333337" y="-15.0" />
+      <point x="423.66068840579703" y="530.0" />
+      <point x="807.5548913043478" y="530.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.group53.dao.SubjectDAOImpl" target="com.group53.dao.SubjectDAO">
+      <point x="-34.5" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.group53.dao.SubjectDAO" target="com.group53.beans.Subject">
+      <point x="0.0" y="-15.0" />
+      <point x="292.07735507246366" y="325.0" />
+      <point x="351.66666666666663" y="325.0" />
+      <point x="-29.666666666666657" y="15.0" />
+    </edge>
+    <edge source="com.group53.controllers.TutorController" target="com.group53.beans.Tutor">
+      <point x="-33.0" y="-15.0" />
+      <point x="33.0" y="140.0" />
+      <point x="173.3166666666666" y="140.0" />
+      <point x="-31.600000000000023" y="15.0" />
+    </edge>
+    <edge source="com.group53.controllers.TutorController" target="com.group53.dao.TutorDAOImpl">
+      <point x="33.0" y="-15.0" />
+      <point x="99.0" y="530.0" />
+      <point x="109.99402173913035" y="530.0" />
+      <point x="-42.66666666666663" y="15.0" />
+    </edge>
+    <edge source="com.group53.dao.UniversityDAOIml" target="com.group53.beans.University">
+      <point x="36.0" y="-15.0" />
+      <point x="1013.535688405797" y="160.0" />
+      <point x="1015.535688405797" y="160.0" />
+      <point x="1015.535688405797" y="60.0" />
+      <point x="897.9166666666667" y="60.0" />
+      <point x="25.5" y="15.0" />
+    </edge>
+    <edge source="com.group53.beans.Student" target="com.group53.beans.University">
+      <point x="30.33333333333337" y="-15.0" />
+      <point x="885.5773550724637" y="230.0" />
+      <point x="835.4166666666667" y="230.0" />
+      <point x="835.4166666666667" y="70.0" />
+      <point x="863.9166666666667" y="70.0" />
+      <point x="-8.5" y="15.0" />
+    </edge>
+    <edge source="com.group53.controllers.UniversityController" target="com.group53.dao.UniversityDAOIml">
+      <point x="-38.75" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.group53.controllers.GroupController" target="com.group53.beans.Group">
+      <point x="34.0" y="-15.0" />
+      <point x="683.5548913043478" y="405.0" />
+      <point x="687.8048913043478" y="405.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.group53.dao.GroupDAOImpl" target="com.group53.beans.Group">
+      <point x="33.0" y="-15.0" />
+      <point x="643.5548913043478" y="250.0" />
+      <point x="670.5773550724637" y="250.0" />
+      <point x="-16.600000000000023" y="15.0" />
+    </edge>
+    <edge source="com.group53.controllers.StudentController" target="org.springframework.stereotype.Controller">
+      <point x="47.999999999999886" y="-15.0" />
+      <point x="990.8273550724637" y="530.0" />
+      <point x="1004.8273550724637" y="530.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.group53.controllers.StudentController" target="com.group53.dao.StudentDAOImpl">
+      <point x="-48.000000000000114" y="-15.0" />
+      <point x="894.8273550724637" y="530.0" />
+      <point x="854.2215579710145" y="530.0" />
+      <point x="46.66666666666663" y="15.0" />
+    </edge>
+    <edge source="com.group53.controllers.GroupController" target="com.group53.dao.GroupDAOImpl">
+      <point x="-34.0" y="-15.0" />
+      <point x="615.5548913043478" y="405.0" />
+      <point x="611.3048913043478" y="405.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.group53.controllers.MarkController" target="com.group53.dao.StudentDAOImpl">
+      <point x="43.33333333333337" y="-15.0" />
+      <point x="260.33333333333337" y="520.0" />
+      <point x="760.8882246376812" y="520.0" />
+      <point x="-46.66666666666663" y="15.0" />
+    </edge>
+    <edge source="com.group53.dao.TutorDAOImpl" target="com.group53.beans.Tutor">
+      <point x="32.0" y="-15.0" />
+      <point x="184.66068840579698" y="405.0" />
+      <point x="183.16068840579698" y="405.0" />
+      <point x="183.16068840579698" y="160.0" />
+      <point x="204.91666666666663" y="160.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.group53.controllers.LoginController" target="com.group53.dao.SubjectDAOImpl">
+      <point x="0.0" y="-15.0" />
+      <point x="379.32735507246366" y="490.0" />
+      <point x="326.57735507246366" y="490.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.group53.controllers.SubjectController" target="com.group53.beans.Subject">
+      <point x="35.5" y="-15.0" />
+      <point x="572.3273550724637" y="510.0" />
+      <point x="512.8882246376812" y="510.0" />
+      <point x="512.8882246376812" y="325.0" />
+      <point x="411.0" y="325.0" />
+      <point x="29.666666666666686" y="15.0" />
+    </edge>
+    <edge source="com.group53.dao.TutorDAOImpl" target="com.group53.dao.TutorDAO">
+      <point x="-32.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.group53.controllers.UniversityController" target="com.group53.beans.University">
+      <point x="38.75" y="-15.0" />
+      <point x="1055.035688405797" y="250.0" />
+      <point x="1060.035688405797" y="250.0" />
+      <point x="1060.035688405797" y="50.0" />
+      <point x="914.9166666666667" y="50.0" />
+      <point x="42.5" y="15.0" />
+    </edge>
+    <edge source="com.group53.controllers.SubjectController" target="com.group53.dao.SubjectDAOImpl">
+      <point x="-35.5" y="-15.0" />
+      <point x="501.32735507246366" y="480.0" />
+      <point x="372.57735507246366" y="480.0" />
+      <point x="46.0" y="15.0" />
+    </edge>
+    <edge source="com.group53.beans.Group" target="com.group53.beans.Tutor">
+      <point x="-20.75" y="-15.0" />
+      <point x="666.4273550724637" y="160.0" />
+      <point x="220.71666666666658" y="160.0" />
+      <point x="15.799999999999955" y="15.0" />
+    </edge>
+    <edge source="com.group53.dao.GroupDAOImpl" target="com.group53.dao.GroupDAO">
+      <point x="-33.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.group53.controllers.MarkController" target="com.group53.dao.SubjectDAOImpl">
+      <point x="0.0" y="-15.0" />
+      <point x="217.0" y="510.0" />
+      <point x="280.57735507246366" y="510.0" />
+      <point x="-46.0" y="15.0" />
+    </edge>
+    <edge source="com.group53.dao.SubjectDAOImpl" target="com.group53.beans.Subject">
+      <point x="34.5" y="-15.0" />
+      <point x="361.07735507246366" y="405.0" />
+      <point x="359.57735507246366" y="405.0" />
+      <point x="359.57735507246366" y="325.0" />
+      <point x="381.3333333333333" y="325.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.group53.dao.StudentDAOImpl" target="com.group53.dao.StudentDAO">
+      <point x="35.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.group53.controllers.LoginController" target="com.group53.dao.TutorDAOImpl">
+      <point x="-44.33333333333337" y="-15.0" />
+      <point x="334.9940217391303" y="500.0" />
+      <point x="195.3273550724636" y="500.0" />
+      <point x="42.66666666666663" y="15.0" />
+    </edge>
+    <edge source="com.group53.controllers.MarkController" target="com.group53.dao.TutorDAOImpl">
+      <point x="-43.33333333333337" y="-15.0" />
+      <point x="173.66666666666663" y="530.0" />
+      <point x="152.66068840579698" y="530.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.group53.beans.Tutor" target="com.group53.beans.University">
+      <point x="19.75" y="-15.0" />
+      <point x="224.66666666666663" y="60.0" />
+      <point x="846.9166666666667" y="60.0" />
+      <point x="-25.5" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.7126050420168067" x="495.5518867924528" y="309.18514150943395" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
