@@ -2,31 +2,39 @@ package com.group53.beans;
 
 public class Group extends Tutor {
 
-    private long group_id;
-    private String group_title;
+    private static long groupID = 0;
+    private String faculty;
+    private String speciality;
 
-    public Group(long university_id, String university_title, String tutor_id, String tutor_name, String tutor_surname,
-                 String tutor_patronymic, boolean isTutorAdmin, String tutor_login, String tutor_password,
-                 long group_id, String group_title) {
-        super(university_id, university_title, tutor_id, tutor_name, tutor_surname, tutor_patronymic, isTutorAdmin,
-                tutor_login, tutor_password);
-        this.group_id = group_id;
-        this.group_title = group_title;
+    public Group(String title, long parent_id, String faculty, String speciality) {
+        super(title, parent_id);
+
+        groupID ++;
+        this.id = groupID;
+        this.faculty = faculty;
+        this.speciality = speciality;
     }
 
-    public long getGroup_id() {
-        return group_id;
+    public Group(String title, long parent_id) {
+        super(title, parent_id);
+
+        groupID ++;
+        this.id = groupID;
     }
 
-    public void setGroup_id(long group_id) {
-        this.group_id = group_id;
+    public String getFaculty() {
+        return faculty;
     }
 
-    public String getGroup_title() {
-        return group_title;
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
     }
 
-    public void setGroup_title(String group_title) {
-        this.group_title = group_title;
+    public String getSpeciality() {
+        return speciality;
+    }
+
+    public void setSpeciality(String speciality) {
+        this.speciality = speciality;
     }
 }

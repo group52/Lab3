@@ -2,83 +2,70 @@ package com.group53.beans;
 
 public class Tutor extends University {
 
-    private String tutor_id;
-    private String tutor_name;
-    private String tutor_surname;
-    private String tutor_patronymic;
+    private static long tutorID = 0;
+
+    long parent_id;
+    String name;
+    String surname;
+    String patronomic;
     private boolean isTutorAdmin;
-    private final byte tutor_access_level;
-    private String tutor_login;
-    private String tutor_password;
+    byte access_level;
 
-    public Tutor(long university_id, String university_title, String tutor_id, String tutor_name, String tutor_surname,
-                 String tutor_patronymic, boolean isTutorAdmin, String tutor_login, String tutor_password) {
-        super(university_id, university_title);
 
-        this.tutor_id = tutor_id;
-        this.tutor_name = tutor_name;
-        this.tutor_surname = tutor_surname;
-        this.tutor_patronymic = tutor_patronymic;
-        this.tutor_login = tutor_login;
-        this.tutor_password = tutor_password;
+    public Tutor(String title, String login, String password, long parent_id, String name, String surname, String patronomic, boolean isTutorAdmin) {
+        super(title, login, password);
+        tutorID ++;
+        this.id = tutorID;
+        this.parent_id = parent_id;
+        this.name = name;
+        this.surname = surname;
+        this.patronomic = patronomic;
+        this.isTutorAdmin = isTutorAdmin;
 
-        if (isTutorAdmin) tutor_access_level = University.admin_access_level;
-        else tutor_access_level = University.tutor_access_level;
+        if (isTutorAdmin) access_level = University.admin_access_level;
+        else access_level = University.tutor_access_level;
     }
 
-    public String getTutor_id() {
-        return tutor_id;
+    public Tutor(String title, long parent_id) {
+        super(title);
+        tutorID ++;
+        this.id = tutorID;
+        this.parent_id = parent_id;
     }
 
-    public void setTutor_id(String tutor_id) {
-        this.tutor_id = tutor_id;
+    public long getParent_id() {
+        return parent_id;
     }
 
-    public String getTutor_name() {
-        return tutor_name;
+    public void setParent_id(long parent_id) {
+        this.parent_id = parent_id;
     }
 
-    public void setTutor_name(String tutor_name) {
-        this.tutor_name = tutor_name;
+    public String getName() {
+        return name;
     }
 
-    public String getTutor_surname() {
-        return tutor_surname;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setTutor_surname(String tutor_surname) {
-        this.tutor_surname = tutor_surname;
+    public String getSurname() {
+        return surname;
     }
 
-    public String getTutor_patronymic() {
-        return tutor_patronymic;
-    }
-
-    public void setTutor_patronymic(String tutor_patronymic) {
-        this.tutor_patronymic = tutor_patronymic;
-    }
-
-    public String getTutor_login() {
-        return tutor_login;
-    }
-
-    public void setTutor_login(String tutor_login) {
-        this.tutor_login = tutor_login;
-    }
-
-    public String getTutor_password() {
-        return tutor_password;
-    }
-
-    public void setTutor_password(String tutor_password) {
-        this.tutor_password = tutor_password;
-    }
-
-    public byte getTutor_access_level() {
-        return tutor_access_level;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public boolean isTutorAdmin() {
         return isTutorAdmin;
+    }
+
+    public void setTutorAdmin(boolean tutorAdmin) {
+        isTutorAdmin = tutorAdmin;
+    }
+
+    public byte getAccess_level() {
+        return access_level;
     }
 }
