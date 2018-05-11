@@ -6,7 +6,7 @@ public class Student extends Group {
 
     private int record_book;
 
-    public Student(String title, long parent_id, int record_book, String login, String password, String name, String surname, String patronomic) {
+    public Student(String title, long parent_id, int record_book, String login, String password, String name, String surname, String patronymic) {
         super(title, parent_id);
         studentID ++;
         this.id = studentID;
@@ -16,7 +16,7 @@ public class Student extends Group {
         this.parent_id = parent_id;
         this.name = name;
         this.surname = surname;
-        this.patronomic = patronomic;
+        this.patronymic = patronymic;
     }
 
     public int getRecord_book() {

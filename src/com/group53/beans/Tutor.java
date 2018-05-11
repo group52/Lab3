@@ -7,19 +7,19 @@ public class Tutor extends University {
     long parent_id;
     String name;
     String surname;
-    String patronomic;
+    String patronymic;
     private boolean isTutorAdmin;
     byte access_level;
 
 
-    public Tutor(String title, String login, String password, long parent_id, String name, String surname, String patronomic, boolean isTutorAdmin) {
+    public Tutor(String title, String login, String password, long parent_id, String name, String surname, String patronymic, boolean isTutorAdmin) {
         super(title, login, password);
         tutorID ++;
         this.id = tutorID;
         this.parent_id = parent_id;
         this.name = name;
         this.surname = surname;
-        this.patronomic = patronomic;
+        this.patronymic = patronymic;
         this.isTutorAdmin = isTutorAdmin;
 
         if (isTutorAdmin) access_level = University.admin_access_level;
