@@ -8,11 +8,10 @@ public class University {
     public static byte tutor_access_level = 2;
     public static byte student_access_level = 3;
 
-    long id;
-    String title;
-    String login;
-    String password;
-
+    protected long id;
+    protected String title;
+    private String login;
+    private String password;
 
     public University(String title, String login, String password) {
         universityID ++;

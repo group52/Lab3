@@ -4,15 +4,15 @@ public class Tutor extends University {
 
     private static long tutorID = 0;
 
-    long parent_id;
-    String name;
-    String surname;
-    String patronymic;
-    private boolean isTutorAdmin;
+    protected long parent_id;
+    protected String name;
+    protected String surname;
+    protected String patronymic;
     byte access_level;
 
 
-    public Tutor(String title, String login, String password, long parent_id, String name, String surname, String patronymic, boolean isTutorAdmin) {
+    public Tutor(String title, String login, String password, long parent_id, String name, String surname,
+                 String patronymic, boolean isTutorAdmin) {
         super(title, login, password);
         tutorID ++;
         this.id = tutorID;
@@ -20,7 +20,6 @@ public class Tutor extends University {
         this.name = name;
         this.surname = surname;
         this.patronymic = patronymic;
-        this.isTutorAdmin = isTutorAdmin;
 
         if (isTutorAdmin) access_level = University.admin_access_level;
         else access_level = University.tutor_access_level;
@@ -57,12 +56,16 @@ public class Tutor extends University {
         this.surname = surname;
     }
 
-    public boolean isTutorAdmin() {
-        return isTutorAdmin;
+    public String getPatronymic() {
+        return patronymic;
     }
 
-    public void setTutorAdmin(boolean tutorAdmin) {
-        isTutorAdmin = tutorAdmin;
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
+    }
+
+    public void setAccess_level(byte access_level) {
+        this.access_level = access_level;
     }
 
     public byte getAccess_level() {
