@@ -10,8 +10,8 @@ public class University {
 
     protected long id;
     protected String title;
-    private String login;
-    private String password;
+    protected String login;
+    protected String password;
 
     public University(String title, String login, String password) {
         universityID ++;

@@ -11,6 +11,8 @@ public class Student extends Group {
         studentID ++;
         this.id = studentID;
 
+        this.login = login;
+        this.password = password;
         this.access_level = University.student_access_level;
         this.record_book = record_book;
         this.parent_id = parent_id;
