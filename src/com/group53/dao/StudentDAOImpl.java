@@ -32,7 +32,7 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     public List<Student> getAllStudents() {
-        return template.query("select * from STUDENTS", new RowMapper<Student>() {
+        return template.query("select * from ENTITY", new RowMapper<Student>() {
             public Student mapRow(ResultSet resultSet, int i) throws SQLException {
                 /*
                 Student student = new Student();

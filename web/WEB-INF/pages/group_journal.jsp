@@ -10,11 +10,11 @@
 
         <table border = "2" >
             <tr><th>ID</th><th>Name</th><th>Group</th></tr>
-            <c:forEach var = "student" items = "${list}">
+            <c:forEach var = "entity" items = "${list}">
             <tr>
-                <td>${student.student_id}</td>
-                <td>${student.student_name}</td>
-                <td>${student.group_title}</td>
+                <td>${entity.id}</td>
+                <td>${entity.title}</td>
+                <td>${entity.parentId}</td>
             </tr>
             </c:forEach>
         </table>

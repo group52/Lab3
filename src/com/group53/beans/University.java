@@ -1,60 +1,19 @@
 package com.group53.beans;
 
-public class University {
 
-    private static long universityID = 0;
+public class University extends Entity {
 
-    public static byte admin_access_level = 1;
-    public static byte tutor_access_level = 2;
-    public static byte student_access_level = 3;
+    private String name;
 
-    protected long id;
-    protected String title;
-    protected String login;
-    protected String password;
-
-    public University(String title, String login, String password) {
-        universityID ++;
-        this.id = universityID;
-        this.title = title;
-        this.login = login;
-        this.password = password;
+    public University(String title, Long id) {
+        super(id, title, null,1);
     }
 
-    public University(String title) {
-        universityID ++;
-        this.id = universityID;
-        this.title = title;
+    public String getName() {
+        return name;
     }
 
-
-    public long getId() {
-        return id;
+    public void setName(String name) {
+        this.name = name;
     }
-
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
 }

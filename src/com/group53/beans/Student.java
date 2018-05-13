@@ -1,24 +1,12 @@
 package com.group53.beans;
 
-public class Student extends Group {
-
-    private static long studentID = 0;
+public class Student extends Person {
 
     private int record_book;
 
-    public Student(String title, long parent_id, int record_book, String login, String password, String name, String surname, String patronymic) {
-        super(title, parent_id);
-        studentID ++;
-        this.id = studentID;
-
-        this.login = login;
-        this.password = password;
-        this.access_level = University.student_access_level;
-        this.record_book = record_book;
-        this.parent_id = parent_id;
-        this.name = name;
-        this.surname = surname;
-        this.patronymic = patronymic;
+    public Student(Long id, String title, Long parent_id, String name, String surname, String patronymic) {
+        super(id, title, parent_id, name, surname, patronymic);
+        setEntityType(3);
     }
 
     public int getRecord_book() {
