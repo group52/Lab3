@@ -30,17 +30,13 @@ public class StudentDAOImpl implements StudentDAO {
     public Student getStudent() {
         return null;
     }
-
     public List<Student> getAllStudents() {
-        return template.query("select * from ENTITY", new RowMapper<Student>() {
+        return template.query("SELECT * FROM ENTITY WHERE  ENTITY_TYPE = 3", new RowMapper<Student>() {
             public Student mapRow(ResultSet resultSet, int i) throws SQLException {
-                /*
-                Student student = new Student();
-                student.setStudent_id(resultSet.getLong(1));
-                student.setStudent_name(resultSet.getString(2));
-                student.setGroup_title(resultSet.getString(3));
-                */
-                return null;
+                long id = resultSet.getLong(1);
+                String name = resultSet.getString(2);
+                long parent_id =resultSet.getLong(3);
+                return new Student(id, null, parent_id, name, null, null);
             }
         });
     }

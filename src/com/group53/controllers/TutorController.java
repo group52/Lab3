@@ -13,7 +13,7 @@ public class TutorController {
     @Autowired
     private TutorDAOImpl tutorDAO;
 
-    @RequestMapping("/viewAll")
+    @RequestMapping("/viewAllTutors")
     public ModelAndView showAllTutors(){
         List<Tutor> tutorList = tutorDAO.getAllTutors();
         return new ModelAndView("group_journal", "list", tutorList);

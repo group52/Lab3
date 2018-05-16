@@ -13,7 +13,7 @@ public class GroupController {
     @Autowired
     private GroupDAOImpl groupDAO;
 
-    @RequestMapping("/viewAll")
+    @RequestMapping("/viewAllGroups")
     public ModelAndView showAllStudents(){
         List<Group> groupList = groupDAO.getAllGroups();
         return new ModelAndView("group_journal", "list", groupList);

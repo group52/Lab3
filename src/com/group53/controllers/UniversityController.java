@@ -13,7 +13,7 @@ public class UniversityController {
     @Autowired
     private UniversityDAOIml universityDAOIml;
 
-    @RequestMapping("/viewAll")
+    @RequestMapping("/viewAllUniversities")
     public ModelAndView showAllUniversities(){
         List<University> universityList = universityDAOIml.getAllUniversities();
         return new ModelAndView("group_journal", "list", universityList);

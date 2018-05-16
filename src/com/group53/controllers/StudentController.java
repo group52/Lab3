@@ -16,7 +16,7 @@ public class StudentController {
     @Autowired
     private StudentDAOImpl studentDAO;
 
-    @RequestMapping("/viewAll")
+    @RequestMapping("/viewAllStudents")
     public ModelAndView showAllStudents(){
         List<Student> studentList = studentDAO.getAllStudents();
         return new ModelAndView("group_journal", "list", studentList);

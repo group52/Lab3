@@ -13,10 +13,10 @@ public class SubjectController {
     @Autowired
     private SubjectDAOImpl subjectDAO;
 
-    @RequestMapping("/viewAll")
+    @RequestMapping("/viewAllSubjects")
     public ModelAndView showAllSubjects(){
         List<Subject> subjectList = subjectDAO.getAllSubjects();
-        return new ModelAndView("group_journal", "list", subjectList);
+        return new ModelAndView("subjects", "list", subjectList);
     }
 
 }

@@ -9,6 +9,7 @@ public class Student extends Person {
         setEntityType(3);
     }
 
+
     public int getRecord_book() {
         return record_book;
     }

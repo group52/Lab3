@@ -10,7 +10,17 @@
 <head>
     <title>Title</title>
 </head>
-<body>
+    <body>
 
-</body>
+    <table border = "2" >
+        <tr><th>ID</th><th>Title</th></tr>
+        <c:forEach var = "subject" items = "${list}">
+            <tr>
+                <td>${subject.id}</td>
+                <td>${subject.title}</td>
+            </tr>
+        </c:forEach>
+    </table>
+
+    </body>
 </html>

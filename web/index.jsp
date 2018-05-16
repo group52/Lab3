@@ -4,6 +4,7 @@
     <title>Application</title>
   </head>
   <body>
-    <a href = "viewAll"> View all students </a>
+    <a href = "/viewAllStudents"> View all students </a>
+    <a href = "/viewAllSubjects"> View all subjects </a>
   </body>
 </html>
