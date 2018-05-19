@@ -32,6 +32,10 @@ public class Entity {
         this.entityType = entityType;
     }
 
+    public void setId(Long id) { this.id = id; }
+
+    public void setParentId(Long parentId) { this.parentId = parentId; }
+
     public Long getParentId() { return parentId; }
 
     public Long getId() {
