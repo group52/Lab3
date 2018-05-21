@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: White Eagle
@@ -21,6 +22,25 @@
             </tr>
         </c:forEach>
     </table>
+
+
+    <h2>Add subject</h2>
+    <form:form method = "POST" action = "addSubject">
+        <table>
+            <tr>
+                <td><form:label path = "title">Title</form:label></td>
+                <td><form:input path = "title" /></td>
+            </tr>
+            <tr>
+                <td colspan = "2">
+                    <input type = "submit" value = "Submit"/>
+                </td>
+            </tr>
+        </table>
+    </form:form>
+
+    <a href = "editSubject"> Edit subject </a>
+    <a href = "removeSubject"> Remove subject </a>
 
     </body>
 </html>
