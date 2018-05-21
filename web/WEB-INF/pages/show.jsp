@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: White Eagle
-  Date: 09.05.2018
-  Time: 12:24
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -28,22 +21,27 @@
         <tr>
             <td><form:label path = "parentId">Parent ID</form:label></td>
             <td><form:input path = "parentId" /></td>
-        </tr>
         <tr>
             <td><form:label path = "entityType">Entity Type</form:label></td>
             <td><form:input path = "entityType" /></td>
         </tr>
+        <%--<td><form:select path="parentId" cssStyle="width: 150px;">
+                <option value="-1">Select parent ID</option>
+                <c:forEach items="${list}" var="entity">
+                    <option value="${entity.id}">${entity.title}</option>
+                </c:forEach>
+            </form:select></td>--%>
         <tr>
             <td colspan = "2">
                 <input type = "submit" value = "Submit"/>
             </td>
         </tr>
     </table>
-
+</form:form>
 
 <h2>Entity List</h2>
 <table border = "2" >
-    <tr><th>ID</th><th>Name</th><th>Parent ID</th><th>Delete</th><th>Edit</th></tr>
+    <tr><th>ID</th><th>Name</th><th>Parent ID</th><th>Delete</th><th>Edit</th><th>Parameters</th></tr>
     <c:forEach var = "entity" items = "${list}">
         <tr>
             <td>${entity.id}</td>
@@ -51,10 +49,9 @@
             <td>${entity.parentId}</td>
             <td><a href = "deleteEntity?id=${entity.id}"> delete </a></td>
             <td><a href = "editEntity?id=${entity.id}"> edit </a></td>
+            <td><a href = "paramEntity?id=${entity.id}"> parameters </a></td>
         </tr>
     </c:forEach>
-</table>>
-</form:form>
-
+</table>
 </body>
 </html>

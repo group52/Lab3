@@ -49,17 +49,29 @@ public class EntityController {
     @RequestMapping(value = "/childEntity", method = RequestMethod.GET)
     public ModelAndView child(HttpServletRequest request) {
         Long id = Long.parseLong(request.getParameter("id"));
-        Entity newEntity = new Entity();
-        List<Entity> entityList = entityDAO.getChildEntitys(id);
-        ModelAndView model = new ModelAndView("show", "list", entityList);
-        model.addObject("entity", newEntity);
-        return model;
+        Entity entity = entityDAO.getEntity(id);
+        if (entity.getEntityType() != 4) {
+            Entity newEntity = new Entity();
+            List<Entity> entityList = entityDAO.getChildEntitys(id);
+            ModelAndView model = new ModelAndView("show", "list", entityList);
+            newEntity.setParentId(id);
+            model.addObject("entity", newEntity);
+            return model;
+        } else
+        return new ModelAndView("redirect:/progress.jsp");
     }
 
     @RequestMapping(value = "/saveEntity", method = RequestMethod.POST)
-    public ModelAndView saveContact(@ModelAttribute Entity entity) {
+    public ModelAndView save(@ModelAttribute Entity entity) {
         entityDAO.saveOrUpdateEntityDB(entity);
         return new ModelAndView("redirect:/viewAll");
     }
+
+    @RequestMapping(value = "/paramEntity", method = RequestMethod.GET)
+    public ModelAndView param(HttpServletRequest request) {
+        Long id = Long.parseLong(request.getParameter("id"));
+        return new ModelAndView("redirect:/viewParam?id=" + id);
+    }
+
 
 }

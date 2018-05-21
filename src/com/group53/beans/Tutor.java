@@ -2,12 +2,14 @@ package com.group53.beans;
 
 public class Tutor extends Person {
 
+    public static final byte tutor_entity_type = 2;
+
     private String faculty;
     private String speciality;
 
     public Tutor(Long id, String title, Long parent_id, String name, String surname, String patronymic) {
         super(id, title, parent_id, name, surname, patronymic);
-        setEntityType(2);
+        setEntityType(tutor_entity_type);
     }
 
     public String getFaculty() {
@@ -26,4 +28,7 @@ public class Tutor extends Person {
         this.speciality = speciality;
     }
 
+    public static byte getTutor_entity_type() {
+        return tutor_entity_type;
+    }
 }
