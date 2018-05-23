@@ -9,38 +9,25 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Subjects</title>
 </head>
     <body>
+    <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-    <table border = "2" >
-        <tr><th>ID</th><th>Title</th></tr>
-        <c:forEach var = "subject" items = "${list}">
+    <h1>Subjects List</h1>
+    <table border="2" width="70%" cellpadding="2">
+        <tr><th>Id</th><th>Title</th><th>Edit</th><th>Delete</th></tr>
+        <c:forEach var="subject" items="${list}">
             <tr>
                 <td>${subject.id}</td>
                 <td>${subject.title}</td>
+                <td><a href="edit_subject/${subject.id}">Edit</a></td>
+                <td><a href="remove_subject/${subject.id}">Delete</a></td>
             </tr>
         </c:forEach>
     </table>
-
-
-    <h2>Add subject</h2>
-    <form:form method = "POST" action = "addSubject">
-        <table>
-            <tr>
-                <td><form:label path = "title">Title</form:label></td>
-                <td><form:input path = "title" /></td>
-            </tr>
-            <tr>
-                <td colspan = "2">
-                    <input type = "submit" value = "Submit"/>
-                </td>
-            </tr>
-        </table>
-    </form:form>
-
-    <a href = "editSubject"> Edit subject </a>
-    <a href = "removeSubject"> Remove subject </a>
-
+    <br/>
+    <a href="add_subject.jsp">Add New Subject</a>
     </body>
 </html>

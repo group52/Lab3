@@ -9,41 +9,31 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class SubjectDAOImpl implements SubjectDAO {
+public class SubjectDAOImpl {
     private JdbcTemplate template;
 
-    public void insertSubject(Subject subject) {
+    public int insertSubject(Subject subject) {
         String insertSQL = "INSERT INTO ENTITY"
-                + "(ID, TITLE,PARENT_ID, ENTITY_TYPE) VALUES"
-                + "(?,?,?,?)";
-        template.update(insertSQL, new Object[] { subject.getId(),
-                subject.getTitle(),subject.getParentId(), subject.getEntityType()});
+                + "(ID, TITLE,PARENT_ID, ENTITY_TYPE) VALUES" +
+                + subject.getId()+ ","
+                + subject.getTitle() + ","
+                + subject.getParentId() + ","
+                + subject.getEntityType();
+        return template.update(insertSQL);
     }
 
-    public void updateSubjectById(long subject_id, Subject subject) {
-        template.update(
-                "UPDATE ENTITY SET TITLE = ? where id = ?",
-                subject.getTitle(), subject_id);
+    public int updateSubject(Subject subject){
+        String sql="UPDATE ENTITY SET TITLE ='"+subject.getTitle()+"', where id="+subject.getId()+"";
+        return template.update(sql);
     }
 
-    public void removeSubjectById(long subject_id) {
-        String query = "delete from ENTITY where id = ?";
-        Object[] object = new Object[] {subject_id};
-        template.update(query, object);
+    public int removeSubject(long id){
+        String sql="DELETE FROM ENTITY where id="+id+"";
+        return template.update(sql);
     }
-
-    public Subject selectSubjectById(long subject_id) {
-        String sql = "SELECT * FROM ENTITY WHERE ID = ?";
-        Subject subject = (Subject)template.queryForObject(
-                sql, new Object[] { subject_id }, new BeanPropertyRowMapper(Subject.class));
-        return subject;
-    }
-
-    public Subject selectSubjectByTitle(String title) {
-        String sql = "SELECT * FROM ENTITY WHERE TITLE = ?";
-        Subject subject = (Subject)template.queryForObject(
-                sql, new Object[] { title }, new BeanPropertyRowMapper(Subject.class));
-        return subject;
+    public Subject selectSubjectById(long subject_id){
+        String sql="SELECT * FROM ENTITY where id=?";
+        return template.queryForObject(sql, new Object[]{subject_id},new BeanPropertyRowMapper<Subject>(Subject.class));
     }
 
     public List<Subject> getAllSubjects() {
