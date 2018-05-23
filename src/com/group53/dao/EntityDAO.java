@@ -10,4 +10,5 @@ public interface EntityDAO {
     public void deleteEntityDB(Long id);
     public Entity getEntity(Long id);
     public List<Entity> getChildEntitys(Long id);
+    public List<Entity> getAllByType(int entityType);
 }

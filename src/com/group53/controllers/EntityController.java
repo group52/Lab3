@@ -2,6 +2,7 @@ package com.group53.controllers;
 
 
 import com.group53.beans.Entity;
+import com.group53.beans.Student;
 import com.group53.dao.EntityDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,14 +44,13 @@ public class EntityController {
         ModelAndView model = new ModelAndView("show", "list", entityList);
         model.addObject("entity", newEntity);
         return model;
-
     }
 
     @RequestMapping(value = "/childEntity", method = RequestMethod.GET)
     public ModelAndView child(HttpServletRequest request) {
         Long id = Long.parseLong(request.getParameter("id"));
         Entity entity = entityDAO.getEntity(id);
-        if (entity.getEntityType() != 4) {
+        if (entity.getEntityType() != Student.getStudent_entity_type()) {
             Entity newEntity = new Entity();
             List<Entity> entityList = entityDAO.getChildEntitys(id);
             ModelAndView model = new ModelAndView("show", "list", entityList);
@@ -73,5 +73,14 @@ public class EntityController {
         return new ModelAndView("redirect:/viewParam?id=" + id);
     }
 
+    @RequestMapping(value = "/viewByType", method = RequestMethod.GET)
+    public ModelAndView viewByType(HttpServletRequest request) {
+        int entityType = Integer.parseInt(request.getParameter("entityType"));
+        List<Entity> entityList = entityDAO.getAllByType(entityType);
+        Entity newEntity = new Entity();
+        ModelAndView model = new ModelAndView("show", "list", entityList);
+        model.addObject("entity", newEntity);
+        return model;
+    }
 
 }

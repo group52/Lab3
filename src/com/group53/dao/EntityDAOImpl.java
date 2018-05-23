@@ -80,4 +80,15 @@ public class EntityDAOImpl implements EntityDAO {
         });
     }
 
+    @Override
+    public List<Entity> getAllByType(int entityType) {
+        String sql = "SELECT * FROM ENTITY WHERE ENTITY_TYPE=" + entityType;
+        return template.query(sql, new RowMapper<Entity>() {
+            @Override
+            public Entity mapRow(ResultSet resultSet, int i) throws SQLException {
+                return new Entity(resultSet.getLong("id"), resultSet.getString("title"), resultSet.getLong("parent_Id"),resultSet.getInt("entity_Type"));
+            }
+        });
+    }
+
 }

@@ -23,14 +23,20 @@
             <td><form:input path = "parentId" /></td>
         <tr>
             <td><form:label path = "entityType">Entity Type</form:label></td>
-            <td><form:input path = "entityType" /></td>
+            <td><form:select path="entityType" cssStyle="width: 150px;">
+                <option value="${entity.entityType}">Select(default ${entity.entityType})</option>
+                <option value="0">0 - Entity</option>
+                <option value="1">1 - University</option>
+                <option value="2">2 - Tutor</option>
+                <option value="3">3 - Group</option>
+                <option value="4">4 - Student</option>
+                <option value="5">5 - Subject</option>
+                <option value="6">6 - Person</option>
+                <option value="7">7 - User</option>
+                <option value="8">8 - StudyLoad</option>
+                <option value="9">9 - Parameter</option>
+            </form:select><td>
         </tr>
-        <%--<td><form:select path="parentId" cssStyle="width: 150px;">
-                <option value="-1">Select parent ID</option>
-                <c:forEach items="${list}" var="entity">
-                    <option value="${entity.id}">${entity.title}</option>
-                </c:forEach>
-            </form:select></td>--%>
         <tr>
             <td colspan = "2">
                 <input type = "submit" value = "Submit"/>
@@ -39,19 +45,22 @@
     </table>
 </form:form>
 
+
 <h2>Entity List</h2>
 <table border = "2" >
-    <tr><th>ID</th><th>Name</th><th>Parent ID</th><th>Delete</th><th>Edit</th><th>Parameters</th></tr>
+    <tr><th>ID</th><th>Name</th><th>Parent ID</th><th>Entity Type</th><th>Delete</th><th>Edit</th><th>Parameters</th></tr>
     <c:forEach var = "entity" items = "${list}">
         <tr>
             <td>${entity.id}</td>
             <td><a href = "childEntity?id=${entity.id}">${entity.title}</a></td>
             <td>${entity.parentId}</td>
+            <td><a href = "viewByType?entityType=${entity.entityType}">${entity.entityType}</a></td>
             <td><a href = "deleteEntity?id=${entity.id}"> delete </a></td>
             <td><a href = "editEntity?id=${entity.id}"> edit </a></td>
             <td><a href = "paramEntity?id=${entity.id}"> parameters </a></td>
         </tr>
     </c:forEach>
 </table>
+<a href = "viewAll"> View all entities </a>
 </body>
 </html>
