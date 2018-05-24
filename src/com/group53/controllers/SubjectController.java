@@ -3,6 +3,7 @@ package com.group53.controllers;
 import com.group53.beans.Subject;
 import com.group53.dao.SubjectDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
+@Controller
 public class SubjectController {
 
     @Autowired
@@ -24,7 +26,7 @@ public class SubjectController {
 
     @RequestMapping("/add_subject")
     public ModelAndView showAddForm(){
-        return new ModelAndView("add_subject","command",new Subject());
+        return new ModelAndView("add_subject","command", new Subject());
     }
 
     @RequestMapping(value="/edit_subject/{id}")

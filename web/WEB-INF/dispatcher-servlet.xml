@@ -36,4 +36,8 @@
     <bean id = "entity_dao" class = "com.group53.dao.EntityDAOImpl">
         <property name = "template" ref = "jdbcTemplate"/>
     </bean>
+
+    <bean id = "entityParam_dao" class = "com.group53.dao.EntityParameterDAOImpl">
+        <property name = "template" ref = "jdbcTemplate"/>
+    </bean>
 </beans>

@@ -8,14 +8,21 @@
 </head>
 <body>
 
+<h2>Group journal for ${group.title} (subject "${subject.title}", tutor ${tutor.title})</h2>
         <table border = "2" >
-            <tr><th>ID</th><th>Name</th><th>Parent_id</th></tr>
-            <c:forEach var = "student" items = "${list}">
             <tr>
-                <td>${student.id}</td>
-                <td>${student.name}</td>
-                <td>${student.parentId}</td>
+                <th>Name</th>
+                <c:forEach var = "date" items = "${dates}">
+                    <th>${date}</th>
+                </c:forEach>
             </tr>
+            <c:forEach items="${journal}" var="student">
+                <tr>
+                    <td>${student.key.title}</td>
+                    <c:forEach var = "mark" items = "${student.value}">
+                        <td>${mark.value}</td>
+                    </c:forEach>
+                </tr>
             </c:forEach>
         </table>
 

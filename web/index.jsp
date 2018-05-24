@@ -5,7 +5,7 @@
   </head>
   <body>
     <a href = "viewAll"> View all students </a>
-    <a href="add_subject.jsp">Add New Subject</a>
-    <a href="subjects.jsp">Show subjects</a>
+    <a href="add_subject">Add New Subject</a>
+    <a href="subjects">Show subjects</a>
   </body>
 </html>

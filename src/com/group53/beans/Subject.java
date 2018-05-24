@@ -4,6 +4,9 @@ public class Subject extends Entity{
 
     public static final byte subject_entity_type = 5;
 
+    public Subject() {
+    }
+
     public Subject(Long id, String title) {
         super(id, title, null, subject_entity_type);
     }

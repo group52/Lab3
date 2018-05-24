@@ -1,8 +1,7 @@
 package com.group53.controllers;
 
 
-import com.group53.beans.Entity;
-import com.group53.beans.Student;
+import com.group53.beans.*;
 import com.group53.dao.EntityDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,15 +49,31 @@ public class EntityController {
     public ModelAndView child(HttpServletRequest request) {
         Long id = Long.parseLong(request.getParameter("id"));
         Entity entity = entityDAO.getEntity(id);
-        if (entity.getEntityType() != Student.getStudent_entity_type()) {
-            Entity newEntity = new Entity();
-            List<Entity> entityList = entityDAO.getChildEntitys(id);
-            ModelAndView model = new ModelAndView("show", "list", entityList);
-            newEntity.setParentId(id);
-            model.addObject("entity", newEntity);
-            return model;
-        } else
-        return new ModelAndView("redirect:/progress.jsp");
+        Entity newEntity = new Entity();
+        List<Entity> entityList = entityDAO.getChildEntitys(id);
+        ModelAndView model = new ModelAndView("show", "list", entityList);
+
+
+        int entityType = entity.getEntityType();
+        switch (entityType) {
+            case Student.student_entity_type:   return new ModelAndView("redirect:/mark?id=" + id);
+
+            case Group.group_entity_type:       newEntity.setParentId(id);
+                                                model.addObject("entity", newEntity);
+                                                return model;
+
+            case Tutor.tutor_entity_type:       newEntity.setParentId(id);
+                                                model.addObject("entity", newEntity);
+                                                return model;
+
+            case Subject.subject_entity_type:   newEntity.setParentId(id);
+                                                model.addObject("entity", newEntity);
+                                                return model;
+
+            case StudyLoad.studyload_entity_type:   return new ModelAndView("redirect:/editMark?id=" + id);
+
+            default:                            return new ModelAndView("redirect:/viewAll");
+        }
     }
 
     @RequestMapping(value = "/saveEntity", method = RequestMethod.POST)

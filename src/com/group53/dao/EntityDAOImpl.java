@@ -1,15 +1,22 @@
 package com.group53.dao;
 
 import com.group53.beans.Entity;
+import com.group53.beans.Parameter;
+import com.group53.beans.StudyLoad;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 public class EntityDAOImpl implements EntityDAO {
+
+    @Autowired
+    private EntityParameterDAOImpl entityParameterDAO;
+
     private JdbcTemplate template;
 
     public void setTemplate(JdbcTemplate template) {
@@ -88,6 +95,44 @@ public class EntityDAOImpl implements EntityDAO {
             public Entity mapRow(ResultSet resultSet, int i) throws SQLException {
                 return new Entity(resultSet.getLong("id"), resultSet.getString("title"), resultSet.getLong("parent_Id"),resultSet.getInt("entity_Type"));
             }
+        });
+    }
+
+    @Override
+    public Long getId(String title) {
+        String sql = "SELECT * FROM ENTITY WHERE TITLE='" + title + "' and ENTITY_TYPE=" + Parameter.parameter_entity_type;
+        return (Long) template.query(sql, new ResultSetExtractor<Long>() {
+            @Override
+            public Long extractData(ResultSet resultSet) throws SQLException {
+                if (resultSet.next()) {
+                    return resultSet.getLong("id");
+                }
+                return null;
+            }
+        });
+    }
+
+    @Override
+    public StudyLoad getStudyLoad(final Long id) {
+        String sql = "SELECT * FROM ENTITY WHERE id=" + id;
+        return (StudyLoad) template.query(sql, new ResultSetExtractor<StudyLoad>() {
+            @Override
+            public StudyLoad extractData(ResultSet resultSet) throws SQLException {
+                if (resultSet.next()) {
+                    StudyLoad studyLoad = new StudyLoad();
+                    studyLoad.setId(resultSet.getLong("id"));
+                    studyLoad.setTitle(resultSet.getString("title"));
+                    studyLoad.setParentId(resultSet.getLong("parent_Id"));
+                    studyLoad.setEntityType(resultSet.getInt("entity_Type"));
+
+                    studyLoad.setGroupId(entityParameterDAO.getParameter(id, getId("groupId")).getIdValue());
+                    studyLoad.setTutorId(entityParameterDAO.getParameter(id, getId("tutorId")).getIdValue());
+
+                    return studyLoad;
+                }
+                return null;
+            }
+
         });
     }
 

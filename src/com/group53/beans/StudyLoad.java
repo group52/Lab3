@@ -7,6 +7,9 @@ public class StudyLoad extends Entity {
     private Long groupId;
     private Long tutorId;
 
+    public StudyLoad() {
+    }
+
     public StudyLoad(Long id, String title, Long subjectId) {
         super(id, title, subjectId, studyload_entity_type);
     }
