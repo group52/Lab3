@@ -1,17 +1,21 @@
 package com.group53.controllers;
 
 import com.group53.beans.Entity;
+import com.group53.beans.EntityParameter;
 import com.group53.beans.StudyLoad;
 import com.group53.dao.EntityDAOImpl;
 import com.group53.dao.EntityParameterDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +45,10 @@ public class MarkController {
         model.addObject("group", entityDAO.getEntity(newStudyLoad.getGroupId()));
         model.addObject("subject", entityDAO.getEntity(newStudyLoad.getParentId()));
         model.addObject("tutor", entityDAO.getEntity(newStudyLoad.getTutorId()));
+        EntityParameter newEntityParameter = new EntityParameter();
+        newEntityParameter.setParameterId(entityDAO.getId("mark"));
+        newEntityParameter.setIdValue(id);
+        model.addObject("entityParameter", newEntityParameter);
 
         return model;
     }
@@ -60,5 +68,20 @@ public class MarkController {
         model.addObject("student", student);
 
         return model;
+    }
+
+    @RequestMapping(value = "/saveMark", method = RequestMethod.POST)
+    public ModelAndView save(@ModelAttribute EntityParameter entityParameter) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        try {
+            java.util.Date date = dateFormat.parse(entityParameter.getDateString());
+            entityParameter.setDateValue(new Date(date.getTime()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        entityParameterDAO.saveParameterDB(entityParameter);
+        return new ModelAndView("redirect://editMark?id=" + entityParameter.getIdValue());
     }
 }

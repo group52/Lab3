@@ -6,6 +6,7 @@
     <title>Title</title>
 </head>
 <body>
+
 <h2>Journal for ${student.title}</h2>
 <table border = "2" >
     <tr>
