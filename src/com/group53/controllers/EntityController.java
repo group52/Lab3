@@ -3,6 +3,7 @@ package com.group53.controllers;
 
 import com.group53.beans.*;
 import com.group53.dao.EntityDAOImpl;
+import com.group53.dao.EntityParameterDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,6 +19,8 @@ public class EntityController {
 
     @Autowired
     private EntityDAOImpl entityDAO;
+    @Autowired
+    private EntityParameterDAOImpl entityParameterDAO;
 
     @RequestMapping("viewAll")
     public ModelAndView showAllEntitys(){
@@ -62,7 +65,10 @@ public class EntityController {
                                                 model.addObject("entity", newEntity);
                                                 return model;
 
-            case Tutor.tutor_entity_type:       newEntity.setParentId(id);
+            case Tutor.tutor_entity_type:       entityList.clear();
+                                                for (Long idStudyLoad : entityParameterDAO.getStudyLoadByTutor(id))
+                                                    entityList.add(entityDAO.getEntity(idStudyLoad));
+                                                model.addObject("list", entityList);
                                                 model.addObject("entity", newEntity);
                                                 return model;
 

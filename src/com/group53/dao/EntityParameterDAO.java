@@ -17,4 +17,5 @@ public interface EntityParameterDAO {
     public Map<Date, Double> getAllMarksByStudent(TreeSet<Date> dates, Long idValue, Long entityId);
     public TreeSet<Date> getAllDatesByStudent(Long idValue);
     public TreeSet<Long> getStudyLoadByGroup(Long idValue);
+    public TreeSet<Long> getStudyLoadByTutor(Long id);
 }

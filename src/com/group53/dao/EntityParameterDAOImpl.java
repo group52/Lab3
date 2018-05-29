@@ -171,4 +171,17 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
         });
         return new TreeSet<Long>(list);
     }
+
+    @Override
+    public TreeSet<Long> getStudyLoadByTutor(Long id) {
+        String sql = "SELECT * FROM ENTITY_PARAMETER WHERE ID_VALUE=" + id
+                + " and PARAMETER_ID=" + entityDAO.getId("tutorId");
+        List<Long> list =  template.query(sql, new RowMapper<Long>() {
+            @Override
+            public Long mapRow(ResultSet resultSet, int i) throws SQLException {
+                return resultSet.getLong("entity_id");
+            }
+        });
+        return new TreeSet<Long>(list);
+    }
 }
