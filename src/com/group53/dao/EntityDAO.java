@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface EntityDAO {
     List<Entity> getAllEntitys();
-    public void saveOrUpdateEntityDB(Entity entity);
-    public void deleteEntityDB(Long id);
-    public Entity getEntity(Long id);
-    public Long getId(String title);
-    public List<Entity> getChildEntitys(Long id);
-    public List<Entity> getAllByType(int entityType);
-    public StudyLoad getStudyLoad(Long id);
+    void saveOrUpdateEntityDB(Entity entity);
+    void deleteEntityDB(Long id);
+    Entity getEntity(Long id);
+    Long getId(String title);
+    List<Entity> getChildEntitys(Long id);
+    List<Entity> getAllByType(int entityType);
+    StudyLoad getStudyLoad(Long id);
 }
