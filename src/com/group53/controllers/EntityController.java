@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
 public class EntityController {
+    private static final Logger logger = Logger.getLogger(EntityController.class);
 
     @Autowired
     private EntityDAOImpl entityDAO;
@@ -28,6 +30,7 @@ public class EntityController {
         ModelAndView model = new ModelAndView("show", "list", entityList);
         Entity newEntity = new Entity();
         model.addObject("entity", newEntity);
+        logger.info("Entities were added to show.jsp");
         return model;
     }
 
@@ -35,6 +38,7 @@ public class EntityController {
     public ModelAndView deleteEntity(HttpServletRequest request) {
         Long id = Long.parseLong(request.getParameter("id"));
         entityDAO.deleteEntityDB(id);
+        logger.info("The entity with id = " + id + " was deleted");
         return new ModelAndView("redirect:/viewAll");
     }
 
@@ -45,6 +49,7 @@ public class EntityController {
         List<Entity> entityList = entityDAO.getAllEntitys();
         ModelAndView model = new ModelAndView("show", "list", entityList);
         model.addObject("entity", newEntity);
+        logger.info("The entity with id = " + id + " was edited");
         return model;
     }
 
@@ -85,6 +90,7 @@ public class EntityController {
     @RequestMapping(value = "/saveEntity", method = RequestMethod.POST)
     public ModelAndView save(@ModelAttribute Entity entity) {
         entityDAO.saveOrUpdateEntityDB(entity);
+        logger.info("The entity with id = " + entity.getId() + " was saved");
         return new ModelAndView("redirect:/viewAll");
     }
 

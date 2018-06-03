@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
@@ -22,6 +23,7 @@ import java.util.List;
 @Controller
 public class ParameterController {
 
+    private static final Logger logger = Logger.getLogger(ParameterController.class);
     private Long entityId;
     @Autowired
     private EntityParameterDAOImpl entityParameterDAO;
@@ -36,6 +38,7 @@ public class ParameterController {
         ModelAndView model = new ModelAndView("param", "list", paramList);
         EntityParameter newEntityParameter = new EntityParameter();
         newEntityParameter.setEntityId(entityId);
+        logger.info("New entity parameter, entity id = " + entityId);
         model.addObject("entityParameter", newEntityParameter);
         model.addObject("parameters", parameters);
         return model;
@@ -45,6 +48,7 @@ public class ParameterController {
     public ModelAndView delete(HttpServletRequest request) {
         Long parameterID = Long.parseLong(request.getParameter("param"));
         entityParameterDAO.deleteParameterDB(entityId, parameterID);
+        logger.info("The param with entity id = " + entityId + " was deleted");
         return new ModelAndView("redirect:/viewParam?id=" + entityId);
     }
 
@@ -56,6 +60,7 @@ public class ParameterController {
         ModelAndView model = new ModelAndView("param", "list", paramList);
         model.addObject("entityParameter", newEntityParameter);
         List<Entity> parameters = entityDAO.getAllByType(Parameter.getParameter_entity_type());
+        logger.info("The param with entity id = " + entityId + " was edited");
         model.addObject("parameters", parameters);
         return model;
     }
@@ -69,9 +74,11 @@ public class ParameterController {
             entityParameter.setDateValue(new Date(date.getTime()));
         } catch (ParseException e) {
             e.printStackTrace();
+            logger.error("ParseException: ", e);
         }
 
         entityParameterDAO.saveParameterDB(entityParameter);
+        logger.info("The param with entity id = " + entityParameter.getEntityId() + " was saved");
         return new ModelAndView("redirect:/viewParam?id=" + entityId);
     }
 }
