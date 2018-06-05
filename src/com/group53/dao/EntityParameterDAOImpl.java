@@ -16,6 +16,7 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
     private JdbcTemplate template;
 
     public void setTemplate(JdbcTemplate template) {
+        Locale.setDefault(Locale.ENGLISH);
         this.template = template;
     }
 
