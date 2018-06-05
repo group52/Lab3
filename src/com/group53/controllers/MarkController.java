@@ -5,6 +5,7 @@ import com.group53.beans.EntityParameter;
 import com.group53.beans.StudyLoad;
 import com.group53.dao.EntityDAOImpl;
 import com.group53.dao.EntityParameterDAOImpl;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,6 +24,7 @@ import java.util.TreeSet;
 
 @Controller
 public class MarkController {
+    private static final Logger logger = Logger.getLogger(MarkController.class);
     @Autowired
     private EntityParameterDAOImpl entityParameterDAO;
     @Autowired
@@ -48,6 +50,7 @@ public class MarkController {
         EntityParameter newEntityParameter = new EntityParameter();
         newEntityParameter.setParameterId(entityDAO.getId("mark"));
         newEntityParameter.setIdValue(id);
+        logger.info("Mark,  id = " + id + " was edited");
         model.addObject("entityParameter", newEntityParameter);
 
         return model;
@@ -66,7 +69,7 @@ public class MarkController {
         }
         model.addObject("journal", journal);
         model.addObject("student", student);
-
+        logger.info("Student marks were updated");
         return model;
     }
 
@@ -79,9 +82,11 @@ public class MarkController {
             entityParameter.setDateValue(new Date(date.getTime()));
         } catch (ParseException e) {
             e.printStackTrace();
+            logger.error("ParseException: ", e);
         }
 
         entityParameterDAO.saveParameterDB(entityParameter);
+        logger.info("The param with entity id = " + entityParameter.getEntityId() + " was saved");
         return new ModelAndView("redirect://editMark?id=" + entityParameter.getIdValue());
     }
 }
