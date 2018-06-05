@@ -33,7 +33,7 @@
         <property name = "template" ref = "jdbcTemplate"/>
     </bean>
 
-    <bean id = "entityParam_dao" class = "com.group53.dao.EntityParameterDAOImpl">
+    <bean id = "entity_param_dao" class = "com.group53.dao.EntityParameterDAOImpl">
         <property name = "template" ref = "jdbcTemplate"/>
     </bean>
 </beans>

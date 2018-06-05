@@ -1,7 +1,7 @@
 package com.group53.beans;
 
 
-import javax.persistence.Transient;
+import java.beans.Transient;
 import java.sql.Date;
 
 public class EntityParameter {
@@ -14,7 +14,6 @@ public class EntityParameter {
     private Long idValue;
     private Date dateValue;
 
-    @Transient
     private String dateString;
 
     public EntityParameter() {
