@@ -12,6 +12,12 @@
     <title>Error</title>
 </head>
 <body>
-
+<h3>Sorry, we have some problems...</h3>
+<p>
+    Root cause of problem is <% exception.getCause(); %>
+</p>
+<p>
+    Details: <% exception.printStackTrace(response.getWriter()); %>
+</p>
 </body>
 </html>
