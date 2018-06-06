@@ -213,7 +213,7 @@
                     <configuration>
                         <classifier>classes</classifier>
                         <includes>
-                            <include>**/**.class</include>
+                            <include>**/**.class</include>                            
                         </includes>
                     </configuration>
                 </execution>
@@ -225,7 +225,7 @@
             <version>2.4</version>
             <configuration>
                 <warSourceDirectory>web</warSourceDirectory>
-                <warName>${project.build.finalName}</warName>
+                <warName>OnlineJournal_war_exploded</warName>
                 <failOnMissingWebXml>false</failOnMissingWebXml>
             </configuration>
         </plugin>
