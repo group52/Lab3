@@ -6,7 +6,7 @@ public class User extends Entity {
 
     public static final byte user_entity_type = 7;
 
-    private String login;
+    private String username;
     private String password;
     private String role;
     private String firstname;
@@ -14,8 +14,8 @@ public class User extends Entity {
     private Person person;
     private Map<Entity, Byte> map;
 
-    public User(String login,String password, String role,String firstname, String lastname){
-       this.login = login;
+    public User(String username,String password, String role,String firstname, String lastname){
+       this.username = username;
        this.password = password;
        this.role = role;
        this.firstname = firstname;
@@ -50,12 +50,12 @@ public class User extends Entity {
         return user_entity_type;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUserName() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -89,4 +89,6 @@ public class User extends Entity {
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
+
+
 }
