@@ -7,6 +7,7 @@
 </head>
 <body>
 
+<a href = "loginChange?id=${student.id}"> Change Login </a>
 <h2>Journal for ${student.title}</h2>
 <table border = "2" >
     <tr>

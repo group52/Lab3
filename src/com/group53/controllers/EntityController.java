@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -81,6 +82,10 @@ public class EntityController {
                                                 model.addObject("entity", newEntity);
                                                 return model;
 
+            case University.university_entity_type:   newEntity.setParentId(id);
+                                                model.addObject("entity", newEntity);
+                                                return model;
+
             case StudyLoad.studyload_entity_type:   return new ModelAndView("redirect:/editMark?id=" + id);
 
             default:                            return new ModelAndView("redirect:/viewAll");
@@ -90,8 +95,23 @@ public class EntityController {
     @RequestMapping(value = "/saveEntity", method = RequestMethod.POST)
     public ModelAndView save(@ModelAttribute Entity entity) {
         entityDAO.saveOrUpdateEntityDB(entity);
+        if (entity.getEntityType() == Student.getStudent_entity_type() ||
+                entity.getEntityType() == Tutor.getTutor_entity_type() ||
+                entity.getEntityType() == University.getUniversity_entity_type()) {
+            EntityParameter entityParameter = new EntityParameter();
+            entityParameter.setParameterId(entityDAO.getId("login"));
+            entityParameter.setEntityId(entity.getId());
+            entityParameter.setStringValue(entity.getTitle());
+            entityParameterDAO.saveParameterDB(entityParameter);
+            entityParameter.setParameterId(entityDAO.getId("password"));
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String hashedPassword = passwordEncoder.encode(entity.getId().toString());
+            entityParameter.setStringValue(hashedPassword);
+            entityParameterDAO.saveParameterDB(entityParameter);
+        }
         logger.info("The entity with id = " + entity.getId() + " was saved");
         return new ModelAndView("redirect:/viewAll");
+
     }
 
     @RequestMapping(value = "/paramEntity", method = RequestMethod.GET)

@@ -39,14 +39,19 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
     @Override
     public void saveParameterDB(EntityParameter entityParameter){
 
-        if (getParameter(entityParameter.getEntityId(), entityParameter.getParameterId(), entityParameter.getDateValue()) != null) {
-            String updateSQL = "UPDATE ENTITY_PARAMETER  SET string_Value=?, int_Value=?, decimal_Value=?," +
-                    " id_Value=?, date_Value=? where parameter_id=? and entity_id=?";
+        if ((getParameter(entityParameter.getEntityId(), entityParameter.getParameterId()) != null &&
+                (long) entityParameter.getParameterId() != (long) entityDAO.getId("mark")) ||
+                ((getParameter(entityParameter.getEntityId(), entityParameter.getParameterId(), entityParameter.getDateValue()) != null &&
+                        (long) entityParameter.getParameterId() != (long) entityDAO.getId("mark")))) {
+
+                String updateSQL = "UPDATE ENTITY_PARAMETER  SET string_Value=?, int_Value=?, decimal_Value=?," +
+                        " id_Value=?, date_Value=? where parameter_id=? and entity_id=?";
 
 
-            template.update(updateSQL, entityParameter.getStringValue(), entityParameter.getIntValue(),
-                    entityParameter.getDecimalValue(), entityParameter.getIdValue(), entityParameter.getDateValue(),
-                    entityParameter.getParameterId(), entityParameter.getEntityId());
+                template.update(updateSQL, entityParameter.getStringValue(), entityParameter.getIntValue(),
+                        entityParameter.getDecimalValue(), entityParameter.getIdValue(), entityParameter.getDateValue(),
+                        entityParameter.getParameterId(), entityParameter.getEntityId());
+
         }
         else {
             String insertSQL = "INSERT INTO ENTITY_PARAMETER"
@@ -183,5 +188,52 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
             }
         });
         return new TreeSet<Long>(list);
+    }
+
+    @Override
+    public EntityParameter checkLogin(String login) {
+        Long id_Login = entityDAO.getId("login");
+        String sql = "SELECT * FROM ENTITY_PARAMETER WHERE  STRING_VALUE='" + login + "' and PARAMETER_ID=" + id_Login;
+        return template.query(sql, new ResultSetExtractor<EntityParameter>() {
+            @Override
+            public EntityParameter extractData(ResultSet resultSet) throws SQLException {
+                if (resultSet.next()) {
+                    EntityParameter entityParameter = new EntityParameter();
+                    entityParameter.setParameterId(resultSet.getLong("parameter_id"));
+                    entityParameter.setEntityId(resultSet.getLong("entity_id"));
+                    entityParameter.setStringValue(resultSet.getString("string_value"));
+                    entityParameter.setIntValue(resultSet.getInt("int_value"));
+                    entityParameter.setDecimalValue(resultSet.getDouble("decimal_value"));
+                    entityParameter.setIdValue(resultSet.getLong("id_value"));
+                    entityParameter.setDateValue(resultSet.getDate("date_value"));
+                    return entityParameter;
+                }
+                return null;
+            }
+        });
+    }
+
+    @Override
+    public EntityParameter checkPassword(Long entityId, String password) {
+        Long id_Login = entityDAO.getId("password");
+        String sql = "SELECT * FROM ENTITY_PARAMETER WHERE  STRING_VALUE='" + password + "' and PARAMETER_ID=" + id_Login
+                + " and ENTITY_ID=" + entityId;
+        return template.query(sql, new ResultSetExtractor<EntityParameter>() {
+            @Override
+            public EntityParameter extractData(ResultSet resultSet) throws SQLException {
+                if (resultSet.next()) {
+                    EntityParameter entityParameter = new EntityParameter();
+                    entityParameter.setParameterId(resultSet.getLong("parameter_id"));
+                    entityParameter.setEntityId(resultSet.getLong("entity_id"));
+                    entityParameter.setStringValue(resultSet.getString("string_value"));
+                    entityParameter.setIntValue(resultSet.getInt("int_value"));
+                    entityParameter.setDecimalValue(resultSet.getDouble("decimal_value"));
+                    entityParameter.setIdValue(resultSet.getLong("id_value"));
+                    entityParameter.setDateValue(resultSet.getDate("date_value"));
+                    return entityParameter;
+                }
+                return null;
+            }
+        });
     }
 }

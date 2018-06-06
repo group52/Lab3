@@ -11,6 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-
+<c: var = "error" items = "${errorV}"/>
+<h2>"${errorV}"</h2>
 </body>
 </html>

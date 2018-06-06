@@ -10,6 +10,7 @@
 </head>
 
 <body>
+<a href = "loginChange?id=${entity.id}"> Change Login </a>
 <h2>Entity Information</h2>
 <form:form method = "POST" action = "saveEntity" modelAttribute="entity">
     <table>
@@ -46,10 +47,10 @@
 </form:form>
 
 <a href = "viewAll"> View all entities </a>
-<a href = "viewByType?entityType=5"> View only subjects </a>
-<a href = "viewByType?entityType=3"> View only groups </a>
-<a href = "viewByType?entityType=2"> View only tutors </a>
-<a href = "viewByType?entityType=9"> View only parameters </a>
+<a href = "viewByType?entityType=5"> Subjects </a>
+<a href = "viewByType?entityType=3"> Groups </a>
+<a href = "viewByType?entityType=2"> Tutors </a>
+<a href = "viewByType?entityType=9"> Parameters </a>
 <h2>Entity List</h2>
 <table border = "2" >
     <tr><th>ID</th><th>Name</th><th>Parent ID</th><th>Entity Type</th><th>Delete</th><th>Edit</th><th>Parameters</th></tr>

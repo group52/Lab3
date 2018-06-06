@@ -18,4 +18,6 @@ public interface EntityParameterDAO {
     TreeSet<Date> getAllDatesByStudent(Long idValue);
     TreeSet<Long> getStudyLoadByGroup(Long idValue);
     TreeSet<Long> getStudyLoadByTutor(Long id);
+    EntityParameter checkLogin(String login);
+    EntityParameter checkPassword(Long entityId, String password);
 }
