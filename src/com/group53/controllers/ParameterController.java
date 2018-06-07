@@ -7,6 +7,7 @@ import com.group53.beans.Parameter;
 import com.group53.dao.EntityParameterDAOImpl;
 import com.group53.dao.EntityDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -77,7 +78,15 @@ public class ParameterController {
             logger.error("ParseException: ", e);
         }
 
+        if ((long) entityParameter.getParameterId() == (long) (entityDAO.getId("password")))
+        {
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String hashedPassword = passwordEncoder.encode(entityParameter.getStringValue());
+            entityParameter.setStringValue(hashedPassword);
+        }
+
         entityParameterDAO.saveParameterDB(entityParameter);
+
         logger.info("The param with entity id = " + entityParameter.getEntityId() + " was saved");
         return new ModelAndView("redirect:/viewParam?id=" + entityId);
     }
