@@ -225,7 +225,7 @@
             <version>2.4</version>
             <configuration>
                 <warSourceDirectory>web</warSourceDirectory>
-                <warName>OnlineJournal_war_exploded</warName>
+                <warName>OnlineJournal</warName>
                 <failOnMissingWebXml>false</failOnMissingWebXml>
             </configuration>
         </plugin>

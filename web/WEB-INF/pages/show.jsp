@@ -10,7 +10,6 @@
 </head>
 
 <body>
-<a href = "loginChange?id=${entity.id}"> Change Login </a>
 <h2>Entity Information</h2>
 <form:form method = "POST" action = "saveEntity" modelAttribute="entity">
     <table>
@@ -66,6 +65,6 @@
         </tr>
     </c:forEach>
 </table>
-
+<a href = "enter"> Start page </a>
 </body>
 </html>

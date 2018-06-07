@@ -27,6 +27,6 @@
         </tr>
     </table>
 </form:form>
-<a href = "enter"> View all entities </a>
+<a href = "start?id=${loginPassword.userId}"> Back </a>
 </body>
 </html>

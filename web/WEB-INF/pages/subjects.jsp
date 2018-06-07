@@ -1,33 +1,26 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: White Eagle
-  Date: 09.05.2018
-  Time: 12:24
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 <head>
     <title>Subjects</title>
 </head>
     <body>
-    <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+    <a href = "loginChange?id=${entity.id}"> Change Login </a>
     <h1>Subjects List</h1>
-    <table border="2" width="70%" cellpadding="2">
-        <tr><th>Id</th><th>Title</th><th>Edit</th><th>Delete</th></tr>
-        <c:forEach var="subject" items="${list}">
+    <table border = "2" >
+        <tr><th>ID</th><th>Name</th></tr>
+        <c:forEach var = "entity" items = "${list}">
             <tr>
-                <td>${subject.id}</td>
-                <td>${subject.title}</td>
-                <td><a href="edit_subject/${subject.id}">Edit</a></td>
-                <td><a href="remove_subject/${subject.id}">Delete</a></td>
+                <td>${entity.id}</td>
+                <td><a href = "childEntity?id=${entity.id}">${entity.title}</a></td>
             </tr>
         </c:forEach>
     </table>
     <br/>
-    <a href="add_subject.jsp">Add New Subject</a>
+    <a href = "enter"> Start page </a>
     </body>
 </html>

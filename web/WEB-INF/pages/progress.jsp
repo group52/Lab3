@@ -25,6 +25,6 @@
         </tr>
     </c:forEach>
 </table>
-
+<a href = "enter"> Start page </a>
 </body>
 </html>

@@ -83,7 +83,7 @@ public class LoginController {
                     case Tutor.tutor_entity_type:       Entity newEntity = new Entity();
                                                         newEntity.setId(entity.getId());
                                                         List<Entity> entityList = entityDAO.getChildEntitys(entity.getId());
-                                                        ModelAndView model = new ModelAndView("show", "list", entityList);
+                                                        ModelAndView model = new ModelAndView("subjects", "list", entityList);
 
                                                         for (Long idStudyLoad : entityParameterDAO.getStudyLoadByTutor(entity.getId()))
                                                             entityList.add(entityDAO.getEntity(idStudyLoad));
@@ -102,6 +102,8 @@ public class LoginController {
         else
             return new ModelAndView("redirect:/errorS?=" + "Wrong login");
     }
+
+
 
     @RequestMapping(value = "/saveLogin", method = RequestMethod.POST)
     public ModelAndView saveLogin(@ModelAttribute LoginPassword loginPassword) {
@@ -127,7 +129,32 @@ public class LoginController {
 
             case Tutor.tutor_entity_type:       Entity newEntity = new Entity();
                 List<Entity> entityList = entityDAO.getChildEntitys(entity.getId());
-                ModelAndView model = new ModelAndView("show", "list", entityList);
+                ModelAndView model = new ModelAndView("subjects", "list", entityList);
+
+                for (Long idStudyLoad : entityParameterDAO.getStudyLoadByTutor(entity.getId()))
+                    entityList.add(entityDAO.getEntity(idStudyLoad));
+                model.addObject("list", entityList);
+                model.addObject("entity", newEntity);
+                return model;
+
+            case University.university_entity_type:   return new ModelAndView("redirect:/viewAll");
+
+            default:                            return new ModelAndView("redirect:/viewAll");
+        }
+    }
+
+    @RequestMapping(value = "/start", method = RequestMethod.GET)
+    public ModelAndView start(HttpServletRequest request){
+        Long id = Long.parseLong(request.getParameter("id"));
+        Entity entity = entityDAO.getEntity(id);
+        int entityType = entity.getEntityType();
+
+        switch (entityType) {
+            case Student.student_entity_type:   return new ModelAndView("redirect:/mark?id=" + entity.getId());
+
+            case Tutor.tutor_entity_type:       Entity newEntity = new Entity();
+                List<Entity> entityList = entityDAO.getChildEntitys(entity.getId());
+                ModelAndView model = new ModelAndView("subjects", "list", entityList);
 
                 for (Long idStudyLoad : entityParameterDAO.getStudyLoadByTutor(entity.getId()))
                     entityList.add(entityDAO.getEntity(idStudyLoad));
