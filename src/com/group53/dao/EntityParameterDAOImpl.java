@@ -3,10 +3,12 @@ package com.group53.dao;
 import com.group53.beans.EntityParameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
@@ -23,9 +25,14 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
     private EntityDAOImpl entityDAO;
 
     @Override
-    public List<EntityParameter> getAllParameters(Long entityId) {
-        String sql = "SELECT * FROM ENTITY_PARAMETER WHERE ENTITY_ID=" + entityId;
-        return template.query(sql, new RowMapper<EntityParameter>() {
+    public List<EntityParameter> getAllParameters(final Long entityId) {
+        String sql = "SELECT * FROM ENTITY_PARAMETER WHERE ENTITY_ID=?";
+        return template.query(sql,new PreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps) throws SQLException {
+                ps.setLong(1, entityId);
+            }
+        }, new RowMapper<EntityParameter>() {
             @Override
             public EntityParameter mapRow(ResultSet resultSet, int i) throws SQLException {
                 return new EntityParameter(resultSet.getLong("parameter_id"),
@@ -72,9 +79,15 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
     }
 
     @Override
-    public EntityParameter getParameter(Long entityId, Long parameterID) {
-        String sql = "SELECT * FROM ENTITY_PARAMETER WHERE  entity_Id=" + entityId + " and parameter_id=" + parameterID;
-        return template.query(sql, new ResultSetExtractor<EntityParameter>() {
+    public EntityParameter getParameter(final Long entityId, final Long parameterID) {
+        String sql = "SELECT * FROM ENTITY_PARAMETER WHERE  entity_Id=? and parameter_id=?";
+        return template.query(sql, new PreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps) throws SQLException {
+                ps.setLong(1,  entityId);
+                ps.setLong(2, parameterID);
+            }
+        }, new ResultSetExtractor<EntityParameter>() {
             @Override
             public EntityParameter extractData(ResultSet resultSet) throws SQLException {
                 if (resultSet.next()) {
@@ -94,10 +107,17 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
     }
 
     @Override
-    public EntityParameter getParameter(Long entityId, Long parameterID, Date date) {
-        String sql = "SELECT * FROM ENTITY_PARAMETER WHERE  entity_Id=" + entityId + " and parameter_id=" + parameterID +
-                " and DATE_VALUE=to_date('" + date + "', 'yyyy-mm-dd')" ;
-        return template.query(sql, new ResultSetExtractor<EntityParameter>() {
+    public EntityParameter getParameter(final Long entityId, final Long parameterID, final Date date) {
+        String sql = "SELECT * FROM ENTITY_PARAMETER WHERE  entity_Id=? and parameter_id=?" +
+                " and DATE_VALUE=?" ;
+        return template.query(sql, new PreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps) throws SQLException {
+                ps.setLong(1, entityId);
+                ps.setLong(2, parameterID);
+                ps.setDate(3, date);
+            }
+        }, new ResultSetExtractor<EntityParameter>() {
             @Override
             public EntityParameter extractData(ResultSet resultSet) throws SQLException {
                 if (resultSet.next()) {
@@ -117,11 +137,14 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
     }
 
     @Override
-    public TreeSet<Date> getAllDatesByStudyLoad(Long idValue) {
-        String sql = "SELECT * FROM ENTITY_PARAMETER WHERE ID_VALUE=" + idValue;
-        List<Date> list = new ArrayList<Date>();
-
-        list = template.query(sql, new RowMapper<Date>() {
+    public TreeSet<Date> getAllDatesByStudyLoad(final Long idValue) {
+        String sql = "SELECT * FROM ENTITY_PARAMETER WHERE ID_VALUE=?";
+        List<Date> list = template.query(sql, new PreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps) throws SQLException {
+                ps.setLong(1, idValue);
+            }
+        }, new RowMapper<Date>() {
             @Override
             public Date mapRow(ResultSet resultSet, int i) throws SQLException {
                 return resultSet.getDate("date_value");
@@ -131,13 +154,19 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
     }
 
     @Override
-    public Map<Date, Double> getAllMarksByStudent(TreeSet<Date> dates, Long idValue, Long entityId) {
+    public Map<Date, Double> getAllMarksByStudent(TreeSet<Date> dates, final Long idValue, final Long entityId) {
 
         Map<Date, Double> treeMap = new TreeMap<Date, Double>();
-        for (Date date : dates){
-            String sql = "SELECT * FROM ENTITY_PARAMETER WHERE ID_VALUE=" + idValue +
-                    " and ENTITY_ID =" + entityId + " and DATE_VALUE =to_date('" + date + "', 'yyyy-mm-dd')" ;
-            treeMap.put(date, template.query(sql, new ResultSetExtractor<Double>() {
+        for (final Date date : dates){
+            String sql = "SELECT * FROM ENTITY_PARAMETER WHERE ENTITY_ID =? and ID_VALUE=? and DATE_VALUE =?" ;
+            treeMap.put(date, template.query(sql, new PreparedStatementSetter() {
+                @Override
+                public void setValues(PreparedStatement ps) throws SQLException {
+                    ps.setLong(1, entityId);
+                    ps.setLong(2, idValue);
+                    ps.setDate(3, date);
+                }
+            }, new ResultSetExtractor<Double>() {
                 @Override
                 public Double extractData(ResultSet resultSet) throws SQLException {
                     if (resultSet.next()) {
@@ -147,15 +176,19 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
                 }
             }));
         }
-
         return treeMap;
     }
 
     @Override
-    public TreeSet<Date> getAllDatesByStudent(Long id) {
-        String sql = "SELECT * FROM ENTITY_PARAMETER WHERE ENTITY_ID=" + id
-                + " and PARAMETER_ID=" + entityDAO.getId("mark");
-        List<Date> list = template.query(sql, new RowMapper<Date>() {
+    public TreeSet<Date> getAllDatesByStudent(final Long id) {
+        String sql = "SELECT * FROM ENTITY_PARAMETER WHERE ENTITY_ID=? and PARAMETER_ID=?";
+        List<Date> list = template.query(sql, new PreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps) throws SQLException {
+                ps.setLong(1, id);
+                ps.setLong(2, entityDAO.getId("mark"));
+            }
+        }, new RowMapper<Date>() {
             @Override
             public Date mapRow(ResultSet resultSet, int i) throws SQLException {
                 return resultSet.getDate("date_value");
@@ -165,10 +198,15 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
     }
 
     @Override
-    public TreeSet<Long> getStudyLoadByGroup(Long id) {
-        String sql = "SELECT * FROM ENTITY_PARAMETER WHERE ID_VALUE=" + id
-                + " and PARAMETER_ID=" + entityDAO.getId("groupId");
-        List<Long> list =  template.query(sql, new RowMapper<Long>() {
+    public TreeSet<Long> getStudyLoadByGroup(final Long id) {
+        String sql = "SELECT * FROM ENTITY_PARAMETER WHERE ID_VALUE=? and PARAMETER_ID=?";
+        List<Long> list =  template.query(sql, new PreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps) throws SQLException {
+                ps.setLong(1, id);
+                ps.setLong(2, entityDAO.getId("groupId"));
+            }
+        }, new RowMapper<Long>() {
             @Override
             public Long mapRow(ResultSet resultSet, int i) throws SQLException {
                 return resultSet.getLong("entity_id");
@@ -178,10 +216,15 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
     }
 
     @Override
-    public TreeSet<Long> getStudyLoadByTutor(Long id) {
-        String sql = "SELECT * FROM ENTITY_PARAMETER WHERE ID_VALUE=" + id
-                + " and PARAMETER_ID=" + entityDAO.getId("tutorId");
-        List<Long> list =  template.query(sql, new RowMapper<Long>() {
+    public TreeSet<Long> getStudyLoadByTutor(final Long id) {
+        String sql = "SELECT * FROM ENTITY_PARAMETER WHERE ID_VALUE=? and PARAMETER_ID=?";
+        List<Long> list =  template.query(sql, new PreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps) throws SQLException {
+                ps.setLong(1, id);
+                ps.setLong(2,  entityDAO.getId("tutorId"));
+            }
+        },  new RowMapper<Long>() {
             @Override
             public Long mapRow(ResultSet resultSet, int i) throws SQLException {
                 return resultSet.getLong("entity_id");
@@ -191,10 +234,16 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
     }
 
     @Override
-    public EntityParameter checkLogin(String login) {
-        Long id_Login = entityDAO.getId("login");
-        String sql = "SELECT * FROM ENTITY_PARAMETER WHERE  STRING_VALUE='" + login + "' and PARAMETER_ID=" + id_Login;
-        return template.query(sql, new ResultSetExtractor<EntityParameter>() {
+    public EntityParameter checkLogin(final String login) {
+
+        String sql = "SELECT * FROM ENTITY_PARAMETER WHERE  STRING_VALUE=? and PARAMETER_ID=?";
+        return template.query(sql,  new PreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps) throws SQLException {
+                ps.setString(1, login);
+                ps.setLong(2, entityDAO.getId("login"));
+            }
+        }, new ResultSetExtractor<EntityParameter>() {
             @Override
             public EntityParameter extractData(ResultSet resultSet) throws SQLException {
                 if (resultSet.next()) {
@@ -214,11 +263,16 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
     }
 
     @Override
-    public EntityParameter checkPassword(Long entityId, String password) {
-        Long id_Login = entityDAO.getId("password");
-        String sql = "SELECT * FROM ENTITY_PARAMETER WHERE  STRING_VALUE='" + password + "' and PARAMETER_ID=" + id_Login
-                + " and ENTITY_ID=" + entityId;
-        return template.query(sql, new ResultSetExtractor<EntityParameter>() {
+    public EntityParameter checkPassword(final Long entityId, final String password) {
+        String sql = "SELECT * FROM ENTITY_PARAMETER WHERE  STRING_VALUE=? and PARAMETER_ID=? and ENTITY_ID=?";
+        return template.query(sql, new PreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps) throws SQLException {
+                ps.setString(1, password);
+                ps.setLong(2, entityDAO.getId("password"));
+                ps.setLong(2, entityId);
+            }
+        }, new ResultSetExtractor<EntityParameter>() {
             @Override
             public EntityParameter extractData(ResultSet resultSet) throws SQLException {
                 if (resultSet.next()) {
