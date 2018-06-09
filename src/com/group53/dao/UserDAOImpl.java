@@ -22,14 +22,15 @@ public class UserDAOImpl implements UserDAO {
         this.template = template;
     }
     public void register(User user) {
-        String sql = "insert into users values(?,?,?,?,?,?,?)";
-        template.update(sql, new Object[] { user.getUserName(), user.getPassword(), user.getFirstname(),
+        String student = "student";
+        String sql = "insert into users values(?,?,?,?,?)";
+        template.update(sql, new Object[] { user.getUsername(), user.getPassword(),student, user.getFirstname(),
                 user.getLastname()});
     }
     public User validateUser(Login login) {
-        String sql = "select * from users where username='" + login.getUsername() + "' and password='" + login.getPassword()
-                + "'";
-        List<User> users = template.query(sql, new UserMapper());
+        String sql = "select * from users where username= ? and password=?" ;
+        List<User> users = template.query(sql, new Object[]{login.getUsername(), login.getPassword()}, new UserMapper());
+        System.out.println("query" + sql);
         return users.size() > 0 ? users.get(0) : null;
     }
 }
@@ -38,9 +39,9 @@ class UserMapper implements RowMapper<User> {
         User user = new User();
         user.setUsername(rs.getString("username"));
         user.setPassword(rs.getString("password"));
-        //user.setRole(rs.getNString("role"));
-        //user.setFirstname(rs.getString("firstname"));
-        //user.setLastname(rs.getString("lastname"));
+        user.setRole(rs.getNString("role_id"));
+        user.setFirstname(rs.getString("firstname"));
+        user.setLastname(rs.getString("lastname"));
 
         return user;
     }

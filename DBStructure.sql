@@ -30,3 +30,13 @@ CREATE TABLE entity_parameter
   , id_value NUMBER(10)
   , date_value DATE
 ) ;
+DROP TABLE USERS;
+create table USERS
+(
+  USERNAME VARCHAR2(36) not null,
+  PASSWORD VARCHAR2(36) not null,
+  ROLE_ID   VARCHAR2(50) not null,
+  FIRSTNAME VARCHAR(50) not null,
+  LASTNAME VARCHAR(50) not null
+
+) ;

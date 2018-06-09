@@ -50,7 +50,7 @@ public class User extends Entity {
         return user_entity_type;
     }
 
-    public String getUserName() {
+    public String getUsername() {
         return username;
     }
 

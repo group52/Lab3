@@ -12,6 +12,6 @@
       </td>
     </tr>
   </table>
-    <a href = "viewAll"> View all entities </a>
+
   </body>
 </html>
