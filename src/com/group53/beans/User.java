@@ -22,6 +22,11 @@ public class User extends Entity {
        this.lastname = lastname;
     }
 
+    public User(String username, String role){
+        this.username = username;
+        this.role = role;
+    }
+
     public User(Long id, String title) {
         super(id, title, null, user_entity_type);
     }

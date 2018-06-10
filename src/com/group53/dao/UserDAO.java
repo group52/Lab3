@@ -6,4 +6,5 @@ import com.group53.beans.User;
 public interface UserDAO {
     void register(User user);
     User validateUser(Login login);
+    void updateRole(User user);
 }

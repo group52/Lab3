@@ -16,4 +16,8 @@ public class UserServiceImpl implements UserService{
         return userDao.validateUser(login);
     }
 
+    public void updateRole(User user) {
+       userDao.updateRole(user);
+    }
+
 }

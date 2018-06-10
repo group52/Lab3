@@ -30,10 +30,19 @@ public class UserDAOImpl implements UserDAO {
     public User validateUser(Login login) {
         String sql = "select * from users where username= ? and password=?" ;
         List<User> users = template.query(sql, new Object[]{login.getUsername(), login.getPassword()}, new UserMapper());
-        System.out.println("query" + sql);
+        System.out.println("result"+users.get(0));
         return users.size() > 0 ? users.get(0) : null;
     }
+
+    public void updateRole(User user) {
+        String sql = "UPDATE users SET role_id = ? WHERE username = ?";
+
+        template.update(sql, new Object[] { user.getRole(), user.getUsername()});
+    }
+
+
 }
+
 class UserMapper implements RowMapper<User> {
     public User mapRow(ResultSet rs, int arg1) throws SQLException {
         User user = new User();

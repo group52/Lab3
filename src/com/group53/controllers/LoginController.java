@@ -31,7 +31,22 @@ public class LoginController {
         ModelAndView mav = null;
         User user = userService.validateUser(login);
         if (null != user) {
-            mav = new ModelAndView("redirect:/viewAll");
+            System.out.println("result " + user.getRole());
+          if (user.getRole().equals("admin")) {
+                mav = new ModelAndView("redirect:/viewAll");
+
+            }
+           else if (user.getRole().equals("tutor")){
+                mav = new ModelAndView("redirect:/subjects");
+            }
+            else if (user.getRole().equals( "student")){
+               mav = new ModelAndView("redirect:/progress");
+            }
+            else {
+                mav = new ModelAndView("login");
+                mav.addObject("message","Incorrect role");
+            }
+
         } else {
             mav = new ModelAndView("login");
             mav.addObject("message", "Username or Password is wrong!!");
