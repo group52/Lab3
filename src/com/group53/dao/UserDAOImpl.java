@@ -30,7 +30,6 @@ public class UserDAOImpl implements UserDAO {
     public User validateUser(Login login) {
         String sql = "select * from users where username= ? and password=?" ;
         List<User> users = template.query(sql, new Object[]{login.getUsername(), login.getPassword()}, new UserMapper());
-        System.out.println("result"+users.get(0));
         return users.size() > 0 ? users.get(0) : null;
     }
 

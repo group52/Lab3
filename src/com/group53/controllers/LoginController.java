@@ -20,7 +20,8 @@ public class LoginController {
     @Autowired
     UserService userService;
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView showLogin(HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView showLogin(HttpServletRequest request,
+                                  HttpServletResponse response) {
         ModelAndView mav = new ModelAndView("login");
         mav.addObject("login", new Login());
         return mav;
@@ -31,7 +32,6 @@ public class LoginController {
         ModelAndView mav = null;
         User user = userService.validateUser(login);
         if (null != user) {
-            System.out.println("result " + user.getRole());
           if (user.getRole().equals("admin")) {
                 mav = new ModelAndView("redirect:/viewAll");
 
