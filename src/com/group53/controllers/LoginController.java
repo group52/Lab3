@@ -39,7 +39,7 @@ public class LoginController {
            else if (user.getRole().equals("tutor")){
                 mav = new ModelAndView("redirect:/subjects");
             }
-            else if (user.getRole().equals( "student")){
+           else if (user.getRole().equals( "student")){
                mav = new ModelAndView("redirect:/progress");
             }
             else {
