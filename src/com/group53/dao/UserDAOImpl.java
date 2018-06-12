@@ -23,18 +23,18 @@ public class UserDAOImpl implements UserDAO {
     }
     public void register(User user) {
         String student = "student";
-        String sql = "insert into users  values(?,?,?,?,?)";
+        String sql = "insert into grp5_users  values(?,?,?,?,?)";
         template.update(sql, new Object[] { user.getUsername(), user.getPassword(),student, user.getFirstname(),
                 user.getLastname()});
     }
     public User validateUser(Login login) {
-        String sql = "select * from users where username= ? and password=?" ;
+        String sql = "select * from grp5_users where username= ? and password=?" ;
         List<User> users = template.query(sql, new Object[]{login.getUsername(), login.getPassword()}, new UserMapper());
         return users.size() > 0 ?users.get(0) : null;
     }
 
     public void updateRole(User user) {
-        String sql = "update users set role_id = ? where username = ?";
+        String sql = "update grp5_users set role_id = ? where username = ?";
 
         template.update(sql, new Object[] { user.getRole(), user.getUsername()});
     }

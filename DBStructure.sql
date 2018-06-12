@@ -30,8 +30,8 @@ CREATE TABLE entity_parameter
   , id_value NUMBER(10)
   , date_value DATE
 ) ;
-DROP TABLE USERS;
-create table USERS
+DROP TABLE GRP5_USERS;
+create table GRP5_USERS
 (
   USERNAME VARCHAR2(36) not null,
   PASSWORD VARCHAR2(36) not null,
