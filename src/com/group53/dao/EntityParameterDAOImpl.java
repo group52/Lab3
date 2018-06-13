@@ -25,7 +25,7 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
 
     @Override
     public List<EntityParameter> getAllParameters(Long entityId) {
-        String sql = "SELECT * FROM ENTITY_PARAMETER WHERE ENTITY_ID=" + entityId;
+        String sql = "SELECT * FROM GRP5_ENTITY_PARAMETER WHERE ENTITY_ID=" + entityId;
         return template.query(sql, new RowMapper<EntityParameter>() {
             @Override
             public EntityParameter mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -41,7 +41,7 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
     public void saveParameterDB(EntityParameter entityParameter){
 
         if (getParameter(entityParameter.getEntityId(), entityParameter.getParameterId(), entityParameter.getDateValue()) != null) {
-            String updateSQL = "UPDATE ENTITY_PARAMETER  SET string_Value=?, int_Value=?, decimal_Value=?," +
+            String updateSQL = "UPDATE GRP5_ENTITY_PARAMETER  SET string_Value=?, int_Value=?, decimal_Value=?," +
                     " id_Value=?, date_Value=? where parameter_id=? and entity_id=?";
 
 
@@ -50,7 +50,7 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
                     entityParameter.getParameterId(), entityParameter.getEntityId());
         }
         else {
-            String insertSQL = "INSERT INTO ENTITY_PARAMETER"
+            String insertSQL = "INSERT INTO GRP5_ENTITY_PARAMETER"
                     + "(parameter_id, entity_id, string_Value, int_Value, decimal_Value," +
                     " id_Value, date_Value) VALUES"
                     + "(?,?,?,?,?,?,?)";
@@ -63,13 +63,13 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
 
     @Override
     public void deleteParameterDB(Long entityId, Long parameterID){
-        String sql = "DELETE FROM ENTITY_PARAMETER WHERE entity_Id=? AND parameter_id=?";
+        String sql = "DELETE FROM GRP5_ENTITY_PARAMETER WHERE entity_Id=? AND parameter_id=?";
         template.update(sql, entityId, parameterID);
     }
 
     @Override
     public EntityParameter getParameter(Long entityId, Long parameterID) {
-        String sql = "SELECT * FROM ENTITY_PARAMETER WHERE  entity_Id=" + entityId + " and parameter_id=" + parameterID;
+        String sql = "SELECT * FROM GRP5_ENTITY_PARAMETER WHERE  entity_Id=" + entityId + " and parameter_id=" + parameterID;
         return template.query(sql, new ResultSetExtractor<EntityParameter>() {
             @Override
             public EntityParameter extractData(ResultSet resultSet) throws SQLException {
@@ -91,7 +91,7 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
 
     @Override
     public EntityParameter getParameter(Long entityId, Long parameterID, Date date) {
-        String sql = "SELECT * FROM ENTITY_PARAMETER WHERE  entity_Id=" + entityId + " and parameter_id=" + parameterID +
+        String sql = "SELECT * FROM GRP5_ENTITY_PARAMETER WHERE  entity_Id=" + entityId + " and parameter_id=" + parameterID +
                 " and DATE_VALUE=to_date('" + date + "', 'yyyy-mm-dd')" ;
         return template.query(sql, new ResultSetExtractor<EntityParameter>() {
             @Override
@@ -114,7 +114,7 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
 
     @Override
     public TreeSet<Date> getAllDatesByStudyLoad(Long idValue) {
-        String sql = "SELECT * FROM ENTITY_PARAMETER WHERE ID_VALUE=" + idValue;
+        String sql = "SELECT * FROM GRP5_ENTITY_PARAMETER WHERE ID_VALUE=" + idValue;
         List<Date> list = new ArrayList<Date>();
 
         list = template.query(sql, new RowMapper<Date>() {
@@ -131,7 +131,7 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
 
         Map<Date, Double> treeMap = new TreeMap<Date, Double>();
         for (Date date : dates){
-            String sql = "SELECT * FROM ENTITY_PARAMETER WHERE ID_VALUE=" + idValue +
+            String sql = "SELECT * FROM GRP5_ENTITY_PARAMETER WHERE ID_VALUE=" + idValue +
                     " and ENTITY_ID =" + entityId + " and DATE_VALUE =to_date('" + date + "', 'yyyy-mm-dd')" ;
             treeMap.put(date, template.query(sql, new ResultSetExtractor<Double>() {
                 @Override
@@ -149,7 +149,7 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
 
     @Override
     public TreeSet<Date> getAllDatesByStudent(Long id) {
-        String sql = "SELECT * FROM ENTITY_PARAMETER WHERE ENTITY_ID=" + id
+        String sql = "SELECT * FROM GRP5_ENTITY_PARAMETER WHERE ENTITY_ID=" + id
                 + " and PARAMETER_ID=" + entityDAO.getId("mark");
         List<Date> list = template.query(sql, new RowMapper<Date>() {
             @Override
@@ -162,7 +162,7 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
 
     @Override
     public TreeSet<Long> getStudyLoadByGroup(Long id) {
-        String sql = "SELECT * FROM ENTITY_PARAMETER WHERE ID_VALUE=" + id
+        String sql = "SELECT * FROM GRP5_ENTITY_PARAMETER WHERE ID_VALUE=" + id
                 + " and PARAMETER_ID=" + entityDAO.getId("groupId");
         List<Long> list =  template.query(sql, new RowMapper<Long>() {
             @Override
@@ -175,7 +175,7 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
 
     @Override
     public TreeSet<Long> getStudyLoadByTutor(Long id) {
-        String sql = "SELECT * FROM ENTITY_PARAMETER WHERE ID_VALUE=" + id
+        String sql = "SELECT * FROM GRP5_ENTITY_PARAMETER WHERE ID_VALUE=" + id
                 + " and PARAMETER_ID=" + entityDAO.getId("tutorId");
         List<Long> list =  template.query(sql, new RowMapper<Long>() {
             @Override

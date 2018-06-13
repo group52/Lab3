@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import javax.sql.DataSource;
+import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -21,8 +22,12 @@ public class UserDAOImpl implements UserDAO {
         Locale.setDefault(Locale.ENGLISH);
         this.template = template;
     }
-    public void register(User user) {
+    public void register(User user) throws SQLException {
         String student = "student";
+      //  DatabaseMetaData meta = template.getDataSource().getConnection().getMetaData();
+       // ResultSet res = meta.getTables(null, null, "My_Table_Name",
+       //         new String[] {"TABLE"});
+        //res.next();
         String sql = "insert into grp5_users  values(?,?,?,?,?)";
         template.update(sql, new Object[] { user.getUsername(), user.getPassword(),student, user.getFirstname(),
                 user.getLastname()});

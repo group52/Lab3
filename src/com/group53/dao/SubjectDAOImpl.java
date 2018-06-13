@@ -13,7 +13,7 @@ public class SubjectDAOImpl {
     private JdbcTemplate template;
 
     public int insertSubject(Subject subject) {
-        String insertSQL = "INSERT INTO ENTITY"
+        String insertSQL = "INSERT INTO GRP5_ENTITY"
                 + "(ID, TITLE,PARENT_ID, ENTITY_TYPE) VALUES" +
                 + subject.getId()+ ","
                 + subject.getTitle() + ","
@@ -23,21 +23,21 @@ public class SubjectDAOImpl {
     }
 
     public int updateSubject(Subject subject){
-        String sql="UPDATE ENTITY SET TITLE ='"+subject.getTitle()+"', where id="+subject.getId()+"";
+        String sql="UPDATE GRP5_ENTITY SET TITLE ='"+subject.getTitle()+"', where id="+subject.getId()+"";
         return template.update(sql);
     }
 
     public int removeSubject(long id){
-        String sql="DELETE FROM ENTITY where id="+id+"";
+        String sql="DELETE FROM GRP5_ENTITY where id="+id+"";
         return template.update(sql);
     }
     public Subject selectSubjectById(long subject_id){
-        String sql="SELECT * FROM ENTITY where id=?";
+        String sql="SELECT * FROM GRP5_ENTITY where id=?";
         return template.queryForObject(sql, new Object[]{subject_id},new BeanPropertyRowMapper<Subject>(Subject.class));
     }
 
     public List<Subject> getAllSubjects() {
-        return template.query("SELECT * FROM ENTITY WHERE  ENTITY_TYPE = 5", new RowMapper<Subject>() {
+        return template.query("SELECT * FROM GRP5_ENTITY WHERE  ENTITY_TYPE = 5", new RowMapper<Subject>() {
             public Subject mapRow(ResultSet resultSet, int i) throws SQLException {
                 long id = resultSet.getLong(1);
                 String title = resultSet.getString(2);

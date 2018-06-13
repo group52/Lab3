@@ -25,7 +25,7 @@ public class EntityDAOImpl implements EntityDAO {
 
     @Override
     public List<Entity> getAllEntitys() {
-        return template.query("select * from ENTITY", new RowMapper<Entity>() {
+        return template.query("select * from GRP5_ENTITY", new RowMapper<Entity>() {
             @Override
             public Entity mapRow(ResultSet resultSet, int i) throws SQLException {
                 return new Entity(resultSet.getLong("id"), resultSet.getString("title"), resultSet.getLong("parent_Id"),resultSet.getInt("entity_Type"));
@@ -37,12 +37,12 @@ public class EntityDAOImpl implements EntityDAO {
     @Override
     public void saveOrUpdateEntityDB(Entity entity){
         if (entity.getId()!= null) {
-            String sql = "UPDATE ENTITY SET title=?, PARENT_ID=?, ENTITY_TYPE=? "
+            String sql = "UPDATE GRP5_ENTITY SET title=?, PARENT_ID=?, ENTITY_TYPE=? "
                     + "WHERE id=?";
             template.update(sql, entity.getTitle(), entity.getParentId(),
                     entity.getEntityType(), entity.getId());
         } else {
-            String insertSQL = "INSERT INTO ENTITY"
+            String insertSQL = "INSERT INTO GRP5_ENTITY"
                     + "(ID, TITLE, PARENT_ID, ENTITY_TYPE) VALUES"
                     + "(?,?,?,?)";
             template.update(insertSQL, entity.getId(), entity.getTitle(),
@@ -52,13 +52,13 @@ public class EntityDAOImpl implements EntityDAO {
 
     @Override
     public void deleteEntityDB(Long id){
-        String sql = "DELETE FROM ENTITY WHERE id=?";
+        String sql = "DELETE FROM GRP5_ENTITY WHERE id=?";
         template.update(sql, id);
     }
 
     @Override
     public Entity getEntity(Long id) {
-        String sql = "SELECT * FROM ENTITY WHERE id=" + id;
+        String sql = "SELECT * FROM GRP5_ENTITY WHERE id=" + id;
         return template.query(sql, new ResultSetExtractor<Entity>() {
             @Override
             public Entity extractData(ResultSet resultSet) throws SQLException {
@@ -78,7 +78,7 @@ public class EntityDAOImpl implements EntityDAO {
 
     @Override
     public List<Entity> getChildEntitys(Long id) {
-        String sql = "SELECT * FROM ENTITY WHERE parent_id=" + id;
+        String sql = "SELECT * FROM GRP5_ENTITY WHERE parent_id=" + id;
         return template.query(sql, new RowMapper<Entity>() {
             @Override
             public Entity mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -89,7 +89,7 @@ public class EntityDAOImpl implements EntityDAO {
 
     @Override
     public List<Entity> getAllByType(int entityType) {
-        String sql = "SELECT * FROM ENTITY WHERE ENTITY_TYPE=" + entityType;
+        String sql = "SELECT * FROM GRP5_ENTITY WHERE ENTITY_TYPE=" + entityType;
         return template.query(sql, new RowMapper<Entity>() {
             @Override
             public Entity mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -100,7 +100,7 @@ public class EntityDAOImpl implements EntityDAO {
 
     @Override
     public Long getId(String title) {
-        String sql = "SELECT * FROM ENTITY WHERE TITLE='" + title + "' and ENTITY_TYPE=" + Parameter.parameter_entity_type;
+        String sql = "SELECT * FROM GRP5_ENTITY WHERE TITLE='" + title + "' and ENTITY_TYPE=" + Parameter.parameter_entity_type;
         return (Long) template.query(sql, new ResultSetExtractor<Long>() {
             @Override
             public Long extractData(ResultSet resultSet) throws SQLException {
@@ -114,7 +114,7 @@ public class EntityDAOImpl implements EntityDAO {
 
     @Override
     public StudyLoad getStudyLoad(final Long id) {
-        String sql = "SELECT * FROM ENTITY WHERE id=" + id;
+        String sql = "SELECT * FROM GRP5_ENTITY WHERE id=" + id;
         return (StudyLoad) template.query(sql, new ResultSetExtractor<StudyLoad>() {
             @Override
             public StudyLoad extractData(ResultSet resultSet) throws SQLException {
