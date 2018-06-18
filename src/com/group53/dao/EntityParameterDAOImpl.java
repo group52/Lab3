@@ -1,6 +1,7 @@
 package com.group53.dao;
 
 import com.group53.beans.EntityParameter;
+import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -13,7 +14,8 @@ import java.util.*;
 
 
 public class EntityParameterDAOImpl implements EntityParameterDAO {
-    private JdbcTemplate template;
+    BasicDataSource ds = new DataFromProperty().getOracleDataSource();
+    private JdbcTemplate template = new JdbcTemplate(ds);
 
     public void setTemplate(JdbcTemplate template) {
         Locale.setDefault(Locale.ENGLISH);

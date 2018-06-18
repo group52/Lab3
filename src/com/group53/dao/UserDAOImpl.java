@@ -2,6 +2,7 @@ package com.group53.dao;
 
 import com.group53.beans.Login;
 import com.group53.beans.User;
+import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -15,13 +16,19 @@ import java.util.Locale;
 
 public class UserDAOImpl implements UserDAO {
 
-    @Autowired
-    JdbcTemplate template;
+   // @Autowired
+
+    BasicDataSource ds = new DataFromProperty().getOracleDataSource();
+
+    JdbcTemplate  template = new JdbcTemplate(ds);
+
 
     public void setTemplate(JdbcTemplate template) {
         Locale.setDefault(Locale.ENGLISH);
+
         this.template = template;
     }
+
     public void register(User user) throws SQLException {
         String student = "student";
       //  DatabaseMetaData meta = template.getDataSource().getConnection().getMetaData();

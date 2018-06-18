@@ -1,6 +1,7 @@
 package com.group53.dao;
 
 import com.group53.beans.Subject;
+import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -8,9 +9,15 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Locale;
 
 public class SubjectDAOImpl {
-    private JdbcTemplate template;
+    BasicDataSource ds = new DataFromProperty().getOracleDataSource();
+    JdbcTemplate template = new JdbcTemplate(ds);
+    public void setTemplate(JdbcTemplate template) {
+        Locale.setDefault(Locale.ENGLISH);
+        this.template = template;
+    }
 
     public int insertSubject(Subject subject) {
         String insertSQL = "INSERT INTO GRP5_ENTITY"
@@ -46,9 +53,6 @@ public class SubjectDAOImpl {
         });
     }
 
-    public void setTemplate(JdbcTemplate template) {
-        this.template = template;
-    }
 
     public JdbcTemplate getTemplate() {
         return template;
