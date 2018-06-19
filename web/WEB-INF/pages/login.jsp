@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: White Eagle
-  Date: 09.05.2018
-  Time: 12:23
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -12,45 +5,28 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title>Login</title>
+    <title>Title</title>
 </head>
 <body>
-<form:form id="loginForm" modelAttribute="login" action="loginProcess" method="post">
-    <table align="center">
+
+<h2>Login page</h2>
+<form:form method = "POST" action = "saveLogin" modelAttribute="loginPassword">
+    <table>
+        <form:hidden path = "userId"/>
         <tr>
-            <td>
-                <form:label path="username">Username: </form:label>
-            </td>
-            <td>
-                <form:input path="username" name="username" id="username" />
-            </td>
+            <td><form:label path = "login">Login</form:label></td>
+            <td><form:input path = "login" /></td>
+        <tr>
+            <td><form:label path = "password">Password</form:label></td>
+            <td><form:input path = "password" /></td>
         </tr>
         <tr>
-            <td>
-                <form:label path="password">Password:</form:label>
-            </td>
-            <td>
-                <form:password path="password" name="password" id="password" />
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td align="left">
-                <form:button id="login" name="login">Login</form:button>
-            </td>
-        </tr>
-        <tr></tr>
-        <tr>
-            <td></td>
-            <td><a href="index.jsp">Home</a>
+            <td colspan = "2">
+                <input type = "submit" value = "Submit"/>
             </td>
         </tr>
     </table>
 </form:form>
-<table align="center">
-    <tr>
-        <td style="font-style: italic; color: red;">${message}</td>
-    </tr>
-</table>
+<a href = "start?id=${loginPassword.userId}"> Back </a>
 </body>
 </html>

@@ -2,13 +2,10 @@ package com.group53.dao;
 
 import com.group53.beans.Login;
 import com.group53.beans.User;
-import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
-import javax.sql.DataSource;
-import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;

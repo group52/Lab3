@@ -13,5 +13,6 @@ public interface EntityDAO {
     Long getId(String title);
     List<Entity> getChildEntitys(Long id);
     List<Entity> getAllByType(int entityType);
+    List<Entity> getAllByTitle(String title);
     StudyLoad getStudyLoad(Long id);
 }
