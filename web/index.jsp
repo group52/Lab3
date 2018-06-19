@@ -6,7 +6,6 @@
   <title>Application</title>
 </head>
 <body>
-<a href = "viewAll"> View all entities </a>
 <a href = "enter"> Enter </a>
 </body>
 </html>

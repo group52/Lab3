@@ -1,6 +1,6 @@
 package com.group53.dao;
 
-import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
+import org.apache.commons.dbcp.BasicDataSource;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,7 +18,7 @@ public class DataFromProperty {
 
         try {
 
-            File file = new File("D:/OnlineJournal-master/src/main/resources/application.properties");
+            File file = new File("C:/Users/Natashenka/Documents/java.course.dev/ЛАБА 3/OnlineJournal/src/main/resources/application.properties");
             fis = new FileInputStream(file);
             props.load(fis);
             BasicDataSource ds = new BasicDataSource();
