@@ -25,7 +25,7 @@
 </head>
 
 <body>
-<a href = "loginChange?id=${entityParameter.entityId}"> Change Login </a>
+<a href = "loginChange?id=${entityParameter.entityId}"> Change Password </a>
 <h2>Parameter Information</h2>
 <form:form method = "POST" action = "saveParam" modelAttribute="entityParameter">
     <table>

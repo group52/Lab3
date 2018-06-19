@@ -60,7 +60,7 @@ select count(1) into cnt from user_tables where table_name='GRP5_ENTITY';
              ' select id_entity.nextval into foo from dual;' ||
              ' :new.id := foo;' ||
              ' end if;' ||
-             ' end;' ;
+             ' end; ' ;
       execute immediate query;
     end;
   end if;

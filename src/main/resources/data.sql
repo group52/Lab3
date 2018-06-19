@@ -1,18 +1,35 @@
-Truncate table entity;
-INSERT INTO entity
+Truncate table GRP5_ENTITY;
+INSERT INTO GRP5_ENTITY
 (id, title, parent_Id, entity_type)
 VALUES
-(1, 'SSU', null, 1);
-INSERT INTO entity
+(null, 'SSU', null, 1);
+INSERT INTO GRP5_ENTITY
 (id, title, parent_Id, entity_type)
 VALUES
-(2, 'SNAU', null, 1);
-INSERT INTO entity
+(null, 'SNAU', null, 1);
+INSERT INTO GRP5_ENTITY
 (id, title, parent_Id, entity_type)
 VALUES
-(3, 'SSPU', null, 1);
-Truncate table entity_parameter;
-INSERT INTO entity_parameter
-(entity_id, parameter_id, string_value, int_value, decimal_value, id_value)
+(null, 'SSPU', null, 1);
+INSERT INTO GRP5_ENTITY
+(id, title, parent_Id, entity_type)
 VALUES
-(1, 1, 'Sumy', null, null, null);
+  (null, 'password', null, 9);
+INSERT INTO GRP5_ENTITY
+(id, title, parent_Id, entity_type)
+VALUES
+  (null, 'login', null, 9);
+INSERT INTO GRP5_ENTITY
+(id, title, parent_Id, entity_type)
+VALUES
+  (null, 'mark', null, 9);
+INSERT INTO GRP5_ENTITY
+(id, title, parent_Id, entity_type)
+VALUES
+  (null, 'name', null, 9);
+INSERT INTO GRP5_ENTITY
+(id, title, parent_Id, entity_type)
+VALUES
+  (null, 'surname', null, 9);
+
+
