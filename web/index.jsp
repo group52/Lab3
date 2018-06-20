@@ -6,6 +6,6 @@
   <title>Application</title>
 </head>
 <body>
-<a href = "enter"> Enter </a>
+<a href = "enter"> Enter1 </a>
 </body>
 </html>

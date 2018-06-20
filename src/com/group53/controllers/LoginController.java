@@ -3,7 +3,6 @@ package com.group53.controllers;
 import com.group53.beans.*;
 import com.group53.dao.EntityDAOImpl;
 import com.group53.dao.EntityParameterDAOImpl;
-import com.group53.dao.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,65 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
 public class LoginController {
     private static final Logger logger = Logger.getLogger(LoginController.class);
-    @Autowired
-    UserService userService;
+
     @Autowired
     private EntityDAOImpl entityDAO;
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView showLogin(HttpServletRequest request,
-                                  HttpServletResponse response) {
-        ModelAndView mav = new ModelAndView("login111");
-        mav.addObject("login", new Login());
-        return mav;
-    }
-
-    @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
-    public ModelAndView loginProcess(HttpServletRequest request, HttpServletResponse response,
-                                     @ModelAttribute("login") Login login) {
-        ModelAndView mav = null;
-        User user = userService.validateUser(login);
-        if (null != user) {
-          if (user.getRole().equals("admin")) {
-                mav = new ModelAndView("redirect:/viewAll");
-
-            }
-           else if (user.getRole().equals("tutor")){
-                mav = new ModelAndView("redirect:/subjects");
-            }
-           else if (user.getRole().equals( "student")){
-               mav = new ModelAndView("redirect:/progress");
-            }
-            else {
-                mav = new ModelAndView("login111");
-                mav.addObject("message","Incorrect role");
-            }
-
-        } else {
-            mav = new ModelAndView("login111");
-            mav.addObject("message", "Username or Password is wrong!!");
-        }
-        return mav;
-    }
-
-    @RequestMapping(value = "/loginRole", method = RequestMethod.POST)
-    public ModelAndView loginRole(HttpServletRequest request, HttpServletResponse response,
-                                     @ModelAttribute("login") Login login) {
-        ModelAndView mav = null;
-        User user = userService.validateUser(login);
-        String title = "" + user.getLastname() + " " + user.getFirstname();
-        List<Entity> entityList = entityDAO.getAllByTitle(title);
-
-        ModelAndView model = new ModelAndView("role", "list", entityList);
-
-        return model;
-
-    }
 
     @Autowired
     private EntityParameterDAOImpl entityParameterDAO;

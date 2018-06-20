@@ -1,7 +1,6 @@
 package com.group53.dao;
 
 import com.group53.beans.EntityParameter;
-import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
@@ -12,12 +11,14 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 
 public class EntityParameterDAOImpl implements EntityParameterDAO {
-    BasicDataSource ds = new DataFromProperty().getOracleDataSource();
-    private JdbcTemplate template = new JdbcTemplate(ds);
+    private JdbcTemplate template;
 
     public void setTemplate(JdbcTemplate template) {
         this.template = template;

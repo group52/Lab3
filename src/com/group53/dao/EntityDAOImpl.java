@@ -3,7 +3,7 @@ package com.group53.dao;
 import com.group53.beans.Entity;
 import com.group53.beans.Parameter;
 import com.group53.beans.StudyLoad;
-import org.apache.commons.dbcp.BasicDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -13,20 +13,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Locale;
 
 public class EntityDAOImpl implements EntityDAO {
-
-    //@Autowired
+    @Autowired
     private EntityParameterDAOImpl entityParameterDAO;
-    BasicDataSource ds = new DataFromProperty().getOracleDataSource();
-    private JdbcTemplate template = new JdbcTemplate(ds);
+
+    private JdbcTemplate template;
 
     public void setTemplate(JdbcTemplate template) {
-        Locale.setDefault(Locale.ENGLISH);
-        this.template =template ;
+        this.template = template;
     }
-
 
     @Override
     public List<Entity> getAllEntitys() {
