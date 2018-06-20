@@ -69,8 +69,9 @@ public class LoginController {
     public ModelAndView checkLogin(@ModelAttribute LoginPassword loginPassword) {
 
         EntityParameter loginParameter = entityParameterDAO.checkLogin(loginPassword.getLogin());
-        Entity entity = entityDAO.getEntity(loginParameter.getEntityId());
-        if (entity != null) {
+
+        if (loginParameter != null) {
+            Entity entity = entityDAO.getEntity(loginParameter.getEntityId());
 
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             EntityParameter passwordParameter = entityParameterDAO.getParameter(loginParameter.getEntityId(),entityDAO.getId("password"));
@@ -85,6 +86,7 @@ public class LoginController {
                     case Tutor.tutor_entity_type:       Entity newEntity = new Entity();
                         newEntity.setId(entity.getId());
                         List<Entity> entityList = entityDAO.getChildEntitys(entity.getId());
+
                         ModelAndView model = new ModelAndView("subjects", "list", entityList);
 
                         for (Long idStudyLoad : entityParameterDAO.getStudyLoadByTutor(entity.getId()))
@@ -95,14 +97,22 @@ public class LoginController {
 
                     case University.university_entity_type:   return new ModelAndView("redirect:/viewAll");
 
-                    default:                            return new ModelAndView("redirect:/viewAll");
+                    default:   return new ModelAndView("redirect:/viewAll");
                 }
             }
             else
-                return new ModelAndView("redirect:/errorS?=" + "Wrong password");
+           {
+                ModelAndView errorPage = new ModelAndView("errorPage");
+                errorPage.addObject("errorMsg", "Wrong password");
+                return errorPage;
+            }
         }
         else
-            return new ModelAndView("redirect:/errorS?=" + "Wrong login");
+        {
+            ModelAndView errorPage = new ModelAndView("errorPage");
+            errorPage.addObject("errorMsg", "Wrong login");
+            return errorPage;
+        }
     }
 
 
@@ -121,7 +131,7 @@ public class LoginController {
         entityParameter.setStringValue(hashedPassword);
         entityParameterDAO.saveParameterDB(entityParameter);
         EntityParameter loginParameter = entityParameterDAO.checkLogin(loginPassword.getLogin());
-        Entity entity = entityDAO.getEntity(loginParameter.getEntityId());
+        Entity entity = entityDAO.getEntity(loginPassword.getUserId());
         logger.info("The param with entity id = " + entityParameter.getEntityId() + " was saved");
 
         int entityType = entity.getEntityType();
@@ -170,10 +180,10 @@ public class LoginController {
         }
     }
 
-    @RequestMapping(value = "/error", method = RequestMethod.GET)
+   /* @RequestMapping(value = "/error", method = RequestMethod.GET)
     public ModelAndView param(HttpServletRequest request) {
         return new ModelAndView("error", "errorV", request.getParameter("errorS"));
-    }
+    }*/
 
     @RequestMapping(value = "/loginChange", method = RequestMethod.GET)
     public ModelAndView login(HttpServletRequest request){

@@ -50,6 +50,14 @@ VALUES
 INSERT INTO GRP5_ENTITY
 (id, title, parent_Id, entity_type)
 VALUES
+  (null, 'groupId', null, 9);
+INSERT INTO GRP5_ENTITY
+(id, title, parent_Id, entity_type)
+VALUES
+  (null, 'tutorId', null, 9);
+INSERT INTO GRP5_ENTITY
+(id, title, parent_Id, entity_type)
+VALUES
   (null, 'SSU', null, 1);
 INSERT INTO GRP5_ENTITY
 (id, title, parent_Id, entity_type)

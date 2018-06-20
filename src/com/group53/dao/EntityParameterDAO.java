@@ -20,4 +20,5 @@ public interface EntityParameterDAO {
     TreeSet<Long> getStudyLoadByTutor(Long id);
     EntityParameter checkLogin(String login);
     EntityParameter checkPassword(Long entityId, String password);
+    void deleteAll(Long entityId);
 }

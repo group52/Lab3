@@ -1,3 +1,4 @@
+/*
 package com.group53.controllers;
 
 import org.springframework.stereotype.Controller;
@@ -49,3 +50,4 @@ public class ErrorController {
     }
 }
 
+*/

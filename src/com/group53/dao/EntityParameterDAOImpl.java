@@ -49,10 +49,11 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
     @Override
     public void saveParameterDB(EntityParameter entityParameter){
 
-        if ((getParameter(entityParameter.getEntityId(), entityParameter.getParameterId()) != null &&
+        if (entityParameter.getEntityId() !=null &&
+                ((getParameter(entityParameter.getEntityId(), entityParameter.getParameterId()) != null &&
                 (long) entityParameter.getParameterId() != (long) entityDAO.getId("mark")) ||
                 ((getParameter(entityParameter.getEntityId(), entityParameter.getParameterId(), entityParameter.getDateValue()) != null &&
-                        (long) entityParameter.getParameterId() != (long) entityDAO.getId("mark")))) {
+                        (long) entityParameter.getParameterId() != (long) entityDAO.getId("mark"))))) {
 
             String updateSQL = "UPDATE GRP5_ENTITY_PARAMETER  SET string_Value=?, int_Value=?, decimal_Value=?," +
                     " id_Value=?, date_Value=? where parameter_id=? and entity_id=?";
@@ -82,12 +83,18 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
     }
 
     @Override
+    public void deleteAll(Long entityId){
+        String sql = "DELETE FROM GRP5_ENTITY_PARAMETER WHERE entity_Id=?";
+        template.update(sql, entityId);
+    }
+
+    @Override
     public EntityParameter getParameter(final Long entityId, final Long parameterID) {
         String sql = "SELECT * FROM GRP5_ENTITY_PARAMETER WHERE  entity_Id=? and parameter_id=?";
         return template.query(sql, new PreparedStatementSetter() {
             @Override
             public void setValues(PreparedStatement ps) throws SQLException {
-                ps.setLong(1,  entityId);
+                ps.setLong(1, entityId);
                 ps.setLong(2, parameterID);
             }
         }, new ResultSetExtractor<EntityParameter>() {

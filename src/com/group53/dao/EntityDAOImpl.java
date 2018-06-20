@@ -45,6 +45,7 @@ public class EntityDAOImpl implements EntityDAO {
             String insertSQL = "INSERT INTO GRP5_ENTITY"
                     + "(ID, TITLE, PARENT_ID, ENTITY_TYPE) VALUES"
                     + "(?,?,?,?)";
+            entity.setId(getNextId());
             template.update(insertSQL, entity.getId(), entity.getTitle(),
                     entity.getParentId(), entity.getEntityType());
         }
@@ -54,6 +55,7 @@ public class EntityDAOImpl implements EntityDAO {
     public void deleteEntityDB(Long id){
         String sql = "DELETE FROM GRP5_ENTITY WHERE id=?";
         template.update(sql, id);
+        entityParameterDAO.deleteAll(id);
     }
 
     @Override
@@ -176,6 +178,26 @@ public class EntityDAOImpl implements EntityDAO {
                 return null;
             }
 
+        });
+    }
+
+    @Override
+    public Long getNextId() {
+        String sql = "SELECT id_entity.nextval as Id from dual";
+        return template.query(sql, new PreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps) throws SQLException {
+                /*ps.setLong(1, entityId);
+                ps.setLong(2, parameterID);*/
+            }
+        }, new ResultSetExtractor<Long>() {
+            @Override
+            public Long extractData(ResultSet resultSet) throws SQLException {
+                if (resultSet.next()) {
+                    return resultSet.getLong("id");
+                }
+                return null;
+            }
         });
     }
 }

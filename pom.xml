@@ -260,7 +260,7 @@
             <version>2.4</version>
             <configuration>
                 <warSourceDirectory>web</warSourceDirectory>
-                <warName>OnlineJournal</warName>
+                <warName>OnlineJournal_war_exploded</warName>
                 <failOnMissingWebXml>false</failOnMissingWebXml>
             </configuration>
         </plugin>

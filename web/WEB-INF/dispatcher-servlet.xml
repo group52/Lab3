@@ -18,11 +18,11 @@
 
 
     <bean id = "dataSource" class = "org.springframework.jdbc.datasource.DriverManagerDataSource">
-       <property name = "driverClassName" value = "${ORACLE_DB_DRIVER_CLASS}" />
+        <property name = "driverClassName" value = "${ORACLE_DB_DRIVER_CLASS}" />
         <property name = "url" value = "${ORACLE_DB_URL}" />
         <property name = "username" value = "${ORACLE_DB_USERNAME}" />
         <property name = "password" value = "${ORACLE_DB_PASSWORD}" />
-     </bean>
+    </bean>
 
     <bean id="propertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
