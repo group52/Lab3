@@ -60,7 +60,7 @@ public class EntityController {
         Entity entity = entityDAO.getEntity(id);
         Entity newEntity = new Entity();
         List<Entity> entityList = entityDAO.getChildEntitys(id);
-        ModelAndView model = new ModelAndView("show", "list", entityList);
+        ModelAndView model = new ModelAndView("showChild", "list", entityList);
 
 
         int entityType = entity.getEntityType();
@@ -68,6 +68,7 @@ public class EntityController {
             case Student.student_entity_type:   return new ModelAndView("redirect:/mark?id=" + id);
 
             case Group.group_entity_type:       newEntity.setParentId(id);
+                                                newEntity.setEntityType(Student.student_entity_type);
                                                 model.addObject("entity", newEntity);
                                                 return model;
 
@@ -79,10 +80,12 @@ public class EntityController {
                                                 return model;
 
             case Subject.subject_entity_type:   newEntity.setParentId(id);
+                                                newEntity.setEntityType(StudyLoad.studyload_entity_type);
                                                 model.addObject("entity", newEntity);
                                                 return model;
 
             case University.university_entity_type:   newEntity.setParentId(id);
+                                                newEntity.setEntityType(Group.group_entity_type);
                                                 model.addObject("entity", newEntity);
                                                 return model;
 
@@ -90,6 +93,63 @@ public class EntityController {
 
             default:                            return new ModelAndView("redirect:/viewAll");
         }
+    }
+
+    @RequestMapping(value = "/saveChild", method = RequestMethod.POST)
+    public ModelAndView saveChild(@ModelAttribute Entity entity) {
+        entityDAO.saveOrUpdateEntityDB(entity);
+        if (entity.getEntityType() == Student.getStudent_entity_type() ||
+                entity.getEntityType() == Tutor.getTutor_entity_type() ||
+                entity.getEntityType() == University.getUniversity_entity_type()) {
+            EntityParameter entityParameter = new EntityParameter();
+            entityParameter.setParameterId(entityDAO.getId("login"));
+            entityParameter.setEntityId(entity.getId());
+            entityParameter.setStringValue(entity.getTitle());
+            entityParameterDAO.saveParameterDB(entityParameter);
+            entityParameter.setParameterId(entityDAO.getId("password"));
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String hashedPassword = passwordEncoder.encode(entity.getId().toString());
+            entityParameter.setStringValue(hashedPassword);
+            entityParameterDAO.saveParameterDB(entityParameter);
+        }
+        logger.info("The entity with id = " + entity.getId() + " was saved");
+        Entity parentEntity = entityDAO.getEntity(entity.getParentId());
+        Long id = parentEntity.getId();
+        List<Entity> entityList = entityDAO.getChildEntitys(id);
+        ModelAndView model = new ModelAndView("showChild", "list", entityList);
+        Entity newEntity = new Entity();
+
+        int entityType = parentEntity.getEntityType();
+        switch (entityType) {
+            case Student.student_entity_type:   return new ModelAndView("redirect:/mark?id=" + id);
+
+            case Group.group_entity_type:       newEntity.setParentId(id);
+                                                newEntity.setEntityType(Student.student_entity_type);
+                                                model.addObject("entity", newEntity);
+                                                return model;
+
+            case Tutor.tutor_entity_type:       entityList.clear();
+                                                for (Long idStudyLoad : entityParameterDAO.getStudyLoadByTutor(id))
+                                                entityList.add(entityDAO.getEntity(idStudyLoad));
+                                                model.addObject("list", entityList);
+                                                model.addObject("entity", newEntity);
+                                                return model;
+
+            case Subject.subject_entity_type:   newEntity.setParentId(id);
+                                                newEntity.setEntityType(StudyLoad.studyload_entity_type);
+                                                model.addObject("entity", newEntity);
+                                                return model;
+
+            case University.university_entity_type:   newEntity.setParentId(id);
+                                                newEntity.setEntityType(Group.group_entity_type);
+                                                model.addObject("entity", newEntity);
+                                                return model;
+
+            case StudyLoad.studyload_entity_type:   return new ModelAndView("redirect:/editMark?id=" + id);
+
+            default:                            return new ModelAndView("redirect:/viewAll");
+        }
+
     }
 
     @RequestMapping(value = "/saveEntity", method = RequestMethod.POST)
