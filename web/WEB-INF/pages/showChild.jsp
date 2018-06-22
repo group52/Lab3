@@ -43,6 +43,6 @@
         </tr>
     </c:forEach>
 </table>
-<a href = "enter"> Start page </a>
+<a href = "viewAll"> View all entities </a>
 </body>
 </html>

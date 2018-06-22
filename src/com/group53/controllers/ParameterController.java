@@ -1,9 +1,7 @@
 package com.group53.controllers;
 
 
-import com.group53.beans.EntityParameter;
-import com.group53.beans.Entity;
-import com.group53.beans.Parameter;
+import com.group53.beans.*;
 import com.group53.dao.EntityParameterDAOImpl;
 import com.group53.dao.EntityDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,5 +87,43 @@ public class ParameterController {
 
         logger.info("The param with entity id = " + entityParameter.getEntityId() + " was saved");
         return new ModelAndView("redirect:/viewParam?id=" + entityId);
+    }
+    @RequestMapping(value = "/saveStudyLoad", method = RequestMethod.POST)
+    public ModelAndView saveStudyLoad(@ModelAttribute StudyLoad studyLoad) {
+        EntityParameter entityParameter = new EntityParameter();
+        entityParameter.setParameterId(entityDAO.getId("groupId"));
+        entityParameter.setEntityId(studyLoad.getId());
+        entityParameter.setIdValue(studyLoad.getGroupId());
+        entityParameterDAO.saveParameterDB(entityParameter);
+        entityParameter.setParameterId(entityDAO.getId("tutorId"));
+        entityParameter.setIdValue(studyLoad.getTutorId());
+        entityParameterDAO.saveParameterDB(entityParameter);
+
+        logger.info("The param with entity id = " + entityParameter.getEntityId() + " was saved");
+        return new ModelAndView("redirect:/paramStudyLoad?id=" + entityId);
+    }
+
+    @RequestMapping(value = "paramStudyLoad", method = RequestMethod.GET)
+    public ModelAndView paramStudyLoad(HttpServletRequest request){
+        entityId = Long.parseLong(request.getParameter("id"));
+        Entity entity = entityDAO.getEntity(entityId);
+        StudyLoad studyLoad = new StudyLoad();
+        studyLoad.setId(entity.getId());
+        studyLoad.setTitle(entity.getTitle());
+        studyLoad.setParentId(entity.getParentId());
+        List<Entity> groups = entityDAO.getAllByType(Group.getGroup_entity_type());
+        List<Entity> tutors = entityDAO.getAllByType(Tutor.getTutor_entity_type());
+        ModelAndView model = new ModelAndView("paramStudyLoad", "listGroup", groups);
+        model.addObject("listTutor", tutors);
+        model.addObject("studyLoad",studyLoad);
+        List<EntityParameter> paramList = entityParameterDAO.getAllParameters(entity.getId());
+        model.addObject("list",paramList);
+        List<Entity> parameters = entityDAO.getAllByType(Parameter.getParameter_entity_type());
+        EntityParameter newEntityParameter = new EntityParameter();
+        newEntityParameter.setEntityId(entity.getId());
+        logger.info("New entity parameter, entity id = " + entity.getId());
+        model.addObject("entityParameter", newEntityParameter);
+        model.addObject("parameters", parameters);
+        return model;
     }
 }

@@ -55,7 +55,6 @@ public class EntityDAOImpl implements EntityDAO {
     public void deleteEntityDB(Long id){
         String sql = "DELETE FROM GRP5_ENTITY WHERE id=?";
         template.update(sql, id);
-        entityParameterDAO.deleteAll(id);
     }
 
     @Override

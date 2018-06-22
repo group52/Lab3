@@ -112,6 +112,9 @@ public class EntityController {
             entityParameter.setStringValue(hashedPassword);
             entityParameterDAO.saveParameterDB(entityParameter);
         }
+        if (entity.getEntityType() == StudyLoad.getStudyload_entity_type()) {
+            return new ModelAndView("redirect:/paramStudyLoad?id=" + entity.getId());
+        }
         logger.info("The entity with id = " + entity.getId() + " was saved");
         Entity parentEntity = entityDAO.getEntity(entity.getParentId());
         Long id = parentEntity.getId();
@@ -168,6 +171,9 @@ public class EntityController {
             String hashedPassword = passwordEncoder.encode(entity.getId().toString());
             entityParameter.setStringValue(hashedPassword);
             entityParameterDAO.saveParameterDB(entityParameter);
+        }
+        if (entity.getEntityType() == StudyLoad.getStudyload_entity_type()) {
+            return new ModelAndView("redirect:/paramStudyLoad?id=" + entity.getId());
         }
         logger.info("The entity with id = " + entity.getId() + " was saved");
         return new ModelAndView("redirect:/viewAll");
