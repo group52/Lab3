@@ -82,11 +82,6 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
         template.update(sql, entityId, parameterID);
     }
 
-    @Override
-    public void deleteAll(Long entityId){
-        String sql = "DELETE FROM GRP5_ENTITY_PARAMETER WHERE entity_Id=?";
-        template.update(sql, entityId);
-    }
 
     @Override
     public EntityParameter getParameter(final Long entityId, final Long parameterID) {
@@ -252,35 +247,6 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
             public void setValues(PreparedStatement ps) throws SQLException {
                 ps.setString(1, login);
                 ps.setLong(2, entityDAO.getId("login"));
-            }
-        }, new ResultSetExtractor<EntityParameter>() {
-            @Override
-            public EntityParameter extractData(ResultSet resultSet) throws SQLException {
-                if (resultSet.next()) {
-                    EntityParameter entityParameter = new EntityParameter();
-                    entityParameter.setParameterId(resultSet.getLong("parameter_id"));
-                    entityParameter.setEntityId(resultSet.getLong("entity_id"));
-                    entityParameter.setStringValue(resultSet.getString("string_value"));
-                    entityParameter.setIntValue(resultSet.getInt("int_value"));
-                    entityParameter.setDecimalValue(resultSet.getDouble("decimal_value"));
-                    entityParameter.setIdValue(resultSet.getLong("id_value"));
-                    entityParameter.setDateValue(resultSet.getDate("date_value"));
-                    return entityParameter;
-                }
-                return null;
-            }
-        });
-    }
-
-    @Override
-    public EntityParameter checkPassword(final Long entityId, final String password) {
-        String sql = "SELECT * FROM GRP5_ENTITY_PARAMETER WHERE  STRING_VALUE=? and PARAMETER_ID=? and ENTITY_ID=?";
-        return template.query(sql, new PreparedStatementSetter() {
-            @Override
-            public void setValues(PreparedStatement ps) throws SQLException {
-                ps.setString(1, password);
-                ps.setLong(2, entityDAO.getId("password"));
-                ps.setLong(2, entityId);
             }
         }, new ResultSetExtractor<EntityParameter>() {
             @Override

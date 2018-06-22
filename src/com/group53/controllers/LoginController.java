@@ -180,10 +180,6 @@ public class LoginController {
         }
     }
 
-   /* @RequestMapping(value = "/error", method = RequestMethod.GET)
-    public ModelAndView param(HttpServletRequest request) {
-        return new ModelAndView("error", "errorV", request.getParameter("errorS"));
-    }*/
 
     @RequestMapping(value = "/loginChange", method = RequestMethod.GET)
     public ModelAndView login(HttpServletRequest request){

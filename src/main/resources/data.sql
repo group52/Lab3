@@ -1,4 +1,3 @@
-Truncate table GRP5_ENTITY;
 INSERT INTO GRP5_ENTITY
 (id, title, parent_Id, entity_type)
 VALUES

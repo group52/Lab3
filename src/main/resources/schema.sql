@@ -37,19 +37,6 @@ select count(1) into cnt from user_tables where table_name='GRP5_ENTITY';
     end;
   end if;
 
-  /*select count(1) into cnt from user_tables where table_name='GRP5_USERS';
-  if cnt=0 then
-    begin
-      query:='CREATE TABLE GRP5_USERS' ||
-             '( USERNAME VARCHAR2(36) not null,' ||
-             ' PASSWORD VARCHAR2(36) not null,' ||
-             ' ROLE_ID   VARCHAR2(50) not null,' ||
-             ' FIRSTNAME VARCHAR(50) not null,' ||
-             ' LASTNAME VARCHAR(50) not null )' ;
-      execute immediate query;
-    end;
-  end if;*/
-
   select count(1) into cnt from user_triggers where trigger_name='GRP5_ENTITY_TR';
   if cnt=0 then
     begin
@@ -66,7 +53,6 @@ select count(1) into cnt from user_tables where table_name='GRP5_ENTITY';
       execute immediate query;
     end;
   end if;
-
 
 end;
 ^;

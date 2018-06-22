@@ -116,22 +116,6 @@ public class EntityDAOImpl implements EntityDAO {
     }
 
     @Override
-    public List<Entity> getAllByTitle(final String title) {
-        String sql = "SELECT * FROM GRP5_ENTITY WHERE TITLE=?";
-        return template.query(sql, new PreparedStatementSetter() {
-            @Override
-            public void setValues(PreparedStatement ps) throws SQLException {
-                ps.setString(1, title);
-            }
-        }, new RowMapper<Entity>() {
-            @Override
-            public Entity mapRow(ResultSet resultSet, int i) throws SQLException {
-                return new Entity(resultSet.getLong("id"), resultSet.getString("title"), resultSet.getLong("parent_Id"),resultSet.getInt("entity_Type"));
-            }
-        });
-    }
-
-    @Override
     public Long getId(final String title) {
         String sql = "SELECT * FROM GRP5_ENTITY WHERE TITLE=? and ENTITY_TYPE=?";
         return template.query(sql, new PreparedStatementSetter() {
