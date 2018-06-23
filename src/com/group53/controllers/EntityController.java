@@ -16,6 +16,9 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * class EntityController is controller for operation under the entities
+ */
 @Controller
 public class EntityController {
     private static final Logger logger = Logger.getLogger(EntityController.class);
@@ -25,6 +28,10 @@ public class EntityController {
     @Autowired
     private EntityParameterDAOImpl entityParameterDAO;
 
+    /**
+     * Return the view of the all entites from the table GRP5_Entity
+     * @return show.jsp with the all entites from the table GRP5_Entity
+     */
     @RequestMapping("viewAll")
     public ModelAndView showAllEntitys(){
         List<Entity> entityList = entityDAO.getAllEntitys();
@@ -35,6 +42,11 @@ public class EntityController {
         return model;
     }
 
+    /**
+     * Delete the entity and return the all entites from the table GRP5_Entity
+     * @param request id of the entity
+     * @return the all entites from the table GRP5_Entity
+     */
     @RequestMapping(value = "/deleteEntity", method = RequestMethod.GET)
     public ModelAndView deleteEntity(HttpServletRequest request) {
         Long id = Long.parseLong(request.getParameter("id"));
@@ -43,6 +55,11 @@ public class EntityController {
         return new ModelAndView("redirect:/viewAll");
     }
 
+    /**
+     * Edit the entity and return the all entites from the table GRP5_Entity
+     * @param request id of the entity
+     * @return sh ow.jsp with the all entites from the table GRP5_Entity
+     */
     @RequestMapping(value = "/editEntity", method = RequestMethod.GET)
     public ModelAndView edit(HttpServletRequest request) {
         Long id = Long.parseLong(request.getParameter("id"));
@@ -54,6 +71,11 @@ public class EntityController {
         return model;
     }
 
+    /**
+     * Return the children entyties for the entity or other login for entity without children
+     * @param request id of the entity
+     * @return the children entyties for the entity or other login for entity without children
+     */
     @RequestMapping(value = "/childEntity", method = RequestMethod.GET)
     public ModelAndView child(HttpServletRequest request) {
         Long id = Long.parseLong(request.getParameter("id"));
@@ -95,6 +117,11 @@ public class EntityController {
         }
     }
 
+    /**
+     * Add child entity to the table GRP5_Entity and return the view of all children of the entity
+     * @param entity the entity for save
+     * @return the view of all children of the entity
+     */
     @RequestMapping(value = "/saveChild", method = RequestMethod.POST)
     public ModelAndView saveChild(@ModelAttribute Entity entity) {
         entityDAO.saveOrUpdateEntityDB(entity);
@@ -155,6 +182,11 @@ public class EntityController {
 
     }
 
+    /**
+     * Add entity to the table GRP5_Entity and return the view of all entities
+     * @param entity the entity for save
+     * @return the view of all entities
+     */
     @RequestMapping(value = "/saveEntity", method = RequestMethod.POST)
     public ModelAndView save(@ModelAttribute Entity entity) {
         entityDAO.saveOrUpdateEntityDB(entity);
@@ -180,12 +212,22 @@ public class EntityController {
 
     }
 
+    /**
+     * Return the view of the entity parameters
+     * @param request id of the entity
+     * @return view of the entity parameters
+     */
     @RequestMapping(value = "/paramEntity", method = RequestMethod.GET)
     public ModelAndView param(HttpServletRequest request) {
         Long id = Long.parseLong(request.getParameter("id"));
         return new ModelAndView("redirect:/viewParam?id=" + id);
     }
 
+    /**
+     * Return all entyties of the type
+     * @param request type of the entity
+     * @return all entyties of the type
+     */
     @RequestMapping(value = "/viewByType", method = RequestMethod.GET)
     public ModelAndView viewByType(HttpServletRequest request) {
         int entityType = Integer.parseInt(request.getParameter("entityType"));
@@ -195,5 +237,4 @@ public class EntityController {
         model.addObject("entity", newEntity);
         return model;
     }
-
 }

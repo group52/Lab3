@@ -14,6 +14,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Class  EntityDAOImpl is implementation of the class EntityDao
+ */
 public class EntityDAOImpl implements EntityDAO {
     @Autowired
     private EntityParameterDAOImpl entityParameterDAO;

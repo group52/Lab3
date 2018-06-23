@@ -15,6 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * Controller for enter to system and check login-password
+ */
 @Controller
 public class LoginController {
     private static final Logger logger = Logger.getLogger(LoginController.class);
@@ -26,45 +29,86 @@ public class LoginController {
     private EntityParameterDAOImpl entityParameterDAO;
 
 
+    /**
+     * Inner class for checking login-password
+     */
     public static class LoginPassword {
         private String login;
         private String password;
         private Long userId;
 
+        /**
+         * Empty constructor
+         */
         public LoginPassword() {
         }
 
+        /**
+         * Constructor
+         * @param login the user login
+         * @param password the user password
+         * @param userId id of the entity
+         */
         public LoginPassword(String login, String password, Long userId) {
             this.login = login;
             this.password = password;
             this.userId = userId;
         }
 
+        /**
+         * Return the id of the entity
+         * @return id of the entity
+         */
         public Long getUserId() {
             return userId;
         }
 
+        /**
+         * Setup the id of the entity
+         * @param userId id of the entity
+         */
         public void setUserId(Long userId) {
             this.userId = userId;
         }
 
+        /**
+         * Return the user login
+         * @return the user login
+         */
         public String getLogin() {
             return login;
         }
 
+        /**
+         * Setup the user login
+         * @param login the user login
+         */
         public void setLogin(String login) {
             this.login = login;
         }
 
+        /**
+         * Return the user password
+         * @return the user password
+         */
         public String getPassword() {
             return password;
         }
 
+        /**
+         * Setup the user password
+         * @param password the user password
+         */
         public void setPassword(String password) {
             this.password = password;
         }
     }
 
+    /**
+     * Check the user login-password and the return enter page define the type
+     * @param loginPassword the user login-password
+     * @return the enter page define the type
+     */
     @RequestMapping(value = "/checkLogin", method = RequestMethod.POST)
     public ModelAndView checkLogin(@ModelAttribute LoginPassword loginPassword) {
 
@@ -115,8 +159,11 @@ public class LoginController {
         }
     }
 
-
-
+    /**
+     * Save password and the return enter page define the type
+     * @param loginPassword the user login-password
+     * @return enter page define the type
+     */
     @RequestMapping(value = "/saveLogin", method = RequestMethod.POST)
     public ModelAndView saveLogin(@ModelAttribute LoginPassword loginPassword) {
 
@@ -155,6 +202,11 @@ public class LoginController {
         }
     }
 
+    /**
+     * Return enter page define the type
+     * @param request id of the entity
+     * @return enter page define the type
+     */
     @RequestMapping(value = "/start", method = RequestMethod.GET)
     public ModelAndView start(HttpServletRequest request){
         Long id = Long.parseLong(request.getParameter("id"));
@@ -180,7 +232,11 @@ public class LoginController {
         }
     }
 
-
+    /**
+     * Return the page for login change
+     * @param request id of the entity
+     * @return the page for login change
+     */
     @RequestMapping(value = "/loginChange", method = RequestMethod.GET)
     public ModelAndView login(HttpServletRequest request){
         Long id = Long.parseLong(request.getParameter("id"));
@@ -191,7 +247,10 @@ public class LoginController {
         return new ModelAndView("login", "loginPassword", loginPassword);
     }
 
-
+    /**
+     * Return the page for enter the user login-password
+     * @return the page for enter the user login-password
+     */
     @RequestMapping("enter")
     public ModelAndView enter(){
         return new ModelAndView("enter", "loginPassword", new LoginPassword());

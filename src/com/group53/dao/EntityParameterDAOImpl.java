@@ -16,7 +16,9 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-
+/**
+ * Class EntityParameterDAOImpl is implementation of the class EntityParameterDAO
+ */
 public class EntityParameterDAOImpl implements EntityParameterDAO {
     private JdbcTemplate template;
 

@@ -1,6 +1,5 @@
 package com.group53.controllers;
 
-
 import com.group53.beans.*;
 import com.group53.dao.EntityParameterDAOImpl;
 import com.group53.dao.EntityDAOImpl;
@@ -19,6 +18,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+/**
+ * Class ParameterController for work with parameters from the table GRP5_Entity_PARAMETER
+ */
 @Controller
 public class ParameterController {
 
@@ -29,6 +31,11 @@ public class ParameterController {
     @Autowired
     private EntityDAOImpl entityDAO;
 
+    /**
+     * Return the view of the all parameters from the table GRP5_Entity_PARAMETER for the entity
+     * @param request id of the entity
+     * @return the view of the all parameters for the entity
+     */
     @RequestMapping(value = "viewParam", method = RequestMethod.GET)
     public ModelAndView show(HttpServletRequest request){
         entityId = Long.parseLong(request.getParameter("id"));
@@ -43,6 +50,11 @@ public class ParameterController {
         return model;
     }
 
+    /**
+     * Delete the parameter and return the view of the all parameters from the table GRP5_Entity_PARAMETER for the entity
+     * @param request id of the entity parameter
+     * @return the view of the all parameters for the entity
+     */
     @RequestMapping(value = "/deleteParam", method = RequestMethod.GET)
     public ModelAndView delete(HttpServletRequest request) {
         Long parameterID = Long.parseLong(request.getParameter("param"));
@@ -51,6 +63,11 @@ public class ParameterController {
         return new ModelAndView("redirect:/viewParam?id=" + entityId);
     }
 
+    /**
+     * Edit the parameter and return the view of the all parameters from the table GRP5_Entity_PARAMETER for the entity
+     * @param request id of the entity parameter
+     * @return the view of the all parameters for the entity
+     */
     @RequestMapping(value = "/editParam", method = RequestMethod.GET)
     public ModelAndView edit(HttpServletRequest request) {
         Long parameterID = Long.parseLong(request.getParameter("param"));
@@ -64,6 +81,11 @@ public class ParameterController {
         return model;
     }
 
+    /**
+     * Save the parameter and return the view of the all parameters from the table GRP5_Entity_PARAMETER for the entity
+     * @param entityParameter entity parameter
+     * @return the view of the all parameters for the entity
+     */
     @RequestMapping(value = "/saveParam", method = RequestMethod.POST)
     public ModelAndView save(@ModelAttribute EntityParameter entityParameter) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -88,6 +110,12 @@ public class ParameterController {
         logger.info("The param with entity id = " + entityParameter.getEntityId() + " was saved");
         return new ModelAndView("redirect:/viewParam?id=" + entityId);
     }
+
+    /**
+     * Save the parameters for the studyLoad and return the view of the all parameters from the table GRP5_Entity_PARAMETER for the studyLoad
+     * @param studyLoad studyload entity
+     * @return the view of the all parameters for the studyLoad
+     */
     @RequestMapping(value = "/saveStudyLoad", method = RequestMethod.POST)
     public ModelAndView saveStudyLoad(@ModelAttribute StudyLoad studyLoad) {
         EntityParameter entityParameter = new EntityParameter();
@@ -103,6 +131,11 @@ public class ParameterController {
         return new ModelAndView("redirect:/paramStudyLoad?id=" + entityId);
     }
 
+    /**
+     * return the view of the all parameters from the table GRP5_Entity_PARAMETER for the studyLoad
+     * @param request id of the studyload
+     * @return the view of the all parameters for the studyLoad
+     */
     @RequestMapping(value = "paramStudyLoad", method = RequestMethod.GET)
     public ModelAndView paramStudyLoad(HttpServletRequest request){
         entityId = Long.parseLong(request.getParameter("id"));

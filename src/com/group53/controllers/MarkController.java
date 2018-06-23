@@ -22,6 +22,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
 
+/**
+ * Class for operation under the mark of the students
+ */
 @Controller
 public class MarkController {
     private static final Logger logger = Logger.getLogger(MarkController.class);
@@ -30,7 +33,11 @@ public class MarkController {
     @Autowired
     private EntityDAOImpl entityDAO;
 
-
+    /**
+     * Add mark on group_journal.jsp for some student and return  group_journal.jsp with all mark fot the studyload
+     * @param request id of the entity
+     * @return group_journal.jsp with all mark fot the studyload
+     */
     @RequestMapping(value = "/editMark", method = RequestMethod.GET)
     public ModelAndView edit(HttpServletRequest request) {
         Long id = Long.parseLong(request.getParameter("id"));
@@ -52,10 +59,14 @@ public class MarkController {
         newEntityParameter.setIdValue(id);
         logger.info("Mark,  id = " + id + " was edited");
         model.addObject("entityParameter", newEntityParameter);
-
         return model;
     }
 
+    /**
+     * View all marks for all subjects for the student
+     * @param request id of the entity
+     * @return progress.page with marks for all subjects for the student
+     */
     @RequestMapping(value = "/mark", method = RequestMethod.GET)
     public ModelAndView mark(HttpServletRequest request) {
         Long id = Long.parseLong(request.getParameter("id"));
@@ -73,6 +84,11 @@ public class MarkController {
         return model;
     }
 
+    /**
+     * Add mark on group_journal.jsp for some student and return all mark fot the studyload
+     * @param entityParameter mark parameter for the entity
+     * @return all mark fot the studyload
+     */
     @RequestMapping(value = "/saveMark", method = RequestMethod.POST)
     public ModelAndView save(@ModelAttribute EntityParameter entityParameter) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
