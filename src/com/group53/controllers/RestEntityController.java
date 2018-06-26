@@ -43,7 +43,7 @@ public class RestEntityController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
         Entity entity = entityDAO.getEntity(id);
-        if (entity.equals(null)) {
+        if (entity == null) {
             return new ResponseEntity("No entity found for ID " + id, HttpStatus.NOT_FOUND);
         }
 
@@ -55,7 +55,7 @@ public class RestEntityController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/xml");
         Entity entity = entityDAO.getEntity(id);
-        if (entity.equals(null)) {
+        if (entity == null) {
             return new ResponseEntity("No entity found for ID " + id, HttpStatus.NOT_FOUND);
         }
 
