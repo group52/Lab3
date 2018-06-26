@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Class  EntityDAOImpl is implementation of the class EntityDao
@@ -24,6 +25,7 @@ public class EntityDAOImpl implements EntityDAO {
     private JdbcTemplate template;
 
     public void setTemplate(JdbcTemplate template) {
+        Locale.setDefault(Locale.ENGLISH);
         this.template = template;
     }
 

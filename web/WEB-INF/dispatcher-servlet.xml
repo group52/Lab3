@@ -20,7 +20,7 @@
         <property name = "driverClassName" value = "${ORACLE_DB_DRIVER_CLASS}" />
         <property name = "url" value = "${ORACLE_DB_URL}" />
         <property name = "username" value = "${ORACLE_DB_USERNAME}" />
-        <property name = "password" value = "${ORACLE_DB_PASSWORD}" />
+        <property name = "password" value = "12345678" />
     </bean>
 
     <bean id="propertyConfigurer"
@@ -57,5 +57,32 @@
 
     <bean id = "entityParam_dao" class = "com.group53.dao.EntityParameterDAOImpl">
         <property name = "template" ref = "jdbcTemplate"/>
+    </bean>
+    <!--<bean id="xmlMessageConverter" class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter">
+    </bean>
+    <bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+    </bean>-->
+
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="webBindingInitializer">
+            <bean class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer"/>
+        </property>
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+
+            </list>
+        </property>
+    </bean>
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="webBindingInitializer">
+            <bean class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer"/>
+        </property>
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter"/>
+
+            </list>
+        </property>
     </bean>
 </beans>

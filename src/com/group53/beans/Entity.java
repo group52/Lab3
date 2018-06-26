@@ -1,6 +1,13 @@
 package com.group53.beans;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /** class Entity is the parent class for all entities */
+@XmlRootElement(name="entity")
+@XmlAccessorType(XmlAccessType.NONE)
 public class Entity {
 
     public static final byte admin_access_level = 1;
@@ -9,9 +16,13 @@ public class Entity {
 
     public static final byte entity_entity_type = 0;
 
+    @XmlAttribute
     private Long id = null;
+    @XmlAttribute
     private String title = null;
+    @XmlAttribute
     private Long parentId = null;
+    @XmlAttribute
     private int entityType = entity_entity_type;
 
     /** Empty constructor for Entity */

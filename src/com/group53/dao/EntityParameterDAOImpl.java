@@ -11,10 +11,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * Class EntityParameterDAOImpl is implementation of the class EntityParameterDAO
@@ -23,6 +20,7 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
     private JdbcTemplate template;
 
     public void setTemplate(JdbcTemplate template) {
+        Locale.setDefault(Locale.ENGLISH);
         this.template = template;
     }
 
