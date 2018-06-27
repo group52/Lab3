@@ -1,9 +1,8 @@
 package com.group53.beans;
 
-
-import java.beans.Transient;
 import java.sql.Date;
 
+/** class EntityParameter is the class for the parameters of the entity */
 public class EntityParameter {
 
     private Long parameterId;
@@ -16,10 +15,23 @@ public class EntityParameter {
 
     private String dateString;
 
+    /**
+     * Empty constructor
+     */
     public EntityParameter() {
     }
 
-     public EntityParameter(Long parameterId, Long entityId, String stringValue, int intValue, double decimalValue, Long idValue, Date dateValue) {
+    /**
+     * Constructor
+      * @param parameterId - id of the parameter
+     * @param entityId - id of the entity
+     * @param stringValue - string value of the parameter
+     * @param intValue - int value of the parameter
+     * @param decimalValue - double value of the parameter
+     * @param idValue - id value of the parameter
+     * @param dateValue date value of the parameter
+     */
+    public EntityParameter(Long parameterId, Long entityId, String stringValue, int intValue, double decimalValue, Long idValue, Date dateValue) {
         this.parameterId = parameterId;
         this.entityId = entityId;
         this.stringValue = stringValue;
@@ -29,66 +41,130 @@ public class EntityParameter {
         this.dateValue = dateValue;
     }
 
+    /**
+     * Return the id of the parameter
+     * @return id of the parameter
+     */
     public Long getParameterId() {
         return parameterId;
     }
 
+    /**
+     * Setup the id of the parameter
+     * @param parameterId id of the parameter
+     */
     public void setParameterId(Long parameterId) {
         this.parameterId = parameterId;
     }
 
+    /**
+     * Return the id of the entity
+     * @return id of the entity
+     */
     public Long getEntityId() {
         return entityId;
     }
 
+    /**
+     * Setup the id of the entity
+     * @param entityId id of the entity
+     */
     public void setEntityId(Long entityId) {
         this.entityId = entityId;
     }
 
+    /**
+     * Return the string value of the parameter
+     * @return string value of the parameter
+     */
     public String getStringValue() {
         return stringValue;
     }
 
+    /**
+     * Setup the string value of the parameter
+     * @param stringValue string value of the parameter
+     */
     public void setStringValue(String stringValue) {
         this.stringValue = stringValue;
     }
 
+    /**
+     * Return the int value of the parameter
+     * @return int value of the parameter
+     */
     public int getIntValue() {
         return intValue;
     }
 
+    /**
+     * Setup the int value of the parameter
+     * @param intValue int value of the parameter
+     */
     public void setIntValue(int intValue) {
         this.intValue = intValue;
     }
 
+    /**
+     * Return the double value of the parameter
+     * @return double value of the parameter
+     */
     public double getDecimalValue() {
         return decimalValue;
     }
 
+    /**
+     * Setup the double value of the parameter
+     * @param decimalValue double value of the parameter
+     */
     public void setDecimalValue(double decimalValue) {
         this.decimalValue = decimalValue;
     }
 
+    /**
+     * Return the id value of the parameter
+     * @return id value of the parameter
+     */
     public Long getIdValue() {
         return idValue;
     }
 
+    /**
+     * Setup the id value of the parameter
+     * @param idValue id value of the parameter
+     */
     public void setIdValue(Long idValue) {
         this.idValue = idValue;
     }
 
+    /**
+     * Return the date value of the parameter
+     * @return date value of the parameter
+     */
     public Date getDateValue() {
         return dateValue;
     }
 
+    /**
+     * Setup the date value of the parameter
+     * @param dateValue date value of the parameter
+     */
     public void setDateValue(Date dateValue) {
         this.dateValue = dateValue;
     }
 
+    /**
+     * Return the date value of the parameter
+     * @return date value of the parameter
+     */
     public String getDateString() {
         return dateString;
     }
 
+    /**
+     * Setup the date value of the parameter
+     * @param dateString date value of the parameter
+     */
     public void setDateString(String dateString) {
         this.dateString = dateString;
     }

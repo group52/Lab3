@@ -1,12 +1,10 @@
 package com.group53.controllers;
 
-
-import com.group53.beans.EntityParameter;
-import com.group53.beans.Entity;
-import com.group53.beans.Parameter;
+import com.group53.beans.*;
 import com.group53.dao.EntityParameterDAOImpl;
 import com.group53.dao.EntityDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +18,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+/**
+ * Class ParameterController for work with parameters from the table GRP5_Entity_PARAMETER
+ */
 @Controller
 public class ParameterController {
 
@@ -30,6 +31,11 @@ public class ParameterController {
     @Autowired
     private EntityDAOImpl entityDAO;
 
+    /**
+     * Return the view of the all parameters from the table GRP5_Entity_PARAMETER for the entity
+     * @param request id of the entity
+     * @return the view of the all parameters for the entity
+     */
     @RequestMapping(value = "viewParam", method = RequestMethod.GET)
     public ModelAndView show(HttpServletRequest request){
         entityId = Long.parseLong(request.getParameter("id"));
@@ -44,6 +50,11 @@ public class ParameterController {
         return model;
     }
 
+    /**
+     * Delete the parameter and return the view of the all parameters from the table GRP5_Entity_PARAMETER for the entity
+     * @param request id of the entity parameter
+     * @return the view of the all parameters for the entity
+     */
     @RequestMapping(value = "/deleteParam", method = RequestMethod.GET)
     public ModelAndView delete(HttpServletRequest request) {
         Long parameterID = Long.parseLong(request.getParameter("param"));
@@ -52,6 +63,11 @@ public class ParameterController {
         return new ModelAndView("redirect:/viewParam?id=" + entityId);
     }
 
+    /**
+     * Edit the parameter and return the view of the all parameters from the table GRP5_Entity_PARAMETER for the entity
+     * @param request id of the entity parameter
+     * @return the view of the all parameters for the entity
+     */
     @RequestMapping(value = "/editParam", method = RequestMethod.GET)
     public ModelAndView edit(HttpServletRequest request) {
         Long parameterID = Long.parseLong(request.getParameter("param"));
@@ -65,6 +81,11 @@ public class ParameterController {
         return model;
     }
 
+    /**
+     * Save the parameter and return the view of the all parameters from the table GRP5_Entity_PARAMETER for the entity
+     * @param entityParameter entity parameter
+     * @return the view of the all parameters for the entity
+     */
     @RequestMapping(value = "/saveParam", method = RequestMethod.POST)
     public ModelAndView save(@ModelAttribute EntityParameter entityParameter) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -77,8 +98,65 @@ public class ParameterController {
             logger.error("ParseException: ", e);
         }
 
+        if ((long) entityParameter.getParameterId() == (long) (entityDAO.getId("password")))
+        {
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String hashedPassword = passwordEncoder.encode(entityParameter.getStringValue());
+            entityParameter.setStringValue(hashedPassword);
+        }
+
         entityParameterDAO.saveParameterDB(entityParameter);
+
         logger.info("The param with entity id = " + entityParameter.getEntityId() + " was saved");
         return new ModelAndView("redirect:/viewParam?id=" + entityId);
+    }
+
+    /**
+     * Save the parameters for the studyLoad and return the view of the all parameters from the table GRP5_Entity_PARAMETER for the studyLoad
+     * @param studyLoad studyload entity
+     * @return the view of the all parameters for the studyLoad
+     */
+    @RequestMapping(value = "/saveStudyLoad", method = RequestMethod.POST)
+    public ModelAndView saveStudyLoad(@ModelAttribute StudyLoad studyLoad) {
+        EntityParameter entityParameter = new EntityParameter();
+        entityParameter.setParameterId(entityDAO.getId("groupId"));
+        entityParameter.setEntityId(studyLoad.getId());
+        entityParameter.setIdValue(studyLoad.getGroupId());
+        entityParameterDAO.saveParameterDB(entityParameter);
+        entityParameter.setParameterId(entityDAO.getId("tutorId"));
+        entityParameter.setIdValue(studyLoad.getTutorId());
+        entityParameterDAO.saveParameterDB(entityParameter);
+
+        logger.info("The param with entity id = " + entityParameter.getEntityId() + " was saved");
+        return new ModelAndView("redirect:/paramStudyLoad?id=" + entityId);
+    }
+
+    /**
+     * return the view of the all parameters from the table GRP5_Entity_PARAMETER for the studyLoad
+     * @param request id of the studyload
+     * @return the view of the all parameters for the studyLoad
+     */
+    @RequestMapping(value = "paramStudyLoad", method = RequestMethod.GET)
+    public ModelAndView paramStudyLoad(HttpServletRequest request){
+        entityId = Long.parseLong(request.getParameter("id"));
+        Entity entity = entityDAO.getEntity(entityId);
+        StudyLoad studyLoad = new StudyLoad();
+        studyLoad.setId(entity.getId());
+        studyLoad.setTitle(entity.getTitle());
+        studyLoad.setParentId(entity.getParentId());
+        List<Entity> groups = entityDAO.getAllByType(Group.getGroup_entity_type());
+        List<Entity> tutors = entityDAO.getAllByType(Tutor.getTutor_entity_type());
+        ModelAndView model = new ModelAndView("paramStudyLoad", "listGroup", groups);
+        model.addObject("listTutor", tutors);
+        model.addObject("studyLoad",studyLoad);
+        List<EntityParameter> paramList = entityParameterDAO.getAllParameters(entity.getId());
+        model.addObject("list",paramList);
+        List<Entity> parameters = entityDAO.getAllByType(Parameter.getParameter_entity_type());
+        EntityParameter newEntityParameter = new EntityParameter();
+        newEntityParameter.setEntityId(entity.getId());
+        logger.info("New entity parameter, entity id = " + entity.getId());
+        model.addObject("entityParameter", newEntityParameter);
+        model.addObject("parameters", parameters);
+        return model;
     }
 }
