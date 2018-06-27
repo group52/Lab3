@@ -28,6 +28,8 @@ public class LoginController {
     @Autowired
     private EntityParameterDAO entityParameterDAO;
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     /**
      * Inner class for checking login-password
@@ -117,7 +119,6 @@ public class LoginController {
         if (loginParameter != null) {
             Entity entity = entityDAO.getEntity(loginParameter.getEntityId());
 
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             EntityParameter passwordParameter = entityParameterDAO.getParameter(loginParameter.getEntityId(),entityDAO.getId("password"));
 
             if (passwordEncoder.matches(loginPassword.getPassword(),passwordParameter.getStringValue())) {
@@ -173,7 +174,6 @@ public class LoginController {
         entityParameter.setStringValue(loginPassword.getLogin());
         entityParameterDAO.saveParameterDB(entityParameter);
         entityParameter.setParameterId(entityDAO.getId("password"));
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String hashedPassword = passwordEncoder.encode(loginPassword.getPassword());
         entityParameter.setStringValue(hashedPassword);
         entityParameterDAO.saveParameterDB(entityParameter);

@@ -14,7 +14,7 @@
         <property name = "suffix" value = ".jsp" />
     </bean>
 
-
+    <bean id="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 
     <bean id = "dataSource" class = "org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name = "driverClassName" value = "${ORACLE_DB_DRIVER_CLASS}" />
