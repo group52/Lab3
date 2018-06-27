@@ -1,5 +1,7 @@
 package com.group53.beans;
 
+import java.util.Objects;
+
 /** class Tutor is the class for describe tutor object */
 public class Tutor extends Person {
 
@@ -60,5 +62,29 @@ public class Tutor extends Person {
      */
     public static byte getTutorEntityType() {
         return tutorEntityType;
+    }
+
+    @Override
+    public String toString() {
+        return "Tutor{" +
+                "faculty='" + faculty + '\'' +
+                ", speciality='" + speciality + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Tutor)) return false;
+        if (!super.equals(o)) return false;
+        Tutor tutor = (Tutor) o;
+        return Objects.equals(getFaculty(), tutor.getFaculty()) &&
+                Objects.equals(getSpeciality(), tutor.getSpeciality());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(super.hashCode(), getFaculty(), getSpeciality());
     }
 }

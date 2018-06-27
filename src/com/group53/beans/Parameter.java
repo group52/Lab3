@@ -21,4 +21,11 @@ public class Parameter extends Entity{
     public static byte getParameterEntityType() {
         return parameterEntityType;
     }
+
+    @Override
+    public String toString() {
+        return "Parameter{}";
+    }
+
+
 }

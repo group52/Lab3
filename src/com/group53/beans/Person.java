@@ -1,5 +1,7 @@
 package com.group53.beans;
 
+import java.util.Objects;
+
 /** class Person is the class for describe person object */
 public class Person extends Entity {
 
@@ -86,5 +88,31 @@ public class Person extends Entity {
      */
     public static byte getPersonEntityType() {
         return personEntityType;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Person)) return false;
+        if (!super.equals(o)) return false;
+        Person person = (Person) o;
+        return Objects.equals(getName(), person.getName()) &&
+                Objects.equals(getSurname(), person.getSurname()) &&
+                Objects.equals(getPatronymic(), person.getPatronymic());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(super.hashCode(), getName(), getSurname(), getPatronymic());
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                '}';
     }
 }

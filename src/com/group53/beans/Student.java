@@ -1,5 +1,7 @@
 package com.group53.beans;
 
+import java.util.Objects;
+
 /** class Student is the class for describe student object */
 public class Student extends Person {
 
@@ -43,5 +45,27 @@ public class Student extends Person {
      */
     public static byte getStudentEntityType() {
         return studentEntityType;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Student)) return false;
+        if (!super.equals(o)) return false;
+        Student student = (Student) o;
+        return recordBook == student.recordBook;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(super.hashCode(), recordBook);
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "recordBook=" + recordBook +
+                '}';
     }
 }

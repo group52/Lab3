@@ -1,5 +1,7 @@
 package com.group53.beans;
 
+import java.util.Objects;
+
 /** class University is the class for describe university object */
 public class University extends Entity {
 
@@ -38,5 +40,27 @@ public class University extends Entity {
      */
     public static byte getUniversityEntityType() {
         return universityEntityType;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof University)) return false;
+        if (!super.equals(o)) return false;
+        University that = (University) o;
+        return Objects.equals(getName(), that.getName());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(super.hashCode(), getName());
+    }
+
+    @Override
+    public String toString() {
+        return "University{" +
+                "name='" + name + '\'' +
+                '}';
     }
 }

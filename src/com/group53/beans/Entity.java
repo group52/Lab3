@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Objects;
 
 /** class Entity is the parent class for all entities */
 @XmlRootElement(name="entity")
@@ -79,4 +80,29 @@ public class Entity {
         this.entityType = entityType;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Entity)) return false;
+        Entity entity = (Entity) o;
+        return getEntityType() == entity.getEntityType() &&
+                Objects.equals(getId(), entity.getId()) &&
+                Objects.equals(getTitle(), entity.getTitle()) &&
+                Objects.equals(getParentId(), entity.getParentId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getTitle(), getParentId(), getEntityType());
+    }
+
+    @Override
+    public String toString() {
+        return "Entity{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", parentId=" + parentId +
+                ", entityType=" + entityType +
+                '}';
+    }
 }

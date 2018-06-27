@@ -1,5 +1,7 @@
 package com.group53.beans;
 
+import java.util.Objects;
+
 /** class Group is the class for describe group object */
 public class Group extends Entity {
 
@@ -56,5 +58,29 @@ public class Group extends Entity {
      */
     public static byte getGroupEntityType() {
         return groupEntityType;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Group)) return false;
+        if (!super.equals(o)) return false;
+        Group group = (Group) o;
+        return Objects.equals(getFaculty(), group.getFaculty()) &&
+                Objects.equals(getSpeciality(), group.getSpeciality());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(super.hashCode(), getFaculty(), getSpeciality());
+    }
+
+    @Override
+    public String toString() {
+        return "Group{" +
+                "faculty='" + faculty + '\'' +
+                ", speciality='" + speciality + '\'' +
+                '}';
     }
 }

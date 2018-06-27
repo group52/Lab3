@@ -27,4 +27,9 @@ public class Subject extends Entity{
     public static byte getSubjectEntityType() {
         return subjectEntityType;
     }
+
+    @Override
+    public String toString() {
+        return "Subject{}";
+    }
 }

@@ -1,5 +1,7 @@
 package com.group53.beans;
 
+import java.util.Objects;
+
 /** class StudyLoad is the class for describe connection between the subject, the tutor and the group */
 public class StudyLoad extends Entity {
 
@@ -62,5 +64,29 @@ public class StudyLoad extends Entity {
      */
     public static byte getStudyloadEntityType() {
         return studyloadEntityType;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof StudyLoad)) return false;
+        if (!super.equals(o)) return false;
+        StudyLoad studyLoad = (StudyLoad) o;
+        return Objects.equals(getGroupId(), studyLoad.getGroupId()) &&
+                Objects.equals(getTutorId(), studyLoad.getTutorId());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(super.hashCode(), getGroupId(), getTutorId());
+    }
+
+    @Override
+    public String toString() {
+        return "StudyLoad{" +
+                "groupId=" + groupId +
+                ", tutorId=" + tutorId +
+                '}';
     }
 }

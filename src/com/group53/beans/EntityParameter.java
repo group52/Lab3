@@ -1,6 +1,7 @@
 package com.group53.beans;
 
 import java.sql.Date;
+import java.util.Objects;
 
 /** class EntityParameter is the class for the parameters of the entity */
 public class EntityParameter {
@@ -167,5 +168,40 @@ public class EntityParameter {
      */
     public void setDateString(String dateString) {
         this.dateString = dateString;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof EntityParameter)) return false;
+        EntityParameter that = (EntityParameter) o;
+        return getIntValue() == that.getIntValue() &&
+                Double.compare(that.getDecimalValue(), getDecimalValue()) == 0 &&
+                Objects.equals(getParameterId(), that.getParameterId()) &&
+                Objects.equals(getEntityId(), that.getEntityId()) &&
+                Objects.equals(getStringValue(), that.getStringValue()) &&
+                Objects.equals(getIdValue(), that.getIdValue()) &&
+                Objects.equals(getDateValue(), that.getDateValue()) &&
+                Objects.equals(getDateString(), that.getDateString());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getParameterId(), getEntityId(), getStringValue(), getIntValue(), getDecimalValue(), getIdValue(), getDateValue(), getDateString());
+    }
+
+    @Override
+    public String toString() {
+        return "EntityParameter{" +
+                "parameterId=" + parameterId +
+                ", entityId=" + entityId +
+                ", stringValue='" + stringValue + '\'' +
+                ", intValue=" + intValue +
+                ", decimalValue=" + decimalValue +
+                ", idValue=" + idValue +
+                ", dateValue=" + dateValue +
+                ", dateString='" + dateString + '\'' +
+                '}';
     }
 }
