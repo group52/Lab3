@@ -40,7 +40,7 @@ public class ParameterController {
     public ModelAndView show(HttpServletRequest request){
         entityId = Long.parseLong(request.getParameter("id"));
         List<EntityParameter> paramList = entityParameterDAO.getAllParameters(entityId);
-        List<Entity> parameters = entityDAO.getAllByType(Parameter.getParameter_entity_type());
+        List<Entity> parameters = entityDAO.getAllByType(Parameter.getParameterEntityType());
         ModelAndView model = new ModelAndView("param", "list", paramList);
         EntityParameter newEntityParameter = new EntityParameter();
         newEntityParameter.setEntityId(entityId);
@@ -75,7 +75,7 @@ public class ParameterController {
         List<EntityParameter> paramList = entityParameterDAO.getAllParameters(entityId);
         ModelAndView model = new ModelAndView("param", "list", paramList);
         model.addObject("entityParameter", newEntityParameter);
-        List<Entity> parameters = entityDAO.getAllByType(Parameter.getParameter_entity_type());
+        List<Entity> parameters = entityDAO.getAllByType(Parameter.getParameterEntityType());
         logger.info("The param with entity id = " + entityId + " was edited");
         model.addObject("parameters", parameters);
         return model;
@@ -144,14 +144,14 @@ public class ParameterController {
         studyLoad.setId(entity.getId());
         studyLoad.setTitle(entity.getTitle());
         studyLoad.setParentId(entity.getParentId());
-        List<Entity> groups = entityDAO.getAllByType(Group.getGroup_entity_type());
-        List<Entity> tutors = entityDAO.getAllByType(Tutor.getTutor_entity_type());
+        List<Entity> groups = entityDAO.getAllByType(Group.getGroupEntityType());
+        List<Entity> tutors = entityDAO.getAllByType(Tutor.getTutorEntityType());
         ModelAndView model = new ModelAndView("paramStudyLoad", "listGroup", groups);
         model.addObject("listTutor", tutors);
         model.addObject("studyLoad",studyLoad);
         List<EntityParameter> paramList = entityParameterDAO.getAllParameters(entity.getId());
         model.addObject("list",paramList);
-        List<Entity> parameters = entityDAO.getAllByType(Parameter.getParameter_entity_type());
+        List<Entity> parameters = entityDAO.getAllByType(Parameter.getParameterEntityType());
         EntityParameter newEntityParameter = new EntityParameter();
         newEntityParameter.setEntityId(entity.getId());
         logger.info("New entity parameter, entity id = " + entity.getId());

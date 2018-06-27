@@ -125,9 +125,9 @@ public class LoginController {
                 logger.info("Enter new user with  " + entity.getId());
                 int entityType = entity.getEntityType();
                 switch (entityType) {
-                    case Student.student_entity_type:   return new ModelAndView("redirect:/mark?id=" + entity.getId());
+                    case Student.studentEntityType:   return new ModelAndView("redirect:/mark?id=" + entity.getId());
 
-                    case Tutor.tutor_entity_type:       Entity newEntity = new Entity();
+                    case Tutor.tutorEntityType:       Entity newEntity = new Entity();
                         newEntity.setId(entity.getId());
                         List<Entity> entityList = entityDAO.getChildEntitys(entity.getId());
 
@@ -139,7 +139,7 @@ public class LoginController {
                         model.addObject("entity", newEntity);
                         return model;
 
-                    case University.university_entity_type:   return new ModelAndView("redirect:/viewAll");
+                    case University.universityEntityType:   return new ModelAndView("redirect:/viewAll");
 
                     default:   return new ModelAndView("redirect:/viewAll");
                 }
@@ -184,9 +184,9 @@ public class LoginController {
         int entityType = entity.getEntityType();
 
         switch (entityType) {
-            case Student.student_entity_type:   return new ModelAndView("redirect:/mark?id=" + entity.getId());
+            case Student.studentEntityType:   return new ModelAndView("redirect:/mark?id=" + entity.getId());
 
-            case Tutor.tutor_entity_type:       Entity newEntity = new Entity();
+            case Tutor.tutorEntityType:       Entity newEntity = new Entity();
                 List<Entity> entityList = entityDAO.getChildEntitys(entity.getId());
                 ModelAndView model = new ModelAndView("subjects", "list", entityList);
 
@@ -196,7 +196,7 @@ public class LoginController {
                 model.addObject("entity", newEntity);
                 return model;
 
-            case University.university_entity_type:   return new ModelAndView("redirect:/viewAll");
+            case University.universityEntityType:   return new ModelAndView("redirect:/viewAll");
 
             default:                            return new ModelAndView("redirect:/viewAll");
         }
@@ -214,9 +214,9 @@ public class LoginController {
         int entityType = entity.getEntityType();
 
         switch (entityType) {
-            case Student.student_entity_type:   return new ModelAndView("redirect:/mark?id=" + entity.getId());
+            case Student.studentEntityType:   return new ModelAndView("redirect:/mark?id=" + entity.getId());
 
-            case Tutor.tutor_entity_type:       Entity newEntity = new Entity();
+            case Tutor.tutorEntityType:       Entity newEntity = new Entity();
                 List<Entity> entityList = entityDAO.getChildEntitys(entity.getId());
                 ModelAndView model = new ModelAndView("subjects", "list", entityList);
 
@@ -226,7 +226,7 @@ public class LoginController {
                 model.addObject("entity", newEntity);
                 return model;
 
-            case University.university_entity_type:   return new ModelAndView("redirect:/viewAll");
+            case University.universityEntityType:   return new ModelAndView("redirect:/viewAll");
 
             default:                            return new ModelAndView("redirect:/viewAll");
         }

@@ -3,7 +3,7 @@ package com.group53.beans;
 /** class Parameter is the class for describe parameter object */
 public class Parameter extends Entity{
 
-    public static final byte parameter_entity_type = 9;
+    public static final byte parameterEntityType = 9;
 
     /**
      * Constructor
@@ -11,14 +11,14 @@ public class Parameter extends Entity{
      @param title is title of entity
      */
     public Parameter(Long id, String title) {
-        super(id, title, null, parameter_entity_type);
+        super(id, title, null, parameterEntityType);
     }
 
     /**
      * Return the parameter type
      * @return parameter type
      */
-    public static byte getParameter_entity_type() {
-        return parameter_entity_type;
+    public static byte getParameterEntityType() {
+        return parameterEntityType;
     }
 }

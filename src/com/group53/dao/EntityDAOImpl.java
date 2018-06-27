@@ -127,7 +127,7 @@ public class EntityDAOImpl implements EntityDAO {
             @Override
             public void setValues(PreparedStatement ps) throws SQLException {
                 ps.setString(1,  title);
-                ps.setInt(2, Parameter.parameter_entity_type);
+                ps.setInt(2, Parameter.parameterEntityType);
             }
         }, new ResultSetExtractor<Long>() {
             @Override

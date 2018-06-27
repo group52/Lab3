@@ -3,7 +3,7 @@ package com.group53.beans;
 /** class Tutor is the class for describe tutor object */
 public class Tutor extends Person {
 
-    public static final byte tutor_entity_type = 2;
+    public static final byte tutorEntityType = 2;
 
     private String faculty;
     private String speciality;
@@ -19,7 +19,7 @@ public class Tutor extends Person {
      */
     public Tutor(Long id, String title, Long parent_id, String name, String surname, String patronymic) {
         super(id, title, parent_id, name, surname, patronymic);
-        setEntityType(tutor_entity_type);
+        setEntityType(tutorEntityType);
     }
 
     /**
@@ -58,7 +58,7 @@ public class Tutor extends Person {
      * Return the tutor type
      * @return tutor type
      */
-    public static byte getTutor_entity_type() {
-        return tutor_entity_type;
+    public static byte getTutorEntityType() {
+        return tutorEntityType;
     }
 }

@@ -3,7 +3,7 @@ package com.group53.beans;
 /** class University is the class for describe university object */
 public class University extends Entity {
 
-    public static final byte university_entity_type = 1;
+    public static final byte universityEntityType = 1;
 
     private String name;
 
@@ -13,7 +13,7 @@ public class University extends Entity {
      * @param title is title of entity id
      */
     public University(String title, Long id) {
-        super(id, title, null,university_entity_type);
+        super(id, title, null,universityEntityType);
     }
 
     /**
@@ -36,7 +36,7 @@ public class University extends Entity {
      * Return the university type
      * @return university type
      */
-    public static byte getUniversity_entity_type() {
-        return university_entity_type;
+    public static byte getUniversityEntityType() {
+        return universityEntityType;
     }
 }

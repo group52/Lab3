@@ -3,9 +3,9 @@ package com.group53.beans;
 /** class Student is the class for describe student object */
 public class Student extends Person {
 
-    public static final byte student_entity_type = 4;
+    public static final byte studentEntityType = 4;
 
-    private int record_book;
+    private int recordBook;
 
     /**
      * Constructor
@@ -18,7 +18,7 @@ public class Student extends Person {
      */
     public Student(Long id, String title, Long parent_id, String name, String surname, String patronymic) {
         super(id, title, parent_id, name, surname, patronymic);
-        setEntityType(student_entity_type);
+        setEntityType(studentEntityType);
     }
 
     /**
@@ -26,22 +26,22 @@ public class Student extends Person {
      * @return record book
      */
     public int getRecord_book() {
-        return record_book;
+        return recordBook;
     }
 
     /**
      * Setup the record book
-     * @param record_book record book
+     * @param recordBook record book
      */
-    public void setRecord_book(int record_book) {
-        this.record_book = record_book;
+    public void setRecord_book(int recordBook) {
+        this.recordBook = recordBook;
     }
 
     /**
      * Return the student type
      * @return student type
      */
-    public static byte getStudent_entity_type() {
-        return student_entity_type;
+    public static byte getStudentEntityType() {
+        return studentEntityType;
     }
 }

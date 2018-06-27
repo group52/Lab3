@@ -10,11 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.NONE)
 public class Entity {
 
-    public static final byte admin_access_level = 1;
-    public static final byte tutor_access_level = 2;
-    public static final byte student_access_level = 3;
-
-    public static final byte entity_entity_type = 0;
+    public static final byte entityEntityType = 0;
 
     @XmlAttribute
     private Long id = null;
@@ -23,7 +19,7 @@ public class Entity {
     @XmlAttribute
     private Long parentId = null;
     @XmlAttribute
-    private int entityType = entity_entity_type;
+    private int entityType = entityEntityType;
 
     /** Empty constructor for Entity */
     public Entity() {

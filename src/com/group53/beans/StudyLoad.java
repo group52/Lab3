@@ -3,7 +3,7 @@ package com.group53.beans;
 /** class StudyLoad is the class for describe connection between the subject, the tutor and the group */
 public class StudyLoad extends Entity {
 
-    public static final byte studyload_entity_type = 8;
+    public static final byte studyloadEntityType = 8;
 
     private Long groupId;
     private Long tutorId;
@@ -21,7 +21,7 @@ public class StudyLoad extends Entity {
      * @param subjectId  is id of the entity parent
      */
     public StudyLoad(Long id, String title, Long subjectId) {
-        super(id, title, subjectId, studyload_entity_type);
+        super(id, title, subjectId, studyloadEntityType);
     }
 
     /**
@@ -60,7 +60,7 @@ public class StudyLoad extends Entity {
      * Return the studyload type
      * @return the studyload type
      */
-    public static byte getStudyload_entity_type() {
-        return studyload_entity_type;
+    public static byte getStudyloadEntityType() {
+        return studyloadEntityType;
     }
 }

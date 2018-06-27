@@ -3,7 +3,7 @@ package com.group53.beans;
 /** class Group is the class for describe group object */
 public class Group extends Entity {
 
-    public static final byte group_entity_type = 3;
+    public static final byte groupEntityType = 3;
 
     private String faculty;
     private String speciality;
@@ -15,7 +15,7 @@ public class Group extends Entity {
      @param parentId is id of the entity parent
      */
     public Group(Long id, String title, Long parentId) {
-        super(id, title, parentId, group_entity_type);
+        super(id, title, parentId, groupEntityType);
     }
 
     /**
@@ -54,7 +54,7 @@ public class Group extends Entity {
      * Return the group type
      * @return group type
      */
-    public static byte getGroup_entity_type() {
-        return group_entity_type;
+    public static byte getGroupEntityType() {
+        return groupEntityType;
     }
 }
