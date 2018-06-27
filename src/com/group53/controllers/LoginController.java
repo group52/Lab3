@@ -1,8 +1,8 @@
 package com.group53.controllers;
 
 import com.group53.beans.*;
-import com.group53.dao.EntityDAOImpl;
-import com.group53.dao.EntityParameterDAOImpl;
+import com.group53.dao.EntityDAO;
+import com.group53.dao.EntityParameterDAO;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,10 +23,10 @@ public class LoginController {
     private static final Logger logger = Logger.getLogger(LoginController.class);
 
     @Autowired
-    private EntityDAOImpl entityDAO;
+    private EntityDAO entityDAO;
 
     @Autowired
-    private EntityParameterDAOImpl entityParameterDAO;
+    private EntityParameterDAO entityParameterDAO;
 
 
     /**

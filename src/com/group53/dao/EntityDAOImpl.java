@@ -20,7 +20,7 @@ import java.util.Locale;
  */
 public class EntityDAOImpl implements EntityDAO {
     @Autowired
-    private EntityParameterDAOImpl entityParameterDAO;
+    private EntityParameterDAO entityParameterDAO;
 
     private JdbcTemplate template;
 

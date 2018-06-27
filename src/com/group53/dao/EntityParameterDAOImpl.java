@@ -25,7 +25,7 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
     }
 
     @Autowired
-    private EntityDAOImpl entityDAO;
+    private EntityDAO entityDAO;
 
     @Override
     public List<EntityParameter> getAllParameters(final Long entityId) {

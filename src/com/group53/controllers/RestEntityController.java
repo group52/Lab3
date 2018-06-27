@@ -1,14 +1,15 @@
 package com.group53.controllers;
 
 import com.group53.beans.Entity;
-import com.group53.beans.Person;
-import com.group53.dao.EntityDAOImpl;
+import com.group53.dao.EntityDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 /**
@@ -17,7 +18,7 @@ import java.util.List;
 @RestController
 public class RestEntityController {
     @Autowired
-    private EntityDAOImpl entityDAO;
+    private EntityDAO entityDAO;
 
     /**
      * Return the view of the all entites from the table GRP5_Entity

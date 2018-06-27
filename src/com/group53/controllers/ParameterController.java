@@ -1,8 +1,9 @@
 package com.group53.controllers;
 
 import com.group53.beans.*;
-import com.group53.dao.EntityParameterDAOImpl;
-import com.group53.dao.EntityDAOImpl;
+import com.group53.dao.EntityDAO;
+import com.group53.dao.EntityParameterDAO;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
@@ -27,9 +27,9 @@ public class ParameterController {
     private static final Logger logger = Logger.getLogger(ParameterController.class);
     private Long entityId;
     @Autowired
-    private EntityParameterDAOImpl entityParameterDAO;
+    private EntityParameterDAO entityParameterDAO;
     @Autowired
-    private EntityDAOImpl entityDAO;
+    private EntityDAO entityDAO;
 
     /**
      * Return the view of the all parameters from the table GRP5_Entity_PARAMETER for the entity

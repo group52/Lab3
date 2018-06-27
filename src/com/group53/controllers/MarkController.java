@@ -3,8 +3,8 @@ package com.group53.controllers;
 import com.group53.beans.Entity;
 import com.group53.beans.EntityParameter;
 import com.group53.beans.StudyLoad;
-import com.group53.dao.EntityDAOImpl;
-import com.group53.dao.EntityParameterDAOImpl;
+import com.group53.dao.EntityDAO;
+import com.group53.dao.EntityParameterDAO;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,9 +29,9 @@ import java.util.TreeSet;
 public class MarkController {
     private static final Logger logger = Logger.getLogger(MarkController.class);
     @Autowired
-    private EntityParameterDAOImpl entityParameterDAO;
+    private EntityParameterDAO entityParameterDAO;
     @Autowired
-    private EntityDAOImpl entityDAO;
+    private EntityDAO entityDAO;
 
     /**
      * Add mark on group_journal.jsp for some student and return  group_journal.jsp with all mark fot the studyload
