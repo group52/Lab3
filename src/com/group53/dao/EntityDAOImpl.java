@@ -74,12 +74,10 @@ public class EntityDAOImpl implements EntityDAO {
             @Override
             public Entity extractData(ResultSet resultSet) throws SQLException {
                 if (resultSet.next()) {
-                    Entity entity = new Entity();
-                    entity.setId(resultSet.getLong("id"));
-                    entity.setTitle(resultSet.getString("title"));
-                    entity.setParentId(resultSet.getLong("parent_Id"));
-                    entity.setEntityType(resultSet.getInt("entity_Type"));
-                    return entity;
+                    return new Entity(resultSet.getLong("id"),
+                            resultSet.getString("title"),
+                            resultSet.getLong("parent_Id"),
+                            resultSet.getInt("entity_Type"));
                 }
                 return null;
             }
@@ -152,11 +150,9 @@ public class EntityDAOImpl implements EntityDAO {
             @Override
             public StudyLoad extractData(ResultSet resultSet) throws SQLException {
                 if (resultSet.next()) {
-                    StudyLoad studyLoad = new StudyLoad();
-                    studyLoad.setId(resultSet.getLong("id"));
-                    studyLoad.setTitle(resultSet.getString("title"));
-                    studyLoad.setParentId(resultSet.getLong("parent_Id"));
-                    studyLoad.setEntityType(resultSet.getInt("entity_Type"));
+                    StudyLoad studyLoad = new StudyLoad(resultSet.getLong("id"),
+                            resultSet.getString("title"),
+                            resultSet.getLong("parent_Id"));
 
                     studyLoad.setGroupId(entityParameterDAO.getParameter(id, getId("groupId")).getIdValue());
                     studyLoad.setTutorId(entityParameterDAO.getParameter(id, getId("tutorId")).getIdValue());

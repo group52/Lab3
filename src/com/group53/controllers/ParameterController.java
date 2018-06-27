@@ -122,10 +122,8 @@ public class ParameterController {
      */
     @RequestMapping(value = "/saveStudyLoad", method = RequestMethod.POST)
     public ModelAndView saveStudyLoad(@ModelAttribute StudyLoad studyLoad) {
-        EntityParameter entityParameter = new EntityParameter();
-        entityParameter.setParameterId(entityDAO.getId("groupId"));
-        entityParameter.setEntityId(studyLoad.getId());
-        entityParameter.setIdValue(studyLoad.getGroupId());
+        EntityParameter entityParameter =
+                new EntityParameter(entityDAO.getId("groupId"), studyLoad.getId(), studyLoad.getGroupId());
         entityParameterDAO.saveParameterDB(entityParameter);
         entityParameter.setParameterId(entityDAO.getId("tutorId"));
         entityParameter.setIdValue(studyLoad.getTutorId());
@@ -145,10 +143,7 @@ public class ParameterController {
         Long entityId;
         entityId = Long.parseLong(request.getParameter("id"));
         Entity entity = entityDAO.getEntity(entityId);
-        StudyLoad studyLoad = new StudyLoad();
-        studyLoad.setId(entity.getId());
-        studyLoad.setTitle(entity.getTitle());
-        studyLoad.setParentId(entity.getParentId());
+        StudyLoad studyLoad = new StudyLoad(entity.getId(), entity.getTitle(), entity.getParentId());
         List<Entity> groups = entityDAO.getAllByType(Group.getGroupEntityType());
         List<Entity> tutors = entityDAO.getAllByType(Tutor.getTutorEntityType());
         ModelAndView model = new ModelAndView("paramStudyLoad", "listGroup", groups);

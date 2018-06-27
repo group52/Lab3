@@ -128,10 +128,8 @@ public class EntityController {
         if (entity.getEntityType() == Student.getStudentEntityType() ||
                 entity.getEntityType() == Tutor.getTutorEntityType() ||
                 entity.getEntityType() == University.getUniversityEntityType()) {
-            EntityParameter entityParameter = new EntityParameter();
-            entityParameter.setParameterId(entityDAO.getId("login"));
-            entityParameter.setEntityId(entity.getId());
-            entityParameter.setStringValue(entity.getTitle());
+            EntityParameter entityParameter =
+                    new EntityParameter(entityDAO.getId("login"),entity.getId(),entity.getTitle());
             entityParameterDAO.saveParameterDB(entityParameter);
             entityParameter.setParameterId(entityDAO.getId("password"));
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -193,10 +191,8 @@ public class EntityController {
         if (entity.getEntityType() == Student.getStudentEntityType() ||
                 entity.getEntityType() == Tutor.getTutorEntityType() ||
                 entity.getEntityType() == University.getUniversityEntityType()) {
-            EntityParameter entityParameter = new EntityParameter();
-            entityParameter.setParameterId(entityDAO.getId("login"));
-            entityParameter.setEntityId(entity.getId());
-            entityParameter.setStringValue(entity.getTitle());
+            EntityParameter entityParameter =
+                    new EntityParameter(entityDAO.getId("login"),entity.getId(),entity.getTitle());
             entityParameterDAO.saveParameterDB(entityParameter);
             entityParameter.setParameterId(entityDAO.getId("password"));
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();

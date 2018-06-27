@@ -43,6 +43,30 @@ public class EntityParameter {
     }
 
     /**
+     * Constructor
+     * @param parameterId - id of the parameter
+     * @param entityId - id of the entity
+     * @param idValue - id value of the parameter
+     */
+    public EntityParameter(Long parameterId, Long entityId, Long idValue) {
+        this.parameterId = parameterId;
+        this.entityId = entityId;
+        this.idValue = idValue;
+    }
+
+    /**
+     * Constructor
+     * @param parameterId - id of the parameter
+     * @param entityId - id of the entity
+     * @param stringValue - string value of the parameter
+     */
+    public EntityParameter(Long parameterId, Long entityId, String stringValue) {
+        this.parameterId = parameterId;
+        this.entityId = entityId;
+        this.stringValue = stringValue;
+    }
+
+    /**
      * Return the id of the parameter
      * @return id of the parameter
      */

@@ -96,15 +96,9 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
             @Override
             public EntityParameter extractData(ResultSet resultSet) throws SQLException {
                 if (resultSet.next()) {
-                    EntityParameter entityParameter = new EntityParameter();
-                    entityParameter.setParameterId(resultSet.getLong("parameter_id"));
-                    entityParameter.setEntityId(resultSet.getLong("entity_id"));
-                    entityParameter.setStringValue(resultSet.getString("string_value"));
-                    entityParameter.setIntValue(resultSet.getInt("int_value"));
-                    entityParameter.setDecimalValue(resultSet.getDouble("decimal_value"));
-                    entityParameter.setIdValue(resultSet.getLong("id_value"));
-                    entityParameter.setDateValue(resultSet.getDate("date_value"));
-                    return entityParameter;
+                    return new EntityParameter(resultSet.getLong("parameter_id"),
+                            resultSet.getLong("entity_id"), resultSet.getString("string_value"), resultSet.getInt("int_value"),
+                            resultSet.getDouble("decimal_value"), resultSet.getLong("id_value"), resultSet.getDate("date_value"));
                 }
                 return null;
             }
@@ -126,15 +120,9 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
             @Override
             public EntityParameter extractData(ResultSet resultSet) throws SQLException {
                 if (resultSet.next()) {
-                    EntityParameter entityParameter = new EntityParameter();
-                    entityParameter.setParameterId(resultSet.getLong("parameter_id"));
-                    entityParameter.setEntityId(resultSet.getLong("entity_id"));
-                    entityParameter.setStringValue(resultSet.getString("string_value"));
-                    entityParameter.setIntValue(resultSet.getInt("int_value"));
-                    entityParameter.setDecimalValue(resultSet.getDouble("decimal_value"));
-                    entityParameter.setIdValue(resultSet.getLong("id_value"));
-                    entityParameter.setDateValue(resultSet.getDate("date_value"));
-                    return entityParameter;
+                    return new EntityParameter(resultSet.getLong("parameter_id"),
+                            resultSet.getLong("entity_id"), resultSet.getString("string_value"), resultSet.getInt("int_value"),
+                            resultSet.getDouble("decimal_value"), resultSet.getLong("id_value"), resultSet.getDate("date_value"));
                 }
                 return null;
             }
@@ -252,15 +240,9 @@ public class EntityParameterDAOImpl implements EntityParameterDAO {
             @Override
             public EntityParameter extractData(ResultSet resultSet) throws SQLException {
                 if (resultSet.next()) {
-                    EntityParameter entityParameter = new EntityParameter();
-                    entityParameter.setParameterId(resultSet.getLong("parameter_id"));
-                    entityParameter.setEntityId(resultSet.getLong("entity_id"));
-                    entityParameter.setStringValue(resultSet.getString("string_value"));
-                    entityParameter.setIntValue(resultSet.getInt("int_value"));
-                    entityParameter.setDecimalValue(resultSet.getDouble("decimal_value"));
-                    entityParameter.setIdValue(resultSet.getLong("id_value"));
-                    entityParameter.setDateValue(resultSet.getDate("date_value"));
-                    return entityParameter;
+                    return new EntityParameter(resultSet.getLong("parameter_id"),
+                            resultSet.getLong("entity_id"), resultSet.getString("string_value"), resultSet.getInt("int_value"),
+                            resultSet.getDouble("decimal_value"), resultSet.getLong("id_value"), resultSet.getDate("date_value"));
                 }
                 return null;
             }
