@@ -65,8 +65,8 @@
         <tr>
             <td>${entityParameter.parameterId}</td>
             <td>${entityParameter.idValue}</td>
-            <td><a href = "deleteParam?param=${entityParameter.parameterId}"> delete </a></td>
-            <td><a href = "editParam?param=${entityParameter.parameterId}"> edit </a></td>
+            <td><a href = "deleteParam?param=${entityParameter.parameterId}&id=${entityParameter.entityId}"> delete </a></td>
+            <td><a href = "editParam?param=${entityParameter.parameterId}&id=${entityParameter.entityId}"> edit </a></td>
         </tr>
     </c:forEach>
 </table>

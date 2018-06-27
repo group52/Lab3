@@ -25,7 +25,6 @@ import java.util.List;
 public class ParameterController {
 
     private static final Logger logger = Logger.getLogger(ParameterController.class);
-    private Long entityId;
     @Autowired
     private EntityParameterDAO entityParameterDAO;
     @Autowired
@@ -40,6 +39,7 @@ public class ParameterController {
      */
     @RequestMapping(value = "viewParam", method = RequestMethod.GET)
     public ModelAndView show(HttpServletRequest request){
+        Long entityId;
         entityId = Long.parseLong(request.getParameter("id"));
         List<EntityParameter> paramList = entityParameterDAO.getAllParameters(entityId);
         List<Entity> parameters = entityDAO.getAllByType(Parameter.getParameterEntityType());
@@ -59,6 +59,8 @@ public class ParameterController {
      */
     @RequestMapping(value = "/deleteParam", method = RequestMethod.GET)
     public ModelAndView delete(HttpServletRequest request) {
+        Long entityId;
+        entityId = Long.parseLong(request.getParameter("id"));
         Long parameterID = Long.parseLong(request.getParameter("param"));
         entityParameterDAO.deleteParameterDB(entityId, parameterID);
         logger.info("The param with entity id = " + entityId + " was deleted");
@@ -72,6 +74,8 @@ public class ParameterController {
      */
     @RequestMapping(value = "/editParam", method = RequestMethod.GET)
     public ModelAndView edit(HttpServletRequest request) {
+        Long entityId;
+        entityId = Long.parseLong(request.getParameter("id"));
         Long parameterID = Long.parseLong(request.getParameter("param"));
         EntityParameter newEntityParameter = entityParameterDAO.getParameter(entityId, parameterID);
         List<EntityParameter> paramList = entityParameterDAO.getAllParameters(entityId);
@@ -90,7 +94,6 @@ public class ParameterController {
      */
     @RequestMapping(value = "/saveParam", method = RequestMethod.POST)
     public ModelAndView save(@ModelAttribute EntityParameter entityParameter) {
-
         try {
             java.util.Date date = dateFormat.parse(entityParameter.getDateString());
             entityParameter.setDateValue(new Date(date.getTime()));
@@ -109,7 +112,7 @@ public class ParameterController {
         entityParameterDAO.saveParameterDB(entityParameter);
 
         logger.info("The param with entity id = " + entityParameter.getEntityId() + " was saved");
-        return new ModelAndView("redirect:/viewParam?id=" + entityId);
+        return new ModelAndView("redirect:/viewParam?id=" + entityParameter.getEntityId());
     }
 
     /**
@@ -129,7 +132,7 @@ public class ParameterController {
         entityParameterDAO.saveParameterDB(entityParameter);
 
         logger.info("The param with entity id = " + entityParameter.getEntityId() + " was saved");
-        return new ModelAndView("redirect:/paramStudyLoad?id=" + entityId);
+        return new ModelAndView("redirect:/paramStudyLoad?id=" + entityParameter.getEntityId());
     }
 
     /**
@@ -139,6 +142,7 @@ public class ParameterController {
      */
     @RequestMapping(value = "paramStudyLoad", method = RequestMethod.GET)
     public ModelAndView paramStudyLoad(HttpServletRequest request){
+        Long entityId;
         entityId = Long.parseLong(request.getParameter("id"));
         Entity entity = entityDAO.getEntity(entityId);
         StudyLoad studyLoad = new StudyLoad();
