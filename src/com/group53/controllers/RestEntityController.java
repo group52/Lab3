@@ -50,15 +50,5 @@ public class RestEntityController {
         return new ResponseEntity(entity, HttpStatus.OK);
     }
 
-    @RequestMapping(value ="/viewAllRestXML/{id}", method = RequestMethod.GET,produces ="application/xml" )
-    public ResponseEntity viewByIdXml(@PathVariable("id") Long id) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Type", "application/xml");
-        Entity entity = entityDAO.getEntity(id);
-        if (entity == null) {
-            return new ResponseEntity("No entity found for ID " + id, HttpStatus.NOT_FOUND);
-        }
-
-        return new ResponseEntity(entity, HttpStatus.OK);
-    }
+    
 }
