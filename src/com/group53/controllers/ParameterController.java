@@ -31,6 +31,8 @@ public class ParameterController {
     @Autowired
     private EntityDAO entityDAO;
 
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
     /**
      * Return the view of the all parameters from the table GRP5_Entity_PARAMETER for the entity
      * @param request id of the entity
@@ -88,7 +90,6 @@ public class ParameterController {
      */
     @RequestMapping(value = "/saveParam", method = RequestMethod.POST)
     public ModelAndView save(@ModelAttribute EntityParameter entityParameter) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         try {
             java.util.Date date = dateFormat.parse(entityParameter.getDateString());

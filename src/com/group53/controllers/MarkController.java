@@ -33,6 +33,8 @@ public class MarkController {
     @Autowired
     private EntityDAO entityDAO;
 
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
     /**
      * Add mark on group_journal.jsp for some student and return  group_journal.jsp with all mark fot the studyload
      * @param request id of the entity
@@ -91,7 +93,6 @@ public class MarkController {
      */
     @RequestMapping(value = "/saveMark", method = RequestMethod.POST)
     public ModelAndView save(@ModelAttribute EntityParameter entityParameter) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         try {
             java.util.Date date = dateFormat.parse(entityParameter.getDateString());
