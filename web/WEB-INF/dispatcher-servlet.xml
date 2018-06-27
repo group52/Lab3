@@ -20,7 +20,7 @@
         <property name = "driverClassName" value = "${ORACLE_DB_DRIVER_CLASS}" />
         <property name = "url" value = "${ORACLE_DB_URL}" />
         <property name = "username" value = "${ORACLE_DB_USERNAME}" />
-        <property name = "password" value = "12345678" />
+        <property name = "password" value = "${ORACLE_DB_PASSWORD}" />
     </bean>
 
     <bean id="propertyConfigurer"
