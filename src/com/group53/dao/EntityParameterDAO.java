@@ -53,7 +53,7 @@ public interface EntityParameterDAO {
      * @param idValue id value of the parameter
      * @return the dates of lessons for the studyload
      */
-    TreeSet<Date> getAllDatesByStudyLoad(Long idValue);
+    TreeSet<Date> getAllDatesParameter(Long idValue);
 
     /**
      * Return the all marks for the student
@@ -62,33 +62,33 @@ public interface EntityParameterDAO {
      * @param entityId id of the entity
      * @return all marks for the student
      */
-    Map<Date, Double> getAllMarksByStudent(TreeSet<Date> dates, Long idValue, Long entityId);
+    Map<Date, Double> getAllDecimalParameter(TreeSet<Date> dates, Long idValue, Long entityId);
 
     /**
      * Return the dates of lessons for the student
      * @param idValue id value of the parameter
      * @return the dates of lessons for the student
      */
-    TreeSet<Date> getAllDatesByStudent(Long idValue);
+    TreeSet<Date> getDatesByEntityParameter(Long idValue);
 
     /**
      * Return the all subjects for the group
      * @param idValue id value of the parameter
      * @return the all subjects for the group
      */
-    TreeSet<Long> getStudyLoadByGroup(Long idValue);
+    TreeSet<Long> getRelationByGroupParameter(Long idValue);
 
     /**
      * Return the all subjects for the tutor
      * @param id tutor id
      * @return all subjects for the tutor
      */
-    TreeSet<Long> getStudyLoadByTutor(Long id);
+    TreeSet<Long> getRelationByTutorParameter(Long id);
 
     /**
      * Check the login-password and return parameter of the entity
      * @param login login-paswword for the user
      * @return parameter of the entity
      */
-    EntityParameter checkLogin(String login);
+    EntityParameter getLoginParameter(String login);
 }

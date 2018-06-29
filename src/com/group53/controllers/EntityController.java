@@ -95,7 +95,7 @@ public class EntityController {
                                                 return model;
 
             case Tutor.tutorEntityType:       entityList.clear();
-                                                for (Long idStudyLoad : entityParameterDAO.getStudyLoadByTutor(id))
+                                                for (Long idStudyLoad : entityParameterDAO.getRelationByTutorParameter(id))
                                                     entityList.add(entityDAO.getEntity(idStudyLoad));
                                                 model.addObject("list", entityList);
                                                 model.addObject("entity", newEntity);
@@ -157,7 +157,7 @@ public class EntityController {
                                                 return model;
 
             case Tutor.tutorEntityType:       entityList.clear();
-                                                for (Long idStudyLoad : entityParameterDAO.getStudyLoadByTutor(id))
+                                                for (Long idStudyLoad : entityParameterDAO.getRelationByTutorParameter(id))
                                                 entityList.add(entityDAO.getEntity(idStudyLoad));
                                                 model.addObject("list", entityList);
                                                 model.addObject("entity", newEntity);

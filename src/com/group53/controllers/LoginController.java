@@ -114,7 +114,7 @@ public class LoginController {
     @RequestMapping(value = "/checkLogin", method = RequestMethod.POST)
     public ModelAndView checkLogin(@ModelAttribute LoginPassword loginPassword) {
 
-        EntityParameter loginParameter = entityParameterDAO.checkLogin(loginPassword.getLogin());
+        EntityParameter loginParameter = entityParameterDAO.getLoginParameter(loginPassword.getLogin());
 
         if (loginParameter != null) {
             Entity entity = entityDAO.getEntity(loginParameter.getEntityId());
@@ -134,7 +134,7 @@ public class LoginController {
 
                         ModelAndView model = new ModelAndView("subjects", "list", entityList);
 
-                        for (Long idStudyLoad : entityParameterDAO.getStudyLoadByTutor(entity.getId()))
+                        for (Long idStudyLoad : entityParameterDAO.getRelationByTutorParameter(entity.getId()))
                             entityList.add(entityDAO.getEntity(idStudyLoad));
                         model.addObject("list", entityList);
                         model.addObject("entity", newEntity);
@@ -177,7 +177,7 @@ public class LoginController {
         String hashedPassword = passwordEncoder.encode(loginPassword.getPassword());
         entityParameter.setStringValue(hashedPassword);
         entityParameterDAO.saveParameterDB(entityParameter);
-        EntityParameter loginParameter = entityParameterDAO.checkLogin(loginPassword.getLogin());
+        EntityParameter loginParameter = entityParameterDAO.getLoginParameter(loginPassword.getLogin());
         Entity entity = entityDAO.getEntity(loginPassword.getUserId());
         logger.info("The param with entity id = " + entityParameter.getEntityId() + " was saved");
 
@@ -190,7 +190,7 @@ public class LoginController {
                 List<Entity> entityList = entityDAO.getChildEntitys(entity.getId());
                 ModelAndView model = new ModelAndView("subjects", "list", entityList);
 
-                for (Long idStudyLoad : entityParameterDAO.getStudyLoadByTutor(entity.getId()))
+                for (Long idStudyLoad : entityParameterDAO.getRelationByTutorParameter(entity.getId()))
                     entityList.add(entityDAO.getEntity(idStudyLoad));
                 model.addObject("list", entityList);
                 model.addObject("entity", newEntity);
@@ -220,7 +220,7 @@ public class LoginController {
                 List<Entity> entityList = entityDAO.getChildEntitys(entity.getId());
                 ModelAndView model = new ModelAndView("subjects", "list", entityList);
 
-                for (Long idStudyLoad : entityParameterDAO.getStudyLoadByTutor(entity.getId()))
+                for (Long idStudyLoad : entityParameterDAO.getRelationByTutorParameter(entity.getId()))
                     entityList.add(entityDAO.getEntity(idStudyLoad));
                 model.addObject("list", entityList);
                 model.addObject("entity", newEntity);

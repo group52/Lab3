@@ -44,12 +44,12 @@ public class MarkController {
     public ModelAndView edit(HttpServletRequest request) {
         Long id = Long.parseLong(request.getParameter("id"));
         StudyLoad newStudyLoad = entityDAO.getStudyLoad(id);
-        TreeSet<Date> dateTreeSet = entityParameterDAO.getAllDatesByStudyLoad(id);
+        TreeSet<Date> dateTreeSet = entityParameterDAO.getAllDatesParameter(id);
         ModelAndView model = new ModelAndView("group_journal", "dates", dateTreeSet);
         HashMap<Entity, Map<Date, Double>> journal = new HashMap<Entity, Map<Date, Double>>();
         List<Entity> students = entityDAO.getChildEntitys(newStudyLoad.getGroupId());
         for (Entity entity : students){
-            journal.put(entity, entityParameterDAO.getAllMarksByStudent(dateTreeSet,id,entity.getId()));
+            journal.put(entity, entityParameterDAO.getAllDecimalParameter(dateTreeSet,id,entity.getId()));
         }
         model.addObject("journal", journal);
         model.addObject("students", students);
@@ -73,12 +73,12 @@ public class MarkController {
     public ModelAndView mark(HttpServletRequest request) {
         Long id = Long.parseLong(request.getParameter("id"));
         Entity student = entityDAO.getEntity(id);
-        TreeSet<Date> dateTreeSet = entityParameterDAO.getAllDatesByStudent(id);
+        TreeSet<Date> dateTreeSet = entityParameterDAO.getDatesByEntityParameter(id);
         ModelAndView model = new ModelAndView("progress", "dates", dateTreeSet);
         HashMap<String, Map<Date, Double>> journal = new HashMap<String, Map<Date, Double>>();
-        TreeSet<Long> studyLoads = entityParameterDAO.getStudyLoadByGroup(student.getParentId());
+        TreeSet<Long> studyLoads = entityParameterDAO.getRelationByGroupParameter(student.getParentId());
         for (Long studyLoadId : studyLoads){
-            journal.put(entityDAO.getEntity(entityDAO.getStudyLoad(studyLoadId).getParentId()).getTitle(), entityParameterDAO.getAllMarksByStudent(dateTreeSet,studyLoadId,id));
+            journal.put(entityDAO.getEntity(entityDAO.getStudyLoad(studyLoadId).getParentId()).getTitle(), entityParameterDAO.getAllDecimalParameter(dateTreeSet,studyLoadId,id));
         }
         model.addObject("journal", journal);
         model.addObject("student", student);
