@@ -167,19 +167,12 @@ public class LoginController {
      */
     @RequestMapping(value = "/saveLogin", method = RequestMethod.POST)
     public ModelAndView saveLogin(@ModelAttribute LoginPassword loginPassword) {
-
-        EntityParameter entityParameter = new EntityParameter();
-        entityParameter.setParameterId(entityDAO.getId("login"));
-        entityParameter.setEntityId(loginPassword.getUserId());
-        entityParameter.setStringValue(loginPassword.getLogin());
-        entityParameterDAO.saveParameterDB(entityParameter);
-        entityParameter.setParameterId(entityDAO.getId("password"));
+        entityParameterDAO.saveParameterDB(new EntityParameter(entityDAO.getId("login"),loginPassword.getUserId(),loginPassword.getLogin()));
         String hashedPassword = passwordEncoder.encode(loginPassword.getPassword());
-        entityParameter.setStringValue(hashedPassword);
-        entityParameterDAO.saveParameterDB(entityParameter);
+        entityParameterDAO.saveParameterDB(new EntityParameter(entityDAO.getId("password"),loginPassword.getUserId(),hashedPassword));
         EntityParameter loginParameter = entityParameterDAO.getLoginParameter(loginPassword.getLogin());
         Entity entity = entityDAO.getEntity(loginPassword.getUserId());
-        logger.info("The param with entity id = " + entityParameter.getEntityId() + " was saved");
+        logger.info("The param with entity id = " + loginPassword.getUserId() + " was saved");
 
         int entityType = entity.getEntityType();
 
